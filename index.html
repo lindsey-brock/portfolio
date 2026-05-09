@@ -29,7 +29,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;justify-content:space-between;align-items:center;
-  padding:24px 48px;
+  padding:0 48px;height:60px;
+  background:rgba(12,12,12,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
 }
 .nav-logo{
   font-family:var(--display);font-size:28px;
@@ -37,22 +40,27 @@ nav{
   text-decoration:none;line-height:1;
 }
 .nav-logo span{color:var(--accent);}
-.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links{display:flex;gap:0;align-items:center;height:100%;}
 .nav-link{
   font-family:var(--sans);font-size:11px;font-weight:500;
   letter-spacing:0.15em;text-transform:uppercase;
   color:var(--muted);text-decoration:none;
-  transition:color 0.3s;
+  padding:0 24px;height:100%;
+  display:flex;align-items:center;
+  border-bottom:2px solid transparent;
+  transition:color 0.2s,border-color 0.2s;
 }
-.nav-link:hover{color:var(--text);}
+.nav-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
 .nav-cta{
   font-family:var(--sans);font-size:11px;font-weight:500;
   letter-spacing:0.15em;text-transform:uppercase;
   color:var(--bg);background:var(--accent);
   padding:10px 20px;text-decoration:none;
+  margin-left:16px;
   transition:opacity 0.2s;
+  border-bottom:2px solid transparent !important;
 }
-.nav-cta:hover{opacity:0.85;}
+.nav-cta:hover{opacity:0.85;color:var(--bg) !important;border-bottom-color:transparent !important;}
 
 /* HERO */
 .hero{
@@ -131,19 +139,30 @@ nav{
   to{opacity:1;transform:translateY(0);}
 }
 
-/* ISSUE BAR */
-.issue-bar{
+/* MARQUEE TICKER */
+.ticker{
   background:var(--accent);
-  padding:12px 48px;
-  display:flex;gap:48px;align-items:center;
+  padding:12px 0;
   overflow:hidden;
+  white-space:nowrap;
 }
+.ticker-inner{
+  display:inline-flex;
+  animation:ticker 28s linear infinite;
+}
+.ticker-inner:hover{animation-play-state:paused;}
+.ticker-set{display:inline-flex;align-items:center;}
 .issue-item{
   font-family:var(--sans);font-size:10px;font-weight:500;
   letter-spacing:0.15em;text-transform:uppercase;
   color:var(--bg);white-space:nowrap;
+  padding:0 32px;
 }
-.issue-sep{color:rgba(12,12,12,0.4);}
+.issue-sep{color:rgba(12,12,12,0.35);}
+@keyframes ticker{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
 
 /* WORK SECTION */
 .work-section{padding:0 0 120px;}
@@ -240,7 +259,90 @@ nav{
 .project.wide .project-title{font-size:clamp(48px,5vw,72px);}
 .project-desc-col{display:flex;flex-direction:column;justify-content:space-between;height:100%;}
 
-/* ABOUT */
+/* WORK FILTER */
+.work-filter{
+  display:flex;align-items:center;gap:16px;
+}
+.filter-label{
+  font-family:var(--serif);font-size:13px;font-style:italic;
+  color:var(--muted);
+}
+.filter-select{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:10px 40px 10px 16px;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e8c547' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  transition:border-color 0.2s;
+  min-width:220px;
+}
+.filter-select:hover{border-color:var(--accent);}
+.filter-select:focus{outline:none;border-color:var(--accent);}
+.filter-select option{background:#1a1a1a;color:var(--text);}
+
+.project.hidden{display:none;}
+.project.fade-out{
+  opacity:0;transform:translateY(20px);
+  transition:opacity 0.3s,transform 0.3s;
+}
+.reporting-section{
+  padding:0 0 0;
+  border-top:1px solid var(--border);
+}
+.reporting-header{
+  padding:80px 48px 64px;
+  display:flex;align-items:baseline;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.reporting-grid{
+  display:grid;grid-template-columns:2fr 1fr;
+  gap:2px;
+}
+.report-card{
+  padding:56px;background:var(--bg2);
+  display:flex;flex-direction:column;
+  text-decoration:none;color:inherit;
+  transition:background 0.2s;
+}
+.report-card:hover{background:var(--bg3);}
+.report-card.placeholder-report{cursor:default;}
+.report-card.placeholder-report:hover{background:var(--bg2);}
+.featured-report{background:var(--bg2);}
+.report-outlet{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+}
+.report-title{
+  font-family:var(--display);font-size:clamp(28px,3vw,42px);
+  letter-spacing:0.03em;line-height:1.05;
+  margin-bottom:20px;flex:1;
+}
+.report-desc{
+  font-family:var(--serif);font-size:14px;font-style:italic;
+  color:var(--muted);line-height:1.9;
+  margin-bottom:32px;
+}
+.report-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:24px;border-top:1px solid var(--border);
+}
+.report-date{font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;}
+.report-arrow{font-size:28px;color:var(--accent);transition:transform 0.3s;line-height:1;}
+.report-card:hover .report-arrow{transform:translate(4px,-4px);}
+
+@media(max-width:900px){
+  .reporting-grid{grid-template-columns:1fr;}
+  .reporting-header{padding:56px 24px 40px;}
+  .report-card{padding:40px 24px;}
+}
 .about-section{
   min-height:100vh;
   display:grid;grid-template-columns:1fr 1fr;
@@ -353,6 +455,7 @@ footer{
   <a class="nav-logo" href="#">LBM<span>.</span></a>
   <div class="nav-links">
     <a class="nav-link" href="#work">Work</a>
+    <a class="nav-link" href="#reporting">Reporting</a>
     <a class="nav-link" href="#about">About</a>
     <a class="nav-link nav-cta" href="#contact">Let's talk</a>
   </div>
@@ -365,7 +468,7 @@ footer{
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-rule"></div>
-  <div class="hero-edition">Editorial Designer & Data Journalist — Milan, IT</div>
+  <div class="hero-edition">Editorial Designer & Data Journalist — Bologna, IT & Washington DC</div>
   <h1 class="hero-title">
     <span class="hero-title-line"><span class="hero-title-inner">LINDSEY</span></span>
     <span class="hero-title-line"><span class="hero-title-inner">BROCK</span></span>
@@ -380,34 +483,54 @@ footer{
   </div>
 </section>
 
-<!-- DISCIPLINE BAR -->
-<div class="issue-bar">
-  <span class="issue-item">Data Visualization</span>
-  <span class="issue-sep">✦</span>
-  <span class="issue-item">Editorial Design</span>
-  <span class="issue-sep">✦</span>
-  <span class="issue-item">Science Communication</span>
-  <span class="issue-sep">✦</span>
-  <span class="issue-item">Investigative Journalism</span>
-  <span class="issue-sep">✦</span>
-  <span class="issue-item">Independent Publishing</span>
-  <span class="issue-sep">✦</span>
-  <span class="issue-item">Community Platforms</span>
-  <span class="issue-sep">✦</span>
-  <span class="issue-item">Data Visualization</span>
-  <span class="issue-sep">✦</span>
-  <span class="issue-item">Editorial Design</span>
+<!-- MARQUEE TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-set">
+      <span class="issue-item">Data Visualization</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Editorial Design</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Science Communication</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Investigative Journalism</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Independent Publishing</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Community Platforms</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Civic Technology</span><span class="issue-sep">✦</span>
+      <span class="issue-item">UX Design</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Web Design</span><span class="issue-sep">✦</span>
+    </div>
+    <div class="ticker-set" aria-hidden="true">
+      <span class="issue-item">Data Visualization</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Editorial Design</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Science Communication</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Investigative Journalism</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Independent Publishing</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Community Platforms</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Civic Technology</span><span class="issue-sep">✦</span>
+      <span class="issue-item">UX Design</span><span class="issue-sep">✦</span>
+      <span class="issue-item">Web Design</span><span class="issue-sep">✦</span>
+    </div>
+  </div>
 </div>
 
 <!-- WORK -->
 <section class="work-section" id="work">
   <div class="work-header fade-up">
     <h2 class="work-heading">SELECTED<br>WORK</h2>
-    <span class="work-count">Five case studies — 2024–2026</span>
+    <div class="work-filter">
+      <span class="filter-label">Filter by</span>
+      <select class="filter-select" id="workFilter">
+        <option value="all">All Work</option>
+        <option value="data-viz">Data Visualization</option>
+        <option value="editorial">Editorial Design</option>
+        <option value="journalism">Journalism</option>
+        <option value="civic">Civic Technology</option>
+        <option value="science">Science Communication</option>
+        <option value="platform">Platform & UX</option>
+      </select>
+    </div>
   </div>
 
   <!-- 01 THE PARLOR -->
-  <a class="project wide" href="#">
+  <a class="project wide" href="#" data-category="editorial journalism platform">
     <div class="project-visual">
       <canvas class="project-canvas" data-theme="parlor"></canvas>
       <div class="project-visual-overlay"></div>
@@ -434,7 +557,7 @@ footer{
   </a>
 
   <!-- 02 REGIME CHANGES -->
-  <a class="project" href="#">
+  <a class="project" href="#" data-category="data-viz journalism">
     <div class="project-visual">
       <canvas class="project-canvas" data-theme="map"></canvas>
       <div class="project-visual-overlay"></div>
@@ -456,7 +579,7 @@ footer{
   </a>
 
   <!-- 03 IMMIGRATION -->
-  <a class="project" href="#">
+  <a class="project" href="#" data-category="data-viz science">
     <div class="project-visual">
       <canvas class="project-canvas" data-theme="immigration"></canvas>
       <div class="project-visual-overlay"></div>
@@ -478,7 +601,7 @@ footer{
   </a>
 
   <!-- 04 TWITCH -->
-  <a class="project" href="#">
+  <a class="project" href="#" data-category="data-viz journalism">
     <div class="project-visual">
       <canvas class="project-canvas" data-theme="twitch"></canvas>
       <div class="project-visual-overlay"></div>
@@ -500,7 +623,7 @@ footer{
   </a>
 
   <!-- 05 CLIMATE - COMING SOON -->
-  <a class="project wide" href="#" style="opacity:0.55;pointer-events:none;">
+  <a class="project wide" href="#" style="opacity:0.55;pointer-events:none;" data-category="science data-viz">
     <div class="project-visual">
       <canvas class="project-canvas" data-theme="climate"></canvas>
       <div class="project-visual-overlay"></div>
@@ -526,9 +649,54 @@ footer{
     </div>
   </a>
 
+  <!-- 06 NON DA SOLA - COMING SOON -->
+  <a class="project" href="#" style="opacity:0.55;pointer-events:none;" data-category="civic science platform">
+    <div class="project-visual">
+      <canvas class="project-canvas" data-theme="nds"></canvas>
+      <div class="project-visual-overlay"></div>
+      <div class="project-num">06</div>
+    </div>
+    <div class="project-info">
+      <div class="project-tags">
+        <span class="project-tag active">Civic Technology</span>
+        <span class="project-tag active">Public Health</span>
+        <span class="project-tag active">UX Design</span>
+        <span class="project-tag">In Development</span>
+      </div>
+      <h3 class="project-title">NON DA SOLA</h3>
+      <p class="project-desc">A multilingual civic app redesign for pregnant women in Emilia Romagna — connecting them directly to consultori, psychological services, and public birthing classes. Built from personal experience navigating a broken phone-dependent system as a pregnant woman during COVID, and seven years advocating for women who faced the same barriers.</p>
+      <div class="project-footer">
+        <div class="project-tech">React · Supabase · FSE Integration<br>Multilingual UX · Civic Technology</div>
+        <span class="project-arrow" style="color:var(--muted);">○</span>
+      </div>
+    </div>
+  </a>
+
 </section>
 
-<!-- ABOUT -->
+<!-- REPORTING -->
+<section class="reporting-section" id="reporting">
+  <div class="reporting-header fade-up">
+    <h2 class="work-heading">REPORTING</h2>
+    <span class="work-count" style="font-family:var(--serif);font-style:italic;">Journalism & essays</span>
+  </div>
+  <div class="reporting-grid">
+    <a class="report-card featured-report fade-up" href="https://observer.com/2025/07/how-elon-musk-and-peter-thiel-consolidated-power-in-2025/" target="_blank">
+      <div class="report-outlet">The Observer</div>
+      <h3 class="report-title">The New Tech Nationalists: Silicon Valley's 2025 Power Play</h3>
+      <p class="report-desc">How Elon Musk and Peter Thiel consolidated power in 2025 — on Silicon Valley's strategic entrenchment in Washington, the coordinated agenda to privatize public infrastructure, capture regulatory bodies, and reshape public policy in the service of private power.</p>
+      <div class="report-footer">
+        <span class="report-date">July 2025</span>
+        <span class="report-arrow">↗</span>
+      </div>
+    </a>
+    <div class="report-card placeholder-report fade-up">
+      <div class="report-outlet" style="color:var(--muted);">More reporting</div>
+      <h3 class="report-title" style="color:var(--muted);font-size:20px;">Further clips available on request</h3>
+      <p class="report-desc">Covering labor, reproductive rights, immigration policy, civic technology, and independent media.</p>
+    </div>
+  </div>
+</section>
 <section class="about-section" id="about">
   <div class="about-visual">
     <canvas id="aboutCanvas"></canvas>
@@ -537,7 +705,7 @@ footer{
     <div class="about-eyebrow">About</div>
     <h2 class="about-title fade-up">DESIGN IS HOW I MAKE POWER VISIBLE</h2>
     <p class="about-body fade-up">
-      I'm an <strong>editorial designer and data journalist</strong> based in Milan, working at the intersection of <strong>politics, science, and community</strong>. I build things that make complex information accessible — from print magazines to interactive maps to community platforms.<br/><br/>
+      I'm an <strong>editorial designer and data journalist</strong> based between <strong>Bologna, Italy and Washington DC</strong>, working at the intersection of <strong>politics, science, and community</strong>. I build things that make complex information accessible — from print magazines to interactive maps to community platforms.<br/><br/>
       I founded <strong>The Parlor Magazine</strong> and built all editorial, digital, and data infrastructure myself. My work spans independent publishing, data visualization, science communication, and UX design.
     </p>
     <div class="skills-rows">
@@ -623,7 +791,8 @@ function initProjectCanvas(canvas){
     map:{bg:'#0a0f1a',colors:['#4a9eff','#7ee7c8','#e8c547']},
     immigration:{bg:'#0a1a0f',colors:['#7ee787','#4aff8f','#e8c547']},
     twitch:{bg:'#1a0a1a',colors:['#bf94ff','#ff7eb6','#e8c547']},
-    climate:{bg:'#0a1a18',colors:['#39d8c8','#7ee787','#4a9eff']}
+    climate:{bg:'#0a1a18',colors:['#39d8c8','#7ee787','#4a9eff']},
+    nds:{bg:'#1a0a12',colors:['#ff7eb6','#f5c6d0','#e8c547']}
   };
   const t=themes[theme]||themes.map;
   let shapes=[];
@@ -737,7 +906,25 @@ window.addEventListener('load',()=>{
   initContactCanvas();
 });
 
-/* SCROLL REVEAL */
+/* WORK FILTER */
+const workFilter=document.getElementById('workFilter');
+if(workFilter){
+  workFilter.addEventListener('change',()=>{
+    const val=workFilter.value;
+    const projects=document.querySelectorAll('.project');
+    projects.forEach(p=>{
+      const cats=(p.dataset.category||'').split(' ');
+      if(val==='all'||cats.includes(val)){
+        p.style.display='';
+        setTimeout(()=>p.classList.add('visible'),50);
+      } else {
+        p.style.display='none';
+        p.classList.remove('visible');
+      }
+    });
+  });
+}
+
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.12});

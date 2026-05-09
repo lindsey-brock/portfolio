@@ -1099,33 +1099,42 @@ const video=document.getElementById('heroVideo');
 const clickLayer=document.getElementById('clickLayer');
 
 /* Disable scroll while video plays */
+/* Disable scroll while video plays */
 document.body.style.overflow='hidden';
 
-function revealHero(){
-  clickLayer.style.display='none';
-  /* Re-enable scroll */
+/* Safety fallback — re-enable scroll after 15s no matter what */
+const scrollFallback=setTimeout(()=>{
   document.body.style.overflow='';
+  revealHero();
+},15000);
+
+function revealHero(){
+  clearTimeout(scrollFallback);
+  clickLayer.style.display='none';
+  document.body.style.overflow='';
+  document.documentElement.style.overflow='';
   document.getElementById('bg').classList.add('show');
   document.getElementById('heroOverlay').classList.add('show');
   document.getElementById('heroStrip').classList.add('show');
   document.getElementById('heroLine').classList.add('show');
-
   setTimeout(()=>document.getElementById('heroContent').classList.add('reveal'),800);
   setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
   setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
   setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);
   setTimeout(()=>document.getElementById('ht3').classList.add('show'),1400);
-  /* Nav and meta appear together */
   setTimeout(()=>{
     document.getElementById('heroMeta').classList.add('show');
     document.querySelector('nav').classList.add('visible');
   },1700);
 }
 
-video.addEventListener('ended', revealHero);
+video.addEventListener('ended',revealHero);
 
-clickLayer.addEventListener('click', ()=>{
-  if(video.currentTime >= 3 && video.currentTime < 9){
+/* Also trigger on video error */
+video.addEventListener('error',revealHero);
+
+clickLayer.addEventListener('click',()=>{
+  if(video.currentTime>=3&&video.currentTime<9){
     video.currentTime=9;
   }
 });

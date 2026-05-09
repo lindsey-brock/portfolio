@@ -22,7 +22,14 @@ video{
   width:100%;height:100%;
   object-fit:cover;
   z-index:1;
+}
+
+/* Click capture layer — sits over video, triggers skip */
+.click-layer{
+  position:absolute;inset:0;
+  z-index:9;
   cursor:pointer;
+  background:transparent;
 }
 
 /* LAYER 2 — Particle canvas, fades in after video ends */
@@ -32,6 +39,7 @@ canvas#bg{
   z-index:4;
   opacity:0;
   transition:opacity 1.2s ease;
+  pointer-events:none;
 }
 canvas#bg.show{opacity:1;}
 
@@ -44,31 +52,56 @@ canvas#bg.show{opacity:1;}
   z-index:3;
   opacity:0;
   transition:opacity 0.8s ease;
+  pointer-events:none;
 }
 .hero-overlay.show{opacity:1;}
 
-/* LAYER 4 — Gold rule */
+/* LAYER 4 — Gold/red rule at top */
 .hero-rule{
   position:absolute;top:0;left:0;right:0;
   height:3px;
   background:linear-gradient(90deg,#e8c547,#c94040,#e8c547);
-  z-index:5;
+  z-index:10;
 }
 
-/* LAYER 5 — Hero content — hidden until reveal */
+/* Bottom strip — independent, pinned to bottom */
+.hero-bottom-strip{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:120px;
+  background:rgba(12,12,12,0.96);
+  z-index:4;
+  opacity:0;
+  transition:opacity 0.8s ease;
+  pointer-events:none;
+}
+.hero-bottom-strip.show{opacity:1;}
+
+/* Line sits right at the top edge of the strip */
+.hero-bottom-line{
+  position:absolute;
+  bottom:119px;left:0;right:0;
+  height:1px;
+  background:rgba(245,240,232,0.35);
+  z-index:5;
+  opacity:0;
+  transition:opacity 0.8s ease;
+  pointer-events:none;
+}
+.hero-bottom-line.show{opacity:1;}
+
+/* LAYER 5 — Hero content */
 .hero-content{
   position:absolute;
-  bottom:64px;left:48px;right:48px;
+  /* bottom:64px places tagline area just above the 120px strip */
+  bottom:130px;left:48px;right:48px;
   z-index:6;
   visibility:hidden;
-  transition:visibility 0s linear 0.9s;
+  pointer-events:none;
 }
 .hero-content.reveal{
   visibility:visible;
-  transition:none;
 }
-/* Meta strip sits above particles */
-.hero-meta{z-index:5;}
 
 .hero-edition{
   font-family:'DM Sans',sans-serif;
@@ -86,53 +119,28 @@ canvas#bg.show{opacity:1;}
   line-height:0.92;letter-spacing:0.02em;
   color:#ffffff;
 }
-.hero-title-line{
-  display:block;
-  overflow:hidden;
-  background:transparent;
-}
+.hero-title-line{display:block;overflow:hidden;}
 .hero-title-inner{
   display:block;
   transform:translateY(100%);
   transition:transform 0.9s cubic-bezier(0.16,1,0.3,1);
   color:#ffffff;
-  text-shadow:0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6);
+  text-shadow:0 2px 20px rgba(0,0,0,0.8),0 0 40px rgba(0,0,0,0.6);
 }
 .hero-title-inner.show{transform:translateY(0);}
 .hero-title-line:nth-child(3) .hero-title-inner{color:#e8c547;text-shadow:0 2px 20px rgba(0,0,0,0.8);}
 
+/* Tagline and scroll sit inside the strip */
 .hero-meta{
+  position:absolute;
+  bottom:16px;left:48px;right:48px;
   display:flex;align-items:flex-end;justify-content:space-between;
-  margin-top:32px;padding-top:0;padding-bottom:8px;
-  border-top:none;
+  z-index:6;
   opacity:0;transform:translateY(20px);
   transition:opacity 0.8s ease,transform 0.8s ease;
-  position:relative;
-  z-index:5;
+  pointer-events:none;
 }
 .hero-meta.show{opacity:1;transform:translateY(0);}
-
-/* Separate strip and line — sits at very bottom independently */
-.hero-bottom-strip{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  height:120px;
-  background:rgba(12,12,12,0.96);
-  z-index:4;
-  opacity:0;
-  transition:opacity 0.8s ease;
-}
-.hero-bottom-strip.show{opacity:1;}
-.hero-bottom-line{
-  position:absolute;
-  bottom:119px;left:0;right:0;
-  height:1px;
-  background:rgba(245,240,232,0.35);
-  z-index:5;
-  opacity:0;
-  transition:opacity 0.8s ease;
-}
-.hero-bottom-line.show{opacity:1;}
 .hero-desc{
   font-family:'Libre Baskerville',serif;
   font-size:16px;font-style:italic;
@@ -165,7 +173,8 @@ canvas#bg.show{opacity:1;}
 .replay-btn.show{opacity:1;}
 
 @media(max-width:768px){
-  .hero-content{bottom:48px;left:24px;right:24px;}
+  .hero-content{bottom:110px;left:24px;right:24px;}
+  .hero-meta{left:24px;right:24px;}
 }
 </style>
 </head>
@@ -177,33 +186,38 @@ canvas#bg.show{opacity:1;}
     <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1778357984/Copy_of_Summer_Video_2_htexds.mp4" type="video/mp4"/>
   </video>
 
-  <!-- LAYER 2: Particles (fade in after video) -->
+  <!-- Click capture layer -->
+  <div class="click-layer" id="clickLayer"></div>
+
+  <!-- LAYER 2: Particles -->
   <canvas id="bg"></canvas>
 
   <!-- LAYER 3: Dark gradient -->
   <div class="hero-overlay" id="heroOverlay"></div>
 
-  <!-- LAYER 4: Gold rule always visible -->
+  <!-- LAYER 4: Gold rule -->
   <div class="hero-rule"></div>
 
-  <!-- Bottom strip and line — independent of hero content -->
+  <!-- Bottom strip and line -->
   <div class="hero-bottom-strip" id="heroStrip"></div>
   <div class="hero-bottom-line" id="heroLine"></div>
 
-  <!-- LAYER 5: Hero content -->
-  <div class="hero-content">
+  <!-- LAYER 5: Name block -->
+  <div class="hero-content" id="heroContent">
     <div class="hero-edition" id="heroEdition">Editorial Designer & Data Journalist — Bologna, IT & Washington DC</div>
     <h1 class="hero-title">
       <span class="hero-title-line"><span class="hero-title-inner" id="ht1">LINDSEY</span></span>
       <span class="hero-title-line"><span class="hero-title-inner" id="ht2">BROCK</span></span>
       <span class="hero-title-line"><span class="hero-title-inner" id="ht3">MORALES</span></span>
     </h1>
-    <div class="hero-meta" id="heroMeta">
-      <p class="hero-desc">Working at the intersection of politics, science, and community — making complex information impossible to ignore.</p>
-      <div class="hero-scroll">
-        <div class="scroll-line"></div>
-        <span>Scroll</span>
-      </div>
+  </div>
+
+  <!-- Tagline and scroll — inside strip -->
+  <div class="hero-meta" id="heroMeta">
+    <p class="hero-desc">Working at the intersection of politics, science, and community — making complex information impossible to ignore.</p>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
   </div>
 </div>
@@ -211,7 +225,6 @@ canvas#bg.show{opacity:1;}
 <button class="replay-btn" id="replayBtn" onclick="replay()">↺ Replay</button>
 
 <script>
-/* Particle canvas */
 (function(){
   const c=document.getElementById('bg');
   const ctx=c.getContext('2d');
@@ -245,14 +258,16 @@ canvas#bg.show{opacity:1;}
 
 const video=document.getElementById('heroVideo');
 const btn=document.getElementById('replayBtn');
+const clickLayer=document.getElementById('clickLayer');
 
 function revealHero(){
+  clickLayer.style.display='none';
   document.getElementById('bg').classList.add('show');
   document.getElementById('heroOverlay').classList.add('show');
   document.getElementById('heroStrip').classList.add('show');
   document.getElementById('heroLine').classList.add('show');
 
-  setTimeout(()=>document.querySelector('.hero-content').classList.add('reveal'),800);
+  setTimeout(()=>document.getElementById('heroContent').classList.add('reveal'),800);
   setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
   setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
   setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);
@@ -263,15 +278,17 @@ function revealHero(){
 
 video.addEventListener('ended', revealHero);
 
-video.addEventListener('click', ()=>{
+/* Click to skip — only works between 3s and 9s */
+clickLayer.addEventListener('click', ()=>{
   if(video.currentTime >= 3 && video.currentTime < 9){
-    video.currentTime = 9;
+    video.currentTime=9;
   }
 });
 
 function replay(){
   btn.classList.remove('show');
-  document.querySelector('.hero-content').classList.remove('reveal');
+  clickLayer.style.display='block';
+  document.getElementById('heroContent').classList.remove('reveal');
   ['heroEdition','heroMeta','heroOverlay','heroStrip','heroLine'].forEach(id=>{
     document.getElementById(id).classList.remove('show');
   });

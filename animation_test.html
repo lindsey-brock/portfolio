@@ -11,17 +11,20 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
 
 .stage{
   width:100vw;height:100vh;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
   background:#0c0c0c;
-  position:relative;
+  gap:24px;
 }
 
+/* Banner matches LinkedIn banner aspect ratio ~4.2:1 */
 .banner{
   position:relative;
-  width:min(95vw,1100px);
+  width:min(96vw,1200px);
   aspect-ratio:4.2/1;
   overflow:hidden;
-  background:#111;
+  background:#0c0c0c;
+  flex-shrink:0;
 }
 
 .piece{
@@ -34,54 +37,72 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
   width:100%;height:100%;object-fit:cover;
 }
 
+/* 
+  LinkedIn banner breakdown (left to right):
+  - Hands: 0-57% width, diagonal right edge ~57% top to 45% bottom
+  - Shadow/silhouette: 45-67% — center lower wedge
+  - Eye: 57-78% — upper center-right triangle  
+  - Megaphones: 72-100% — right strip diagonal
+  - Diamond: center ~50% left, overlapping junction
+*/
 #p-hands{
-  clip-path:polygon(0% 0%, 60% 0%, 46% 100%, 0% 100%);
+  clip-path:polygon(0% 0%, 57% 0%, 43% 100%, 0% 100%);
   transform:translateX(-110%);
 }
+#p-shadow{
+  clip-path:polygon(43% 0%, 72% 0%, 60% 100%, 31% 100%);
+  transform:translateY(110%);
+}
 #p-eye{
-  clip-path:polygon(55% 0%, 78% 0%, 65% 100%, 42% 100%);
+  clip-path:polygon(57% 0%, 80% 0%, 68% 100%, 44% 100%);
   transform:translateY(-110%);
 }
 #p-meg{
-  clip-path:polygon(76% 0%, 100% 0%, 100% 100%, 63% 100%);
+  clip-path:polygon(72% 0%, 100% 0%, 100% 100%, 60% 100%);
   transform:translateX(110%);
 }
-#p-shadow{
-  clip-path:polygon(36% 0%, 66% 0%, 54% 100%, 24% 100%);
-  transform:translateY(110%);
-}
 
+/* Diamond */
 .diamond-wrap{
   position:absolute;
-  width:13%;aspect-ratio:1;
+  width:14%;aspect-ratio:1;
   top:50%;left:50%;
   transform:translate(-50%,-50%) rotate(45deg) scale(0);
-  opacity:0;z-index:10;will-change:transform,opacity;
+  opacity:0;z-index:10;
+  overflow:hidden;
 }
-.diamond-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.diamond-wrap img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+}
 .diamond-text{
   position:absolute;inset:0;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  transform:rotate(-45deg);text-align:center;padding:8%;
+  transform:rotate(-45deg);
+  text-align:center;padding:10%;
+  z-index:2;
 }
 .dt1,.dt2{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(6px,1.1vw,14px);
-  letter-spacing:0.06em;line-height:1.3;display:block;
+  font-size:clamp(6px,1vw,13px);
+  letter-spacing:0.06em;line-height:1.4;display:block;
 }
 .dt1{color:#f5f0e8;}
 .dt2{color:#e8c547;}
 
+/* Flying text */
 .fly-text{
-  position:absolute;font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(12px,2.5vw,40px);
+  position:absolute;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(10px,2.2vw,36px);
   letter-spacing:0.1em;opacity:0;top:50%;
   white-space:nowrap;pointer-events:none;z-index:20;
 }
 #ft-human{color:#f5f0e8;left:-120%;transform:translateY(-130%);}
 #ft-digital{color:#e8c547;right:-120%;transform:translateY(20%);}
 
+/* Final slogan */
 .final-slogan{
   position:absolute;top:50%;left:50%;
   transform:translate(-50%,-50%) scale(0.2);
@@ -89,16 +110,18 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
   font-family:'Bebas Neue',sans-serif;
   letter-spacing:0.1em;line-height:1.0;white-space:nowrap;
 }
-.fs1{display:block;font-size:clamp(16px,3.5vw,56px);color:#f5f0e8;}
-.fs2{display:block;font-size:clamp(16px,3.5vw,56px);color:#e8c547;}
+.fs1{display:block;font-size:clamp(14px,3vw,52px);color:#f5f0e8;}
+.fs2{display:block;font-size:clamp(14px,3vw,52px);color:#e8c547;}
 
+/* Name reveal — below the banner */
 .name-reveal{
-  position:absolute;bottom:5%;left:5%;
-  opacity:0;transform:translateY(20px);z-index:40;
+  opacity:0;transform:translateY(16px);
+  flex-shrink:0;align-self:flex-start;
+  margin-left:min(2vw,24px);
 }
 .name-reveal h1{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(28px,5vw,72px);
+  font-size:clamp(32px,6vw,80px);
   color:#f5f0e8;letter-spacing:0.03em;line-height:0.92;
 }
 .name-reveal h1 span{color:#e8c547;}
@@ -118,7 +141,6 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
 }
 .replay-btn:hover{color:#e8c547;}
 .replay-btn.show{opacity:1;}
-
 .debug-btn{
   position:fixed;bottom:16px;left:16px;
   font-family:'Bebas Neue',sans-serif;font-size:11px;
@@ -130,11 +152,14 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
 </style>
 </head>
 <body>
-
 <div class="stage">
   <div class="banner" id="banner">
+
     <div class="piece" id="p-hands">
       <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778351224/Untitled_design_-_2026-05-09T200349.357_lrwncb.png" alt=""/>
+    </div>
+    <div class="piece" id="p-shadow">
+      <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778351437/Untitled_design_-_2026-05-09T202926.420_w25jow.png" alt=""/>
     </div>
     <div class="piece" id="p-eye">
       <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778351195/Untitled_design_-_2026-05-09T200227.598_ryjhh2.png" alt=""/>
@@ -142,9 +167,7 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
     <div class="piece" id="p-meg">
       <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778350882/Untitled_design_-_2026-05-09T200144.004_qpqw2p.png" alt=""/>
     </div>
-    <div class="piece" id="p-shadow">
-      <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778351437/Untitled_design_-_2026-05-09T202926.420_w25jow.png" alt=""/>
-    </div>
+
     <div class="diamond-wrap" id="dWrap">
       <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778351266/Untitled_design_-_2026-05-09T200500.817_ovt7uu.png" alt=""/>
       <div class="diamond-text">
@@ -152,16 +175,20 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
         <span class="dt2">DIGITAL SPACES.</span>
       </div>
     </div>
+
     <div class="fly-text" id="ft-human">HUMAN STORIES.</div>
     <div class="fly-text" id="ft-digital">DIGITAL SPACES.</div>
+
     <div class="final-slogan" id="fSlogan">
       <span class="fs1">HUMAN STORIES.</span>
       <span class="fs2">DIGITAL SPACES.</span>
     </div>
+
   </div>
+
   <div class="name-reveal" id="nameReveal">
     <h1>LINDSEY<br>BROCK<br><span>MORALES</span></h1>
-    <p>Editorial designer & data journalist<br>Bologna, IT & Washington DC</p>
+    <p>Editorial designer & data journalist — Bologna, IT & Washington DC</p>
   </div>
 </div>
 
@@ -182,14 +209,16 @@ function set(el,styles,tr){
 function toggleDebug(){
   debugMode=!debugMode;
   $('debugBtn').textContent=debugMode?'Hide assembled':'Show assembled';
-  ['p-hands','p-eye','p-meg','p-shadow'].forEach(id=>{
+  ['p-hands','p-shadow','p-eye','p-meg'].forEach(id=>{
     const el=$(id);
     el.style.transition='none';
-    el.style.transform=debugMode?'none':'';
+    el.style.transform='none';
     el.style.opacity=debugMode?'1':'0';
   });
   set($('dWrap'),{
-    transform:debugMode?'translate(-50%,-50%) rotate(45deg) scale(1)':'translate(-50%,-50%) rotate(45deg) scale(0)',
+    transform:debugMode
+      ?'translate(-50%,-50%) rotate(45deg) scale(1)'
+      :'translate(-50%,-50%) rotate(45deg) scale(0)',
     opacity:debugMode?'1':'0'
   },'none');
   if(!debugMode)run();
@@ -200,60 +229,72 @@ async function run(){
   debugMode=false;
   $('debugBtn').textContent='Show assembled';
 
-  const hands=$('p-hands'),eye=$('p-eye'),
-        meg=$('p-meg'),shadow=$('p-shadow'),
+  const hands=$('p-hands'),shadow=$('p-shadow'),
+        eye=$('p-eye'),meg=$('p-meg'),
         dWrap=$('dWrap'),
         ftH=$('ft-human'),ftD=$('ft-digital'),
         fs=$('fSlogan'),name=$('nameReveal');
 
-  [hands,eye,meg,shadow].forEach(el=>{el.style.transition='none';el.style.opacity='0';});
+  ['p-hands','p-shadow','p-eye','p-meg'].forEach(id=>{
+    const el=$(id);el.style.transition='none';el.style.opacity='0';
+  });
   set(hands,{transform:'translateX(-110%)'},'none');
+  set(shadow,{transform:'translateY(110%)'},'none');
   set(eye,{transform:'translateY(-110%)'},'none');
   set(meg,{transform:'translateX(110%)'},'none');
-  set(shadow,{transform:'translateY(110%)'},'none');
   set(dWrap,{transform:'translate(-50%,-50%) rotate(45deg) scale(0)',opacity:'0'},'none');
   set(ftH,{left:'-120%',opacity:'0',transform:'translateY(-130%)'},'none');
   set(ftD,{right:'-120%',opacity:'0',transform:'translateY(20%)'},'none');
   set(fs,{transform:'translate(-50%,-50%) scale(0.2)',opacity:'0'},'none');
-  set(name,{opacity:'0',transform:'translateY(20px)'},'none');
+  set(name,{opacity:'0',transform:'translateY(16px)'},'none');
 
   await wait(400);
 
+  // Pieces fly in and assemble
   set(hands,{transform:'translateX(0)',opacity:'1'},`all 850ms ${ease}`);
-  await wait(100);
+  await wait(80);
   set(meg,{transform:'translateX(0)',opacity:'1'},`all 850ms ${ease}`);
   await wait(80);
   set(eye,{transform:'translateY(0)',opacity:'1'},`all 850ms ${ease}`);
-  await wait(100);
+  await wait(80);
   set(shadow,{transform:'translateY(0)',opacity:'1'},`all 850ms ${ease}`);
-  await wait(600);
-  set(dWrap,{transform:'translate(-50%,-50%) rotate(45deg) scale(1)',opacity:'1'},`all 650ms ${ease}`);
+  await wait(650);
 
-  await wait(1200);
+  // Diamond pops in center
+  set(dWrap,{
+    transform:'translate(-50%,-50%) rotate(45deg) scale(1)',opacity:'1'
+  },`all 600ms ${ease}`);
 
-  set(ftH,{left:'4%',opacity:'1'},`all 650ms ${ease}`);
-  await wait(110);
-  set(ftD,{right:'4%',opacity:'1'},`all 650ms ${ease}`);
+  await wait(1100);
+
+  // Text flies in from opposite sides
+  set(ftH,{left:'4%',opacity:'1'},`all 600ms ${ease}`);
+  await wait(100);
+  set(ftD,{right:'4%',opacity:'1'},`all 600ms ${ease}`);
 
   await wait(1500);
 
-  set(hands,{opacity:'0',transform:'translateX(-15%) scale(0.96)'},'all 450ms ease-in');
-  set(meg,{opacity:'0',transform:'translateX(15%) scale(0.96)'},'all 450ms ease-in');
-  set(eye,{opacity:'0',transform:'translateY(-15%) scale(0.96)'},'all 450ms ease-in');
-  set(shadow,{opacity:'0',transform:'translateY(15%) scale(0.96)'},'all 450ms ease-in');
+  // Everything dissolves
+  set(hands,{opacity:'0',transform:'translateX(-12%)'},'all 450ms ease-in');
+  set(meg,{opacity:'0',transform:'translateX(12%)'},'all 450ms ease-in');
+  set(eye,{opacity:'0',transform:'translateY(-12%)'},'all 450ms ease-in');
+  set(shadow,{opacity:'0',transform:'translateY(12%)'},'all 450ms ease-in');
   set(dWrap,{opacity:'0',transform:'translate(-50%,-50%) rotate(45deg) scale(0.3)'},'all 380ms ease-in');
-  set(ftH,{opacity:'0',left:'-25%'},'all 380ms ease-in');
-  set(ftD,{opacity:'0',right:'-25%'},'all 380ms ease-in');
+  set(ftH,{opacity:'0',left:'-20%'},'all 350ms ease-in');
+  set(ftD,{opacity:'0',right:'-20%'},'all 350ms ease-in');
 
-  await wait(500);
+  await wait(480);
 
-  set(fs,{transform:'translate(-50%,-50%) scale(1)',opacity:'1'},`opacity 350ms ease, transform 750ms ${ease}`);
-  await wait(650);
-  set(fs,{transform:'translate(-50%,-50%) scale(1.18)'},'transform 850ms cubic-bezier(0.34,1.4,0.64,1)');
+  // Slogan grows
+  set(fs,{transform:'translate(-50%,-50%) scale(1)',opacity:'1'},
+    `opacity 350ms ease, transform 700ms ${ease}`);
+  await wait(600);
+  set(fs,{transform:'translate(-50%,-50%) scale(1.2)'},
+    'transform 800ms cubic-bezier(0.34,1.4,0.64,1)');
   await wait(700);
-  set(fs,{transform:'translate(-50%,-65%) scale(0.75)'},'transform 550ms ease-out');
-  await wait(300);
-  set(name,{opacity:'1',transform:'translateY(0)'},`all 750ms ${ease}`);
+
+  // Slogan stays visible, name reveals below
+  set(name,{opacity:'1',transform:'translateY(0)'},`all 700ms ${ease}`);
 
   await wait(800);
   $('replayBtn').classList.add('show');

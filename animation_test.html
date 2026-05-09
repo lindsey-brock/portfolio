@@ -57,7 +57,7 @@ canvas#bg.show{opacity:1;}
 /* LAYER 5 — Hero content — hidden until reveal */
 .hero-content{
   position:absolute;
-  bottom:32px;left:48px;right:48px;
+  bottom:64px;left:48px;right:48px;
   z-index:6;
   visibility:hidden;
   transition:visibility 0s linear 0.9s;
@@ -102,29 +102,36 @@ canvas#bg.show{opacity:1;}
 
 .hero-meta{
   display:flex;align-items:flex-end;justify-content:space-between;
-  margin-top:12px;padding-top:16px;padding-bottom:8px;
+  margin-top:32px;padding-top:0;padding-bottom:8px;
   border-top:none;
   opacity:0;transform:translateY(20px);
   transition:opacity 0.8s ease,transform 0.8s ease;
   position:relative;
   z-index:5;
 }
-.hero-meta::after{
-  content:'';
+.hero-meta.show{opacity:1;transform:translateY(0);}
+
+/* Separate strip and line — sits at very bottom independently */
+.hero-bottom-strip{
   position:absolute;
-  top:0;left:-48px;right:-48px;
+  bottom:0;left:0;right:0;
+  height:120px;
+  background:rgba(12,12,12,0.96);
+  z-index:4;
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+.hero-bottom-strip.show{opacity:1;}
+.hero-bottom-line{
+  position:absolute;
+  bottom:119px;left:0;right:0;
   height:1px;
   background:rgba(245,240,232,0.35);
-  z-index:2;
+  z-index:5;
+  opacity:0;
+  transition:opacity 0.8s ease;
 }
-.hero-meta::before{
-  content:'';
-  position:absolute;
-  inset:0px -48px -64px -48px;
-  background:rgba(12,12,12,0.96);
-  z-index:-1;
-}
-.hero-meta.show{opacity:1;transform:translateY(0);}
+.hero-bottom-line.show{opacity:1;}
 .hero-desc{
   font-family:'Libre Baskerville',serif;
   font-size:16px;font-style:italic;
@@ -177,6 +184,10 @@ canvas#bg.show{opacity:1;}
 
   <!-- LAYER 4: Gold rule always visible -->
   <div class="hero-rule"></div>
+
+  <!-- Bottom strip and line — independent of hero content -->
+  <div class="hero-bottom-strip" id="heroStrip"></div>
+  <div class="hero-bottom-line" id="heroLine"></div>
 
   <!-- LAYER 5: Hero content -->
   <div class="hero-content">
@@ -237,10 +248,10 @@ const btn=document.getElementById('replayBtn');
 function revealHero(){
   document.getElementById('bg').classList.add('show');
   document.getElementById('heroOverlay').classList.add('show');
+  document.getElementById('heroStrip').classList.add('show');
+  document.getElementById('heroLine').classList.add('show');
 
-  /* Make content visible after overlay fades in */
   setTimeout(()=>document.querySelector('.hero-content').classList.add('reveal'),800);
-
   setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
   setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
   setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);
@@ -254,7 +265,7 @@ video.addEventListener('ended', revealHero);
 function replay(){
   btn.classList.remove('show');
   document.querySelector('.hero-content').classList.remove('reveal');
-  ['heroEdition','heroMeta','heroOverlay'].forEach(id=>{
+  ['heroEdition','heroMeta','heroOverlay','heroStrip','heroLine'].forEach(id=>{
     document.getElementById(id).classList.remove('show');
   });
   ['ht1','ht2','ht3'].forEach(id=>{

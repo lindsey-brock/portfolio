@@ -54,11 +54,17 @@ canvas#bg.show{opacity:0.4;}
   z-index:5;
 }
 
-/* LAYER 5 — Hero content */
+/* LAYER 5 — Hero content — hidden until reveal */
 .hero-content{
   position:absolute;
   bottom:64px;left:48px;right:48px;
   z-index:6;
+  visibility:hidden;
+  transition:visibility 0s linear 0.9s;
+}
+.hero-content.reveal{
+  visibility:visible;
+  transition:none;
 }
 
 .hero-edition{
@@ -77,7 +83,11 @@ canvas#bg.show{opacity:0.4;}
   line-height:0.92;letter-spacing:0.02em;
   color:#ffffff;
 }
-.hero-title-line{display:block;overflow:hidden;}
+.hero-title-line{
+  display:block;
+  overflow:hidden;
+  background:transparent;
+}
 .hero-title-inner{
   display:block;
   transform:translateY(100%);
@@ -209,7 +219,9 @@ function revealHero(){
   document.getElementById('bg').classList.add('show');
   document.getElementById('heroOverlay').classList.add('show');
 
-  /* Wait for overlay to fade in (800ms) before revealing name */
+  /* Make content visible after overlay fades in */
+  setTimeout(()=>document.querySelector('.hero-content').classList.add('reveal'),800);
+
   setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
   setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
   setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);
@@ -222,6 +234,7 @@ video.addEventListener('ended', revealHero);
 
 function replay(){
   btn.classList.remove('show');
+  document.querySelector('.hero-content').classList.remove('reveal');
   ['heroEdition','heroMeta','heroOverlay'].forEach(id=>{
     document.getElementById(id).classList.remove('show');
   });

@@ -466,18 +466,39 @@ footer{
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg">
-    <canvas id="heroCanvas"></canvas>
-  </div>
-  <div class="hero-overlay"></div>
+  <!-- LAYER 1: Video underlay -->
+  <video id="heroVideo" autoplay muted playsinline preload="auto">
+    <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1778357984/Copy_of_Summer_Video_2_htexds.mp4" type="video/mp4"/>
+  </video>
+
+  <!-- Click capture layer -->
+  <div class="click-layer" id="clickLayer"></div>
+
+  <!-- LAYER 2: Particles -->
+  <canvas id="bg"></canvas>
+
+  <!-- LAYER 3: Dark gradient -->
+  <div class="hero-overlay" id="heroOverlay"></div>
+
+  <!-- LAYER 4: Gold rule -->
   <div class="hero-rule"></div>
-  <div class="hero-edition">Editorial Designer & Data Journalist — Bologna, IT & Washington DC</div>
-  <h1 class="hero-title">
-    <span class="hero-title-line"><span class="hero-title-inner">LINDSEY</span></span>
-    <span class="hero-title-line"><span class="hero-title-inner">BROCK</span></span>
-    <span class="hero-title-line"><span class="hero-title-inner">MORALES</span></span>
-  </h1>
-  <div class="hero-meta">
+
+  <!-- Bottom strip and line -->
+  <div class="hero-bottom-strip" id="heroStrip"></div>
+  <div class="hero-bottom-line" id="heroLine"></div>
+
+  <!-- LAYER 5: Name block -->
+  <div class="hero-content" id="heroContent">
+    <div class="hero-edition" id="heroEdition">Editorial Designer & Data Journalist — Bologna, IT & Washington DC</div>
+    <h1 class="hero-title">
+      <span class="hero-title-line"><span class="hero-title-inner" id="ht1">LINDSEY</span></span>
+      <span class="hero-title-line"><span class="hero-title-inner" id="ht2">BROCK</span></span>
+      <span class="hero-title-line"><span class="hero-title-inner" id="ht3">MORALES</span></span>
+    </h1>
+  </div>
+
+  <!-- Tagline and scroll — inside strip -->
+  <div class="hero-meta" id="heroMeta">
     <p class="hero-desc">Working at the intersection of politics, science, and community — making complex information impossible to ignore.</p>
     <div class="hero-scroll">
       <div class="scroll-line"></div>

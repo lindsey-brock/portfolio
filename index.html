@@ -964,6 +964,64 @@ const skillObserver=new IntersectionObserver(entries=>{
   });
 },{threshold:0.1});
 skillLines.forEach(el=>skillObserver.observe(el));
+(function(){
+  const c=document.getElementById('bg');
+  const ctx=c.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  for(let i=0;i<120;i++){
+    particles.push({
+      x:Math.random()*window.innerWidth,
+      y:Math.random()*window.innerHeight,
+      r:Math.random()*2+0.5,
+      vx:(Math.random()-0.5)*0.3,
+      vy:-(Math.random()*0.4+0.1),
+      alpha:Math.random()*0.6+0.2
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,197,71,${p.alpha})`;ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<0){p.y=h;p.x=Math.random()*w;}
+      if(p.x<0||p.x>w)p.vx*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+const video=document.getElementById('heroVideo');
+const clickLayer=document.getElementById('clickLayer');
+
+function revealHero(){
+  clickLayer.style.display='none';
+  document.getElementById('bg').classList.add('show');
+  document.getElementById('heroOverlay').classList.add('show');
+  document.getElementById('heroStrip').classList.add('show');
+  document.getElementById('heroLine').classList.add('show');
+
+  setTimeout(()=>document.getElementById('heroContent').classList.add('reveal'),800);
+  setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
+  setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
+  setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);
+  setTimeout(()=>document.getElementById('ht3').classList.add('show'),1400);
+  setTimeout(()=>document.getElementById('heroMeta').classList.add('show'),1700);
+}
+
+video.addEventListener('ended', revealHero);
+
+/* Click to skip — only works between 3s and 9s */
+clickLayer.addEventListener('click', ()=>{
+  if(video.currentTime >= 3 && video.currentTime < 9){
+    video.currentTime=9;
+  }
+});
+
 </script>
 </body>
 </html>

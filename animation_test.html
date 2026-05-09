@@ -9,7 +9,6 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
 
-/* Full screen hero — matches portfolio exactly */
 .hero{
   width:100vw;height:100vh;
   position:relative;
@@ -17,54 +16,49 @@ html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
   background:#0c0c0c;
 }
 
-/* Particle canvas background */
-canvas#bg{
+/* LAYER 1 — Video underlay, full screen */
+video{
   position:absolute;inset:0;
   width:100%;height:100%;
-  opacity:0.4;
-}
-
-/* Dark gradient overlay */
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(12,12,12,0.95) 0%,rgba(12,12,12,0.3) 60%,transparent 100%);
+  object-fit:cover;
   z-index:1;
 }
 
-/* Gold/red rule at top */
+/* LAYER 2 — Particle canvas, fades in after video ends */
+canvas#bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  z-index:2;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+canvas#bg.show{opacity:0.4;}
+
+/* LAYER 3 — Dark gradient overlay */
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(12,12,12,0.95) 0%,rgba(12,12,12,0.3) 60%,transparent 100%);
+  z-index:3;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+.hero-overlay.show{opacity:1;}
+
+/* LAYER 4 — Gold rule */
 .hero-rule{
   position:absolute;top:0;left:0;right:0;
   height:3px;
   background:linear-gradient(90deg,#e8c547,#c94040,#e8c547);
-  z-index:2;
+  z-index:5;
 }
 
-/* VIDEO OVERLAY — full width, sits over everything */
-.video-overlay{
-  position:absolute;inset:0;
-  z-index:10;
-  display:flex;align-items:center;justify-content:center;
-  background:#0c0c0c;
-  transition:opacity 0.8s ease;
-}
-.video-overlay.fade-out{
-  opacity:0;
-  pointer-events:none;
-}
-
-video{
-  width:100%;height:100%;
-  object-fit:cover;
-  mix-blend-mode:screen;
-  display:block;
-}
-
-/* HERO CONTENT — exactly matching portfolio layout */
+/* LAYER 5 — Hero content */
 .hero-content{
   position:absolute;
   bottom:64px;left:48px;right:48px;
-  z-index:3;
+  z-index:6;
 }
+
 .hero-edition{
   font-family:'DM Sans',sans-serif;
   font-size:10px;font-weight:500;
@@ -79,7 +73,6 @@ video{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(72px,12vw,160px);
   line-height:0.92;letter-spacing:0.02em;
-  overflow:hidden;
 }
 .hero-title-line{display:block;overflow:hidden;}
 .hero-title-inner{
@@ -137,18 +130,21 @@ video{
 <body>
 
 <div class="hero">
+  <!-- LAYER 1: Video underlay -->
+  <video id="heroVideo" autoplay muted playsinline preload="auto">
+    <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1778357984/Copy_of_Summer_Video_2_htexds.mp4" type="video/mp4"/>
+  </video>
+
+  <!-- LAYER 2: Particles (fade in after video) -->
   <canvas id="bg"></canvas>
-  <div class="hero-overlay"></div>
+
+  <!-- LAYER 3: Dark gradient -->
+  <div class="hero-overlay" id="heroOverlay"></div>
+
+  <!-- LAYER 4: Gold rule always visible -->
   <div class="hero-rule"></div>
 
-  <!-- VIDEO OVERLAY — plays first, then fades out -->
-  <div class="video-overlay" id="videoOverlay">
-    <video id="heroVideo" autoplay muted playsinline preload="auto">
-      <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1778357984/Copy_of_Summer_Video_2_htexds.mp4" type="video/mp4"/>
-    </video>
-  </div>
-
-  <!-- HERO CONTENT — revealed after video -->
+  <!-- LAYER 5: Hero content -->
   <div class="hero-content">
     <div class="hero-edition" id="heroEdition">Editorial Designer & Data Journalist — Bologna, IT & Washington DC</div>
     <h1 class="hero-title">
@@ -169,7 +165,7 @@ video{
 <button class="replay-btn" id="replayBtn" onclick="replay()">↺ Replay</button>
 
 <script>
-/* Particle background */
+/* Particle canvas */
 (function(){
   const c=document.getElementById('bg');
   const ctx=c.getContext('2d');
@@ -202,51 +198,35 @@ video{
 })();
 
 const video=document.getElementById('heroVideo');
-const overlay=document.getElementById('videoOverlay');
 const btn=document.getElementById('replayBtn');
-const ease=t=>t<0.5?2*t*t:(4-2*t)*t-1;
 
 function revealHero(){
-  overlay.classList.add('fade-out');
+  /* Fade in particles and dark overlay over the video */
+  document.getElementById('bg').classList.add('show');
+  document.getElementById('heroOverlay').classList.add('show');
 
-  setTimeout(()=>{
-    document.getElementById('heroEdition').classList.add('show');
-  },300);
-  setTimeout(()=>{
-    document.getElementById('ht1').classList.add('show');
-  },500);
-  setTimeout(()=>{
-    document.getElementById('ht2').classList.add('show');
-  },650);
-  setTimeout(()=>{
-    document.getElementById('ht3').classList.add('show');
-  },800);
-  setTimeout(()=>{
-    document.getElementById('heroMeta').classList.add('show');
-  },1100);
-  setTimeout(()=>{
-    btn.classList.add('show');
-  },2000);
+  /* Staggered name reveal */
+  setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),400);
+  setTimeout(()=>document.getElementById('ht1').classList.add('show'),600);
+  setTimeout(()=>document.getElementById('ht2').classList.add('show'),750);
+  setTimeout(()=>document.getElementById('ht3').classList.add('show'),900);
+  setTimeout(()=>document.getElementById('heroMeta').classList.add('show'),1200);
+  setTimeout(()=>btn.classList.add('show'),2000);
 }
 
 video.addEventListener('ended', revealHero);
 
 function replay(){
   btn.classList.remove('show');
-  ['heroEdition','heroMeta'].forEach(id=>{
+  ['heroEdition','heroMeta','heroOverlay'].forEach(id=>{
     document.getElementById(id).classList.remove('show');
   });
   ['ht1','ht2','ht3'].forEach(id=>{
     document.getElementById(id).classList.remove('show');
   });
-  overlay.style.transition='none';
-  overlay.classList.remove('fade-out');
-  overlay.style.opacity='1';
-  setTimeout(()=>{
-    overlay.style.transition='opacity 0.8s ease';
-    video.currentTime=0;
-    video.play();
-  },100);
+  document.getElementById('bg').classList.remove('show');
+  video.currentTime=0;
+  video.play();
 }
 </script>
 </body>

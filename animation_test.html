@@ -9,55 +9,117 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;background:#0c0c0c;overflow:hidden;}
 
-.stage{
+.hero{
   width:100vw;height:100vh;
+  position:relative;
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
+  justify-content:flex-end;
+  padding:0 48px 64px;
   background:#0c0c0c;
-  gap:20px;
 }
 
+/* Layout: video left, slogan right — side by side */
+.hero-content{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:40px;
+  position:relative;
+  z-index:2;
+}
+
+.hero-left{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  flex:1;
+  min-width:0;
+}
+
+/* Video container — black bg removed via mix-blend-mode */
 .video-wrap{
   position:relative;
-  width:min(96vw,1200px);
-  flex-shrink:0;
+  width:100%;
+  max-width:560px;
+  margin-bottom:-8px;
 }
 
 video{
   width:100%;
   display:block;
-  /* No controls, no UI — pure visual */
+  /* screen blend mode: black = transparent, colors show through */
+  mix-blend-mode:screen;
 }
 
-.name-reveal{
+/* Name — hidden until video ends */
+.name-block{
   opacity:0;
-  transform:translateY(16px);
-  flex-shrink:0;
-  align-self:flex-start;
-  padding-left:min(2vw,20px);
+  transform:translateY(20px);
   transition:opacity 0.8s ease, transform 0.8s ease;
 }
-.name-reveal.show{
+.name-block.show{
   opacity:1;
   transform:translateY(0);
 }
-.name-reveal h1{
+.name-block h1{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(28px,5.5vw,72px);
+  font-size:clamp(56px,9vw,120px);
   color:#f5f0e8;
-  letter-spacing:0.03em;
+  letter-spacing:0.02em;
   line-height:0.92;
 }
-.name-reveal h1 span{color:#e8c547;}
-.name-reveal p{
+.name-block h1 span{color:#e8c547;}
+
+/* Slogan — right side, vertically centered with the video */
+.hero-right{
+  flex-shrink:0;
+  text-align:right;
+  padding-bottom:8px;
+}
+.slogan{
+  opacity:0;
+  transform:translateX(20px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+}
+.slogan.show{opacity:1;transform:translateX(0);}
+.slogan-line1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(20px,2.8vw,40px);
+  color:#f5f0e8;
+  letter-spacing:0.06em;
+  line-height:1.1;
+  display:block;
+}
+.slogan-line2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(20px,2.8vw,40px);
+  color:#e8c547;
+  letter-spacing:0.06em;
+  line-height:1.1;
+  display:block;
+}
+.slogan-desc{
   font-family:'Libre Baskerville',serif;
-  font-size:clamp(10px,1vw,14px);
+  font-size:clamp(11px,1vw,14px);
   font-style:italic;
   color:#8a8478;
-  margin-top:6px;
+  margin-top:12px;
   line-height:1.7;
+  display:block;
 }
 
+/* Bottom border line */
+.hero-rule{
+  width:100%;
+  height:1px;
+  background:rgba(245,240,232,0.1);
+  margin-bottom:24px;
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+.hero-rule.show{opacity:1;}
+
+/* Replay */
 .replay-btn{
   position:fixed;bottom:16px;right:16px;
   font-family:'Bebas Neue',sans-serif;
@@ -65,30 +127,49 @@ video{
   color:#8a8478;background:transparent;
   border:1px solid rgba(255,255,255,0.12);
   padding:7px 14px;cursor:pointer;
-  opacity:0;transition:opacity 0.3s,color 0.2s;
-  z-index:100;
+  opacity:0;transition:opacity 0.3s,color 0.2s;z-index:100;
 }
 .replay-btn:hover{color:#e8c547;}
 .replay-btn.show{opacity:1;}
+
+@media(max-width:768px){
+  .hero{padding:0 24px 48px;}
+  .hero-content{flex-direction:column;align-items:flex-start;gap:16px;}
+  .hero-right{text-align:left;}
+  .video-wrap{max-width:100%;}
+}
 </style>
 </head>
 <body>
 
-<div class="stage">
-  <div class="video-wrap">
-    <video
-      id="heroVideo"
-      autoplay
-      muted
-      playsinline
-      preload="auto">
-      <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1778355887/Copy_of_Summer_Video_rpzxot.mp4" type="video/mp4"/>
-    </video>
-  </div>
+<div class="hero">
+  <div class="hero-rule" id="heroRule"></div>
+  <div class="hero-content">
 
-  <div class="name-reveal" id="nameReveal">
-    <h1>LINDSEY<br>BROCK<br><span>MORALES</span></h1>
-    <p>Editorial designer & data journalist — Bologna, IT & Washington DC</p>
+    <div class="hero-left">
+      <div class="video-wrap">
+        <video
+          id="heroVideo"
+          autoplay
+          muted
+          playsinline
+          preload="auto">
+          <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1778357984/Copy_of_Summer_Video_2_htexds.mp4" type="video/mp4"/>
+        </video>
+      </div>
+      <div class="name-block" id="nameBlock">
+        <h1>LINDSEY<br>BROCK<br><span>MORALES</span></h1>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="slogan" id="slogan">
+        <span class="slogan-line1">HUMAN STORIES.</span>
+        <span class="slogan-line2">DIGITAL SPACES.</span>
+        <span class="slogan-desc">Editorial designer & data journalist<br>Bologna, IT & Washington DC</span>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -96,17 +177,23 @@ video{
 
 <script>
 const video = document.getElementById('heroVideo');
-const name = document.getElementById('nameReveal');
+const nameBlock = document.getElementById('nameBlock');
+const slogan = document.getElementById('slogan');
+const rule = document.getElementById('heroRule');
 const btn = document.getElementById('replayBtn');
 
 video.addEventListener('ended', () => {
-  name.classList.add('show');
-  setTimeout(()=>btn.classList.add('show'), 800);
+  nameBlock.classList.add('show');
+  slogan.classList.add('show');
+  rule.classList.add('show');
+  setTimeout(()=>btn.classList.add('show'), 1000);
 });
 
 function replay(){
   btn.classList.remove('show');
-  name.classList.remove('show');
+  nameBlock.classList.remove('show');
+  slogan.classList.remove('show');
+  rule.classList.remove('show');
   video.currentTime = 0;
   video.play();
 }

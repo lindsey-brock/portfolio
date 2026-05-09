@@ -103,11 +103,19 @@ canvas#bg.show{opacity:1;}
 .hero-meta{
   display:flex;align-items:flex-end;justify-content:space-between;
   margin-top:32px;padding-top:24px;padding-bottom:8px;
-  border-top:1px solid rgba(245,240,232,0.35);
+  border-top:none;
   opacity:0;transform:translateY(20px);
   transition:opacity 0.8s ease,transform 0.8s ease;
   position:relative;
   z-index:5;
+}
+.hero-meta::after{
+  content:'';
+  position:absolute;
+  top:0;left:-48px;right:-48px;
+  height:1px;
+  background:rgba(245,240,232,0.35);
+  z-index:2;
 }
 .hero-meta::before{
   content:'';

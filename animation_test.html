@@ -37,10 +37,12 @@ canvas#bg.show{opacity:0.4;}
 /* LAYER 3 — Dark gradient overlay */
 .hero-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(12,12,12,0.95) 0%,rgba(12,12,12,0.3) 60%,transparent 100%);
+  background:
+    linear-gradient(to right, rgba(12,12,12,0.96) 0%, rgba(12,12,12,0.96) 35%, rgba(12,12,12,0.4) 60%, rgba(12,12,12,0) 100%),
+    linear-gradient(to top, rgba(12,12,12,0.98) 0%, rgba(12,12,12,0.5) 50%, rgba(12,12,12,0.1) 100%);
   z-index:3;
   opacity:0;
-  transition:opacity 1s ease;
+  transition:opacity 0.8s ease;
 }
 .hero-overlay.show{opacity:1;}
 
@@ -73,6 +75,7 @@ canvas#bg.show{opacity:0.4;}
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(72px,12vw,160px);
   line-height:0.92;letter-spacing:0.02em;
+  color:#ffffff;
 }
 .hero-title-line{display:block;overflow:hidden;}
 .hero-title-inner{
@@ -203,17 +206,16 @@ const video=document.getElementById('heroVideo');
 const btn=document.getElementById('replayBtn');
 
 function revealHero(){
-  /* Fade in particles and dark overlay over the video */
   document.getElementById('bg').classList.add('show');
   document.getElementById('heroOverlay').classList.add('show');
 
-  /* Staggered name reveal */
-  setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),400);
-  setTimeout(()=>document.getElementById('ht1').classList.add('show'),600);
-  setTimeout(()=>document.getElementById('ht2').classList.add('show'),750);
-  setTimeout(()=>document.getElementById('ht3').classList.add('show'),900);
-  setTimeout(()=>document.getElementById('heroMeta').classList.add('show'),1200);
-  setTimeout(()=>btn.classList.add('show'),2000);
+  /* Wait for overlay to fade in (800ms) before revealing name */
+  setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
+  setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
+  setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);
+  setTimeout(()=>document.getElementById('ht3').classList.add('show'),1400);
+  setTimeout(()=>document.getElementById('heroMeta').classList.add('show'),1700);
+  setTimeout(()=>btn.classList.add('show'),2500);
 }
 
 video.addEventListener('ended', revealHero);

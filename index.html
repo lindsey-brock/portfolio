@@ -1058,6 +1058,15 @@ const skillObserver=new IntersectionObserver(entries=>{
   });
 },{threshold:0.1});
 skillLines.forEach(el=>skillObserver.observe(el));
+const aboutPhoto=document.getElementById('aboutPhoto');
+if(aboutPhoto){
+  const photoObserver=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting)e.target.style.opacity='1';
+    });
+  },{threshold:0.2});
+  photoObserver.observe(aboutPhoto);
+}
 (function(){
   const c=document.getElementById('bg');
   const ctx=c.getContext('2d');

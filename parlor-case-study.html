@@ -77,13 +77,14 @@ nav{
   min-width:100vw;
   height:100%;
   overflow-y:auto;
-  padding:48px 120px 48px 120px;
+  padding:40px 120px;
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:flex-start;
   position:relative;
   border-right:1px solid var(--border);
 }
+.slide-inner{margin:auto 0;width:100%;}
 .slide:nth-child(odd){background:var(--bg);}
 .slide:nth-child(even){background:var(--bg2);}
 .slide-rule{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--red),var(--accent));opacity:0.4;}
@@ -375,7 +376,58 @@ nav{
               <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Session state persists</strong> across portal navigation and all custom-coded components</span></li>
             </ul>
           </div>
-          <div class="video-placeholder" style="aspect-ratio:16/7;">
+          <!-- ARCHITECTURE DIAGRAM -->
+          <div style="margin-bottom:16px;">
+            <div style="font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);margin-bottom:12px;">SYSTEM ARCHITECTURE</div>
+            <svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;background:#0c0c0c;border:1px solid rgba(245,240,232,0.1);border-radius:2px;">
+              <defs>
+                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#e8c547" opacity="0.7"/>
+                </marker>
+              </defs>
+              <!-- WIX NODE -->
+              <rect x="20" y="100" width="140" height="80" rx="2" fill="#1a0a0a" stroke="#e8c547" stroke-opacity="0.5" stroke-width="1"/>
+              <text x="90" y="132" font-family="'Bebas Neue',sans-serif" font-size="13" fill="#e8c547" text-anchor="middle" letter-spacing="1">WIX CMS</text>
+              <text x="90" y="150" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8478" text-anchor="middle">Velo Serverless</text>
+              <text x="90" y="163" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8478" text-anchor="middle">HTTP API Endpoints</text>
+              <!-- WIXAUTH NODE -->
+              <rect x="210" y="30" width="140" height="60" rx="2" fill="#111" stroke="rgba(245,240,232,0.15)" stroke-width="1"/>
+              <text x="280" y="57" font-family="'Bebas Neue',sans-serif" font-size="13" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">WIX AUTH</text>
+              <text x="280" y="74" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8478" text-anchor="middle">Session + Tier Management</text>
+              <!-- DATABASE NODE -->
+              <rect x="210" y="190" width="140" height="60" rx="2" fill="#111" stroke="rgba(245,240,232,0.15)" stroke-width="1"/>
+              <text x="280" y="217" font-family="'Bebas Neue',sans-serif" font-size="13" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">DATABASE</text>
+              <text x="280" y="234" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8478" text-anchor="middle">Supabase (migrating)</text>
+              <!-- PORTAL NODE -->
+              <rect x="400" y="100" width="140" height="80" rx="2" fill="#1a0a0a" stroke="#e8c547" stroke-opacity="0.5" stroke-width="1"/>
+              <text x="470" y="132" font-family="'Bebas Neue',sans-serif" font-size="13" fill="#e8c547" text-anchor="middle" letter-spacing="1">PORTAL</text>
+              <text x="470" y="150" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8478" text-anchor="middle">GitHub + Vercel</text>
+              <text x="470" y="163" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8478" text-anchor="middle">Embedded via iframe</text>
+              <!-- ARROWS -->
+              <!-- Wix → WixAuth -->
+              <line x1="160" y1="120" x2="210" y2="75" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- WixAuth → Wix -->
+              <line x1="210" y1="85" x2="160" y2="130" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- Wix → DB -->
+              <line x1="160" y1="160" x2="210" y2="205" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- DB → Wix -->
+              <line x1="210" y1="215" x2="160" y2="170" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- Portal → WixAuth -->
+              <line x1="400" y1="120" x2="350" y2="75" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- WixAuth → Portal -->
+              <line x1="350" y1="85" x2="400" y2="130" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- Portal → DB -->
+              <line x1="400" y1="160" x2="350" y2="205" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- DB → Portal -->
+              <line x1="350" y1="215" x2="400" y2="170" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr)"/>
+              <!-- Labels on arrows -->
+              <text x="178" y="95" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">auth call</text>
+              <text x="178" y="190" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">data query</text>
+              <text x="382" y="95" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">session</text>
+              <text x="382" y="190" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">live data</text>
+            </svg>
+          </div>
+          <div class="video-placeholder" style="aspect-ratio:16/5;">
             <div class="video-icon"></div>
             <div class="video-label">Login Flow Walkthrough</div>
             <div class="video-note">Loom walkthrough coming</div>
@@ -419,17 +471,92 @@ nav{
           <div class="tier-price"><span>Print subscription</span> · Single issue purchase</div>
         </div>
       </div>
+      <!-- READER JOURNEY MAP -->
+      <div style="margin-top:24px;">
+        <div style="font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);margin-bottom:12px;">READER JOURNEY MAP</div>
+        <svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;background:#0c0c0c;border:1px solid rgba(245,240,232,0.1);">
+          <defs>
+            <marker id="arr2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#e8c547" opacity="0.6"/>
+            </marker>
+          </defs>
+          <!-- DISCOVERY -->
+          <rect x="10" y="75" width="100" height="50" rx="2" fill="#161616" stroke="rgba(245,240,232,0.15)" stroke-width="1"/>
+          <text x="60" y="97" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">DISCOVERY</text>
+          <text x="60" y="112" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Search · Social</text>
+          <text x="60" y="122" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Word of Mouth</text>
+          <!-- arrow -->
+          <line x1="110" y1="100" x2="138" y2="100" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr2)"/>
+          <!-- SIGN UP -->
+          <rect x="140" y="75" width="100" height="50" rx="2" fill="#161616" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1"/>
+          <text x="190" y="97" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#e8c547" text-anchor="middle" letter-spacing="1">SIGN UP</text>
+          <text x="190" y="112" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Free membership</text>
+          <text x="190" y="122" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Custom auth call</text>
+          <!-- arrow -->
+          <line x1="240" y1="100" x2="268" y2="100" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr2)"/>
+          <!-- FREE ARTICLE -->
+          <rect x="270" y="75" width="100" height="50" rx="2" fill="#161616" stroke="rgba(245,240,232,0.15)" stroke-width="1"/>
+          <text x="320" y="97" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">FREE</text>
+          <text x="320" y="110" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">EDITORIAL</text>
+          <text x="320" y="122" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Full access</text>
+          <!-- 3 arrows out -->
+          <!-- up to premium media -->
+          <line x1="370" y1="90" x2="430" y2="30" stroke="#e8c547" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arr2)"/>
+          <!-- straight to digital -->
+          <line x1="370" y1="100" x2="428" y2="100" stroke="#e8c547" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arr2)"/>
+          <!-- down to print -->
+          <line x1="370" y1="110" x2="430" y2="170" stroke="#e8c547" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arr2)"/>
+
+          <!-- PREMIUM MEDIA PATH -->
+          <rect x="432" y="5" width="110" height="45" rx="2" fill="#161616" stroke="rgba(245,240,232,0.1)" stroke-width="1"/>
+          <text x="487" y="24" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">PREMIUM MEDIA</text>
+          <text x="487" y="36" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Teaser plays</text>
+          <text x="487" y="46" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">$2.50 or upgrade</text>
+
+          <!-- DIGITAL PAYWALL PATH -->
+          <rect x="430" y="75" width="110" height="50" rx="2" fill="#161616" stroke="rgba(245,240,232,0.1)" stroke-width="1"/>
+          <text x="485" y="95" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">DIGITAL ISSUE</text>
+          <text x="485" y="108" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">10s preview + audio</text>
+          <text x="485" y="118" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Paywall fires</text>
+
+          <!-- PRINT PATH -->
+          <rect x="432" y="148" width="110" height="45" rx="2" fill="#161616" stroke="rgba(245,240,232,0.1)" stroke-width="1"/>
+          <text x="487" y="168" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">PRINT PREVIEW</text>
+          <text x="487" y="180" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Flipbook reader</text>
+          <text x="487" y="190" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Subscribe or buy</text>
+
+          <!-- arrows to outcomes -->
+          <line x1="542" y1="27" x2="600" y2="20" stroke="#e8c547" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arr2)"/>
+          <line x1="540" y1="100" x2="600" y2="100" stroke="#e8c547" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arr2)"/>
+          <line x1="542" y1="170" x2="600" y2="178" stroke="#e8c547" stroke-opacity="0.3" stroke-width="1" marker-end="url(#arr2)"/>
+
+          <!-- OUTCOMES -->
+          <rect x="602" y="5" width="110" height="35" rx="2" fill="#1a1208" stroke="#e8c547" stroke-opacity="0.5" stroke-width="1"/>
+          <text x="657" y="27" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#e8c547" text-anchor="middle" letter-spacing="1">$2.50 PURCHASE</text>
+
+          <rect x="602" y="75" width="110" height="50" rx="2" fill="#1a1208" stroke="#e8c547" stroke-opacity="0.5" stroke-width="1"/>
+          <text x="657" y="97" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#e8c547" text-anchor="middle" letter-spacing="1">DIGITAL SUB</text>
+          <text x="657" y="112" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Full digital access</text>
+          <text x="657" y="122" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">No paywalls</text>
+
+          <rect x="602" y="158" width="110" height="35" rx="2" fill="#1a1208" stroke="#e8c547" stroke-opacity="0.5" stroke-width="1"/>
+          <text x="657" y="180" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#e8c547" text-anchor="middle" letter-spacing="1">PRINT + DIGITAL</text>
+
+          <!-- arrow digital → print upgrade -->
+          <line x1="712" y1="115" x2="750" y2="115" stroke="#e8c547" stroke-opacity="0.2" stroke-width="1" marker-end="url(#arr2)"/>
+          <rect x="752" y="75" width="100" height="100" rx="2" fill="#161616" stroke="rgba(245,240,232,0.08)" stroke-width="1"/>
+          <text x="802" y="118" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">PRINT SUB</text>
+          <text x="802" y="132" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">Everything in digital</text>
+          <text x="802" y="144" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">+ physical magazine</text>
+          <text x="802" y="156" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">via Peecho</text>
+        </svg>
+      </div>
     </div>
 
     <!-- SLIDE 05 — DIGITAL PAYWALL -->
     <div class="slide">
       <div class="slide-rule"></div>
       <span class="slide-label">04 — The Digital Issue Paywall</span>
-      <div class="video-placeholder">
-        <div class="video-icon"></div>
-        <div class="video-label">Digital Paywall Demo</div>
-        <div class="video-note">Loom walkthrough of 10-second trigger, audio interrupt, and purchase flow coming</div>
-      </div>
       <div class="two-col">
         <div>
           <h2 class="slide-heading" style="font-size:clamp(28px,3.5vw,52px);margin-bottom:20px;">10 SECONDS.<br>THEN THE<br><span>WALL HITS.</span></h2>
@@ -446,6 +573,73 @@ nav{
               <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Two options</strong> — digital subscription or $2.50 single article</span></li>
               <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>On purchase</strong> — paywall dismisses, audio resumes, scroll unlocks</span></li>
             </ul>
+          </div>
+          <!-- VIDEO -->
+          <div class="video-placeholder" style="aspect-ratio:16/5;margin-top:16px;">
+            <div class="video-icon"></div>
+            <div class="video-label">Digital Paywall Demo</div>
+            <div class="video-note">Loom walkthrough coming</div>
+          </div>
+          <!-- PAYWALL STATES DIAGRAM -->
+          <div style="margin-top:16px;">
+            <div style="font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);margin-bottom:10px;">INTERACTION STATES</div>
+            <svg viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;background:#0c0c0c;border:1px solid rgba(245,240,232,0.1);">
+              <defs>
+                <marker id="arr3" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L7,3 z" fill="#e8c547" opacity="0.6"/>
+                </marker>
+              </defs>
+              <!-- STATE 1 — READING -->
+              <rect x="10" y="20" width="150" height="140" rx="2" fill="#161616" stroke="rgba(245,240,232,0.15)" stroke-width="1"/>
+              <text x="85" y="42" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">STATE 1</text>
+              <text x="85" y="56" font-family="'DM Sans',sans-serif" font-size="9" fill="#e8c547" text-anchor="middle">Reading + Audio Active</text>
+              <!-- mock article lines -->
+              <rect x="24" y="68" width="122" height="5" rx="1" fill="rgba(245,240,232,0.15)"/>
+              <rect x="24" y="78" width="100" height="5" rx="1" fill="rgba(245,240,232,0.1)"/>
+              <rect x="24" y="88" width="115" height="5" rx="1" fill="rgba(245,240,232,0.1)"/>
+              <rect x="24" y="98" width="80" height="5" rx="1" fill="rgba(245,240,232,0.1)"/>
+              <!-- audio indicator -->
+              <rect x="24" y="115" width="122" height="28" rx="2" fill="#111" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+              <text x="60" y="133" font-family="'DM Sans',sans-serif" font-size="8" fill="#e8c547">▶ Audio playing</text>
+              <text x="24" y="152" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478">Scroll: unlocked</text>
+
+              <!-- ARROW + TIMER LABEL -->
+              <line x1="160" y1="90" x2="188" y2="90" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr3)"/>
+              <text x="174" y="82" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">10s</text>
+
+              <!-- STATE 2 — PAYWALL -->
+              <rect x="190" y="20" width="160" height="140" rx="2" fill="#161616" stroke="#c94040" stroke-opacity="0.6" stroke-width="1"/>
+              <text x="270" y="42" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">STATE 2</text>
+              <text x="270" y="56" font-family="'DM Sans',sans-serif" font-size="9" fill="#c94040" text-anchor="middle">Paywall Active</text>
+              <!-- blurred content -->
+              <rect x="204" y="65" width="132" height="5" rx="1" fill="rgba(245,240,232,0.05)"/>
+              <rect x="204" y="75" width="110" height="5" rx="1" fill="rgba(245,240,232,0.05)"/>
+              <!-- paywall overlay -->
+              <rect x="204" y="85" width="132" height="60" rx="2" fill="#0c0c0c" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+              <text x="270" y="106" font-family="'Bebas Neue',sans-serif" font-size="10" fill="#e8c547" text-anchor="middle">CONTINUE READING</text>
+              <rect x="212" y="112" width="55" height="18" rx="1" fill="#e8c547"/>
+              <text x="239" y="124" font-family="'DM Sans',sans-serif" font-size="8" fill="#0c0c0c" text-anchor="middle">Subscribe</text>
+              <rect x="272" y="112" width="55" height="18" rx="1" fill="#161616" stroke="rgba(245,240,232,0.2)" stroke-width="1"/>
+              <text x="299" y="124" font-family="'DM Sans',sans-serif" font-size="8" fill="#f5f0e8" text-anchor="middle">$2.50</text>
+              <text x="204" y="155" font-family="'DM Sans',sans-serif" font-size="8" fill="#c94040">✕ Audio stopped</text>
+              <text x="204" y="166" font-family="'DM Sans',sans-serif" font-size="8" fill="#c94040">⊘ Scroll locked</text>
+
+              <!-- ARROW -->
+              <line x1="350" y1="90" x2="378" y2="90" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1" marker-end="url(#arr3)"/>
+              <text x="364" y="82" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478" text-anchor="middle">purchase</text>
+
+              <!-- STATE 3 — UNLOCKED -->
+              <rect x="380" y="20" width="150" height="140" rx="2" fill="#161616" stroke="#e8c547" stroke-opacity="0.4" stroke-width="1"/>
+              <text x="455" y="42" font-family="'Bebas Neue',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle" letter-spacing="1">STATE 3</text>
+              <text x="455" y="56" font-family="'DM Sans',sans-serif" font-size="9" fill="#e8c547" text-anchor="middle">Unlocked</text>
+              <rect x="394" y="68" width="122" height="5" rx="1" fill="rgba(245,240,232,0.15)"/>
+              <rect x="394" y="78" width="100" height="5" rx="1" fill="rgba(245,240,232,0.1)"/>
+              <rect x="394" y="88" width="115" height="5" rx="1" fill="rgba(245,240,232,0.1)"/>
+              <rect x="394" y="98" width="80" height="5" rx="1" fill="rgba(245,240,232,0.1)"/>
+              <rect x="394" y="115" width="122" height="28" rx="2" fill="#111" stroke="rgba(232,197,71,0.3)" stroke-width="1"/>
+              <text x="430" y="133" font-family="'DM Sans',sans-serif" font-size="8" fill="#e8c547">▶ Audio resumed</text>
+              <text x="394" y="152" font-family="'DM Sans',sans-serif" font-size="8" fill="#8a8478">Scroll: unlocked</text>
+            </svg>
           </div>
         </div>
       </div>
@@ -479,7 +673,7 @@ nav{
           <div class="flow-desc">Wix Plans (recurring) · direct purchase link (one-time)</div>
         </div>
       </div>
-      <div class="video-placeholder" style="aspect-ratio:16/6;">
+      <div class="video-placeholder" style="aspect-ratio:16/4;">
         <div class="video-icon"></div>
         <div class="video-label">Print Purchase Flow Demo</div>
         <div class="video-note">Loom walkthrough of flipbook preview and checkout sequence coming</div>

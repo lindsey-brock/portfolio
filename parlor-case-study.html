@@ -271,6 +271,33 @@ nav{
   .slide{padding:24px 24px;}
   .case-title{font-size:clamp(40px,12vw,80px);}
 }
+.tier-tabs{
+  display:flex;gap:2px;margin-bottom:2px;
+}
+.tier-tab{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  padding:12px 24px;
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;
+  transition:all 0.2s;flex:1;
+}
+.tier-tab:hover{color:var(--text);border-color:rgba(245,240,232,0.2);}
+.tier-tab.active{background:var(--bg2);border-color:var(--accent);color:var(--accent);}
+.tier-panel{
+  display:none;
+  padding:32px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-top:none;
+}
+.tier-panel.active{display:block;}
+.tier-price-badge{
+  font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);padding:12px 0;
+  border-top:1px solid var(--border);margin-top:16px;
+}
+.tier-price-badge span{color:var(--accent);}
 </style>
 </head>
 <body>
@@ -451,26 +478,65 @@ nav{
           <p class="body-text">Print fulfillment runs through <strong>Peecho</strong> — a print-on-demand service. At current scale, inventory risk doesn't make sense. POD means print runs scale with demand, overhead stays low, focus stays on the editorial product.</p>
         </div>
       </div>
-      <div class="tier-grid">
-        <div class="tier-card">
-          <div class="tier-label">Tier 01</div>
-          <div class="tier-name">FREE EDITORIAL</div>
-          <div class="tier-desc">Original reporting, essays, human interest journalism. Always fully accessible. The top of the funnel — how the audience grows. May include premium media accompaniments with microtransactions built into the player.</div>
-          <div class="tier-price">Free · <span>$2.50 per media piece</span></div>
-        </div>
-        <div class="tier-card">
-          <div class="tier-label">Tier 02</div>
-          <div class="tier-name">DIGITAL ISSUE</div>
-          <div class="tier-desc">The same articles as print, fully paywalled. Audio plays for 10 seconds, then the paywall interrupts both audio and scroll simultaneously. Converts the most engaged free readers.</div>
-          <div class="tier-price"><span>Digital subscription</span> · $2.50 single article</div>
-        </div>
-        <div class="tier-card">
-          <div class="tier-label">Tier 03</div>
-          <div class="tier-name">PRINT</div>
-          <div class="tier-desc">The physical magazine. Full color, original illustration, matte cover. Fulfilled through Peecho on demand. A flipbook preview lets readers browse before committing.</div>
-          <div class="tier-price"><span>Print subscription</span> · Single issue purchase</div>
-        </div>
+      <!-- TIER TABS -->
+<div style="margin-top:24px;">
+  <div class="tier-tabs">
+    <button class="tier-tab active" onclick="showTier(0)">Tier 01 — Free Editorial</button>
+    <button class="tier-tab" onclick="showTier(1)">Tier 02 — Digital Issue</button>
+    <button class="tier-tab" onclick="showTier(2)">Tier 03 — Print</button>
+  </div>
+
+  <!-- TIER 01 -->
+  <div class="tier-panel active">
+    <div class="two-col">
+      <div>
+        <div class="tier-name" style="font-family:var(--display);font-size:36px;letter-spacing:0.05em;margin-bottom:16px;">FREE EDITORIAL</div>
+        <p class="body-text">Original reporting, essays, and human interest journalism. Always fully accessible — but not to everyone. Anonymous users must sign up for a free membership before accessing any content. The sign-up flow calls <strong>Wix Auth</strong> directly to create a session and assign the free tier. Once a member, all editorial is fully accessible with no gates.</p>
+        <p class="body-text">Some articles carry premium media accompaniments — custom audio and video players with microtransactions built in. The reporting is free. Going deeper costs <strong>$2.50</strong>.</p>
+        <div class="tier-price-badge">Free · <span>$2.50 per media piece</span></div>
       </div>
+      <div class="video-placeholder" style="aspect-ratio:16/9;">
+        <div class="video-icon"></div>
+        <div class="video-label">Free Article + Sign Up Flow</div>
+        <div class="video-note">Screenshot or Loom coming</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 02 -->
+  <div class="tier-panel">
+    <div class="two-col">
+      <div>
+        <div class="tier-name" style="font-family:var(--display);font-size:36px;letter-spacing:0.05em;margin-bottom:16px;">DIGITAL ISSUE</div>
+        <p class="body-text">The same articles contained in the print magazine, presented as a fully designed digital experience. Always fully paywalled — free members hit the paywall at 10 seconds. Audio plays during the preview window, then the paywall interrupts both audio and scroll simultaneously.</p>
+        <p class="body-text">Two paths forward: upgrade to a <strong>digital subscription</strong> for full access, or purchase the single article for <strong>$2.50</strong>. Neither path redirects away from the page.</p>
+        <div class="tier-price-badge"><span>Digital subscription</span> · $2.50 single article</div>
+      </div>
+      <div class="video-placeholder" style="aspect-ratio:16/9;">
+        <div class="video-icon"></div>
+        <div class="video-label">Digital Issue + Paywall Demo</div>
+        <div class="video-note">Screenshot or Loom coming</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 03 -->
+  <div class="tier-panel">
+    <div class="two-col">
+      <div>
+        <div class="tier-name" style="font-family:var(--display);font-size:36px;letter-spacing:0.05em;margin-bottom:16px;">PRINT</div>
+        <p class="body-text">The physical magazine. Full color throughout, with original commissioned illustration as a core part of the visual identity. The cover went through a deliberate materials iteration — high gloss laminate to matte. Matte won.</p>
+        <p class="body-text">Fulfilled through <strong>Peecho</strong> on demand — no inventory risk, print runs scale with demand. A flipbook reader lets readers browse before committing. Print subscribers get everything in digital plus the physical artifact.</p>
+        <div class="tier-price-badge"><span>Print subscription</span> · Single issue purchase</div>
+      </div>
+      <div class="video-placeholder" style="aspect-ratio:16/9;">
+        <div class="video-icon"></div>
+        <div class="video-label">Print Issue + Flipbook Preview</div>
+        <div class="video-note">Screenshot or Loom coming</div>
+      </div>
+    </div>
+  </div>
+</div>
       <!-- READER JOURNEY MAP -->
       <div style="margin-top:24px;">
         <div style="font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);margin-bottom:12px;">READER JOURNEY MAP</div>
@@ -821,6 +887,10 @@ document.addEventListener('touchend',e=>{
 
 /* Init */
 goTo(0);
+function showTier(n){
+  document.querySelectorAll('.tier-tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.tier-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+}
 </script>
 </body>
 </html>

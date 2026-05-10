@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Parlor Magazine — Case Study — Lindsey Brock Morales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0c0c0c;
+  --bg2:#111111;
+  --bg3:#161616;
+  --text:#f5f0e8;
+  --muted:#8a8478;
+  --accent:#e8c547;
+  --red:#c94040;
+  --border:rgba(245,240,232,0.1);
+  --display:'Bebas Neue',sans-serif;
+  --serif:'Libre Baskerville',serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 48px;height:60px;
+  background:rgba(12,12,12,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--display);font-size:28px;letter-spacing:0.15em;color:var(--text);text-decoration:none;line-height:1;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:0;align-items:center;height:100%;}
+.nav-link{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:0 24px;height:100%;display:flex;align-items:center;
+  border-bottom:2px solid transparent;
+  transition:color 0.2s,border-color 0.2s;
+}
+.nav-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-cta{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);
+  padding:10px 20px;text-decoration:none;margin-left:16px;
+  transition:opacity 0.2s;border-bottom:2px solid transparent !important;
+}
+.nav-cta:hover{opacity:0.85;}
+
+/* HERO */
+.case-hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 48px 80px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.case-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a0a0a 0%,#0c0c0c 60%);}
+.case-hero-rule{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--red),var(--accent));}
+.case-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,12,12,0.98) 0%,rgba(12,12,12,0.4) 60%,transparent 100%);}
+.case-hero-content{position:relative;z-index:1;}
+.back-link{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  margin-bottom:48px;transition:color 0.2s;
+}
+.back-link:hover{color:var(--accent);}
+.case-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
+.case-tag{font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--accent);color:var(--accent);}
+.case-tag.muted{border-color:var(--border);color:var(--muted);}
+.case-title{font-family:var(--display);font-size:clamp(64px,10vw,140px);line-height:0.92;letter-spacing:0.02em;margin-bottom:32px;}
+.case-title span{color:var(--accent);}
+.case-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding-top:32px;border-top:1px solid var(--border);margin-top:32px;}
+.case-intro-text{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--muted);line-height:1.8;}
+.case-meta{display:flex;flex-direction:column;gap:24px;}
+.case-meta-label{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.case-meta-value{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* SECTIONS */
+.case-section{padding:120px 48px;border-bottom:1px solid var(--border);}
+.case-section.dark{background:var(--bg2);}
+.case-section.darker{background:var(--bg3);}
+.section-label{font-size:9px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:block;}
+.section-heading{font-family:var(--display);font-size:clamp(40px,6vw,80px);letter-spacing:0.03em;line-height:1;margin-bottom:48px;}
+.section-heading span{color:var(--accent);}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.two-col.flip{direction:rtl;}
+.two-col.flip>*{direction:ltr;}
+
+/* TEXT */
+.body-text{font-family:var(--serif);font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:24px;}
+.body-text strong{color:var(--text);font-style:normal;font-weight:700;}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--accent);padding:24px 32px;background:rgba(232,197,71,0.04);margin:40px 0;}
+.callout-text{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--text);line-height:1.7;}
+
+/* TECH PILLS */
+.tech-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+.tech-pill{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);color:var(--muted);}
+
+/* FLOW */
+.flow{display:flex;align-items:stretch;gap:2px;margin:48px 0;flex-wrap:wrap;}
+.flow-step{
+  display:flex;flex-direction:column;align-items:center;
+  flex:1;min-width:130px;padding:32px 16px;
+  background:var(--bg3);border:1px solid var(--border);
+  text-align:center;position:relative;
+}
+.flow-step::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:18px;z-index:2;}
+.flow-step:last-child::after{display:none;}
+.flow-num{font-family:var(--display);font-size:36px;color:var(--accent);line-height:1;margin-bottom:8px;}
+.flow-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);margin-bottom:6px;}
+.flow-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+
+/* ARCH BLOCK */
+.arch-block{background:var(--bg3);border:1px solid var(--border);padding:40px;margin:40px 0;}
+.arch-title{font-family:var(--display);font-size:22px;letter-spacing:0.05em;color:var(--accent);margin-bottom:24px;}
+.arch-list{list-style:none;display:flex;flex-direction:column;gap:16px;}
+.arch-item{display:flex;gap:16px;align-items:flex-start;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.arch-item:last-child{border-bottom:none;padding-bottom:0;}
+.arch-arrow{color:var(--accent);font-size:14px;flex-shrink:0;margin-top:3px;}
+.arch-text{font-size:14px;color:var(--muted);line-height:1.7;}
+.arch-text strong{color:var(--text);}
+
+/* TIER CARDS */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:48px 0;}
+.tier-card{padding:48px;background:var(--bg3);border:1px solid var(--border);display:flex;flex-direction:column;gap:16px;}
+.tier-label{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);}
+.tier-name{font-family:var(--display);font-size:32px;letter-spacing:0.05em;line-height:1;}
+.tier-desc{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--muted);line-height:1.7;flex:1;}
+.tier-price{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--border);}
+.tier-price span{color:var(--accent);}
+
+/* VIDEO PLACEHOLDER */
+.video-placeholder{
+  width:100%;aspect-ratio:16/9;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  position:relative;overflow:hidden;
+}
+.video-placeholder::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,197,71,0.03),transparent);}
+.video-icon{width:64px;height:64px;border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;}
+.video-icon::after{content:'';width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid var(--accent);margin-left:4px;}
+.video-label{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);position:relative;z-index:1;}
+.video-note{font-family:var(--serif);font-size:12px;font-style:italic;color:var(--muted);opacity:0.6;position:relative;z-index:1;text-align:center;max-width:240px;}
+
+/* NEXT */
+.next-project{padding:80px 48px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);text-decoration:none;color:inherit;transition:background 0.2s;}
+.next-project:hover{background:var(--bg2);}
+.next-label{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.next-title{font-family:var(--display);font-size:clamp(36px,5vw,64px);letter-spacing:0.03em;line-height:1;}
+.next-arrow{font-size:48px;color:var(--accent);transition:transform 0.3s;flex-shrink:0;}
+.next-project:hover .next-arrow{transform:translate(8px,-8px);}
+
+/* FADE */
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .case-hero{padding:0 24px 64px;}
+  .case-intro{grid-template-columns:1fr;}
+  .case-section{padding:80px 24px;}
+  .two-col{grid-template-columns:1fr;gap:48px;}
+  .two-col.flip{direction:ltr;}
+  .tier-grid{grid-template-columns:1fr;}
+  .flow{flex-direction:column;}
+  .flow-step::after{content:'↓';right:auto;top:auto;bottom:-14px;left:50%;transform:translateX(-50%);}
+  .next-project{padding:56px 24px;flex-direction:column;gap:24px;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LBM<span>.</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html#work">Work</a>
+    <a class="nav-link" href="index.html#reporting">Reporting</a>
+    <a class="nav-link" href="index.html#about">About</a>
+    <a class="nav-link nav-cta" href="index.html#contact">Let's talk</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="case-hero">
+  <div class="case-hero-bg"></div>
+  <div class="case-hero-overlay"></div>
+  <div class="case-hero-rule"></div>
+  <div class="case-hero-content">
+    <a class="back-link" href="index.html#work">← Back to work</a>
+    <div class="case-tags">
+      <span class="case-tag">Editorial Design</span>
+      <span class="case-tag">Platform Architecture</span>
+      <span class="case-tag">UX Design</span>
+      <span class="case-tag muted">Independent Publishing</span>
+      <span class="case-tag muted">Product Strategy</span>
+    </div>
+    <h1 class="case-title">THE<br>PARLOR<br><span>MAGAZINE</span></h1>
+    <div class="case-intro">
+      <p class="case-intro-text">The Parlor began as a decision to ship fast. It became something else entirely — a fully custom editorial platform with its own authentication architecture, three distinct monetization tiers, and a principled stance on what journalism should cost and what it shouldn't. Built solo. Still building.</p>
+      <div class="case-meta">
+        <div class="case-meta-item">
+          <div class="case-meta-label">Role</div>
+          <div class="case-meta-value">Founder · Creative Director · Product Designer · Developer</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Platform</div>
+          <div class="case-meta-value">Custom-built on Wix Velo · Supabase (migrating)</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Status</div>
+          <div class="case-meta-value">Live & evolving — theparlormagazine.com</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Year</div>
+          <div class="case-meta-value">2023 — present</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 PLATFORM DECISION -->
+<section class="case-section fade-up">
+  <span class="section-label">01 — The Platform Decision</span>
+  <div class="two-col">
+    <div>
+      <h2 class="section-heading">SHIP FAST.<br>FIGURE IT<br><span>OUT LATER.</span></h2>
+    </div>
+    <div>
+      <p class="body-text">The conventional wisdom says don't build on Wix if you're serious. The conventional wisdom hasn't tried to solo-found a feminist media platform while also editing, writing, designing, and running the business.</p>
+      <p class="body-text">The Parlor needed to exist. Not in six months after a perfect technical spec — now. Wix offered something no other platform could at that moment: a full editorial CMS, hosting, payments infrastructure, and a serverless backend I could bend to my will, all without an engineering team.</p>
+      <p class="body-text">Wix Velo — the platform's serverless layer — gives you backend JavaScript files that run server-side, HTTP functions that expose real API endpoints, a live database, and a secrets manager. It's comparable to Netlify Functions or Vercel Edge Functions. Most Wix users never touch it. I built my entire platform on top of it.</p>
+      <div class="callout">
+        <p class="callout-text">The workarounds became features. The constraints became architecture decisions. What started as a fast launch became a fully custom platform — one that no template could have produced.</p>
+      </div>
+      <p class="body-text">Over time I built custom-coded elements across the site — authentication systems, subscription flows, paywalls, interactive embeds — using Velo to bridge gaps the platform wasn't designed to fill. Each constraint I engineered around is now a documented capability.</p>
+      <div class="tech-stack">
+        <span class="tech-pill">Wix Velo</span>
+        <span class="tech-pill">Serverless Functions</span>
+        <span class="tech-pill">HTTP API Endpoints</span>
+        <span class="tech-pill">Wix Plans</span>
+        <span class="tech-pill">Custom Auth</span>
+        <span class="tech-pill">Supabase (migrating)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 AUTHENTICATION -->
+<section class="case-section dark fade-up">
+  <span class="section-label">02 — Authentication Architecture</span>
+  <h2 class="section-heading">A LOGIN<br>SYSTEM BUILT<br><span>FROM SCRATCH</span></h2>
+  <div class="two-col">
+    <div>
+      <p class="body-text">Wix provides authentication out of the box. What it doesn't provide is a system that bridges that authentication with a separate member portal, a living database, and persistent session state across custom-coded features. So I built one.</p>
+      <p class="body-text">The authentication layer bridges <strong>Wix Auth</strong> with proprietary portal logic. When a member logs in, their session propagates through the portal, connects to the database, and determines what they can access across the platform based on their membership tier.</p>
+      <p class="body-text">It's not a plugin. It's custom architecture that happens to run on Wix infrastructure — the same way complex applications run on AWS without being "an AWS product."</p>
+      <div class="arch-block">
+        <div class="arch-title">AUTH FLOW</div>
+        <ul class="arch-list">
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>User login</strong> triggers Wix Auth session creation</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Custom Velo backend</strong> intercepts session, queries member database</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Member tier determined</strong> — subscriber, contributor, or community member</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Portal access granted</strong> based on tier — different views, features, and content for each</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Session state persists</strong> across portal navigation and all custom-coded components</span></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="video-placeholder">
+        <div class="video-icon"></div>
+        <div class="video-label">Login Flow Walkthrough</div>
+        <div class="video-note">Loom walkthrough of full auth sequence coming</div>
+      </div>
+      <div style="margin-top:24px;">
+        <p class="body-text">The member portal is a separate system entirely — its own architecture, its own data flows, its own user experience. Inside the portal, members access subscription details, community features, submission tools, and exclusive content. Each element is custom-coded against a <strong>live database</strong> that updates in real time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 CONTENT PHILOSOPHY -->
+<section class="case-section fade-up">
+  <span class="section-label">03 — Content Architecture & Monetization Philosophy</span>
+  <h2 class="section-heading">THE JOURNALISM<br>IS ALWAYS<br><span>FREE.</span></h2>
+
+  <div class="callout" style="margin-bottom:64px;">
+    <p class="callout-text">The Parlor doesn't gate reporting behind money. What's behind the paywall is the magazine experience — the curated, designed, produced object. What's monetized in the free tier is depth and intimacy. This isn't just a pricing decision. It's a statement about what journalism should cost and what it shouldn't.</p>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier-card">
+      <div class="tier-label">Tier 01</div>
+      <div class="tier-name">FREE EDITORIAL</div>
+      <div class="tier-desc">Original reporting, essays, and data journalism. Always fully accessible. May include premium media accompaniments — custom audio and video players with microtransactions built in. The reporting is free. Going deeper costs.</div>
+      <div class="tier-price">Free · <span>$2.50 per media piece</span></div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label">Tier 02</div>
+      <div class="tier-name">DIGITAL ISSUE</div>
+      <div class="tier-desc">The same articles contained in the print magazine, presented as a fully designed digital experience. Always fully paywalled. Audio plays for 10 seconds, then the paywall interrupts both audio and scroll simultaneously.</div>
+      <div class="tier-price"><span>Digital subscription</span> · $2.50 single article</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-label">Tier 03</div>
+      <div class="tier-name">PRINT</div>
+      <div class="tier-desc">The physical magazine. A flipbook preview lets readers browse before committing. Two purchase paths from inside the reader — recurring print subscription or single issue. Separate flow from digital entirely.</div>
+      <div class="tier-price"><span>Print subscription</span> · Single issue purchase</div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 DIGITAL PAYWALL -->
+<section class="case-section dark fade-up">
+  <span class="section-label">04 — The Digital Issue Paywall</span>
+  <div class="two-col">
+    <div>
+      <h2 class="section-heading">10 SECONDS.<br>THEN THE<br><span>WALL HITS.</span></h2>
+      <p class="body-text">The digital issue paywall is a custom-coded interaction. When a reader lands on a digital issue article, the audio — many recorded by the writers themselves — begins playing. They can read and listen freely for 10 seconds.</p>
+      <p class="body-text">Then the paywall fires. It doesn't just block the content — it <strong>interrupts the audio and locks the scroll simultaneously</strong>. Both sensory channels cut off at once. The effect is deliberate: the reader feels the absence of something they were already experiencing.</p>
+      <p class="body-text">From the paywall, two paths forward: upgrade to a digital subscription, or purchase the single article for $2.50. Neither path redirects away from the page.</p>
+      <div class="arch-block">
+        <div class="arch-title">PAYWALL TRIGGER SEQUENCE</div>
+        <ul class="arch-list">
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Page load</strong> — article text visible, audio begins playing</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>10 second timer</strong> fires — paywall overlay renders</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Audio interrupted</strong> and <strong>scroll locked</strong> simultaneously</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Two options presented</strong> — digital subscription or $2.50 single article</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>On purchase</strong> — paywall dismisses, audio resumes, scroll unlocks in same session</span></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="video-placeholder">
+        <div class="video-icon"></div>
+        <div class="video-label">Digital Paywall Demo</div>
+        <div class="video-note">Loom walkthrough of 10-second trigger, audio interrupt, and purchase flow</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PRINT FLOW -->
+<section class="case-section fade-up">
+  <span class="section-label">05 — Print Purchase Flow</span>
+  <h2 class="section-heading">BROWSE.<br>THEN<br><span>BUY.</span></h2>
+  <p class="body-text" style="max-width:640px;margin-bottom:64px;">The print magazine needed to sell itself. A static subscription page doesn't do that. So I built a complete conversion experience — preview, decision, payment — that happens without the reader ever leaving the page.</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">01</div>
+      <div class="flow-label">Custom Button</div>
+      <div class="flow-desc">Embedded in editorial pages — triggers the preview experience</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">02</div>
+      <div class="flow-label">Flipbook Reader</div>
+      <div class="flow-desc">Custom iframe element — browse the print magazine before committing</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">03</div>
+      <div class="flow-label">Decision Point</div>
+      <div class="flow-desc">Two exit paths from inside the reader — subscribe or buy single issue</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">04</div>
+      <div class="flow-label">Payment</div>
+      <div class="flow-desc">Wix Plans for recurring subscription · direct purchase link for single issue</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:32px;">
+    <div>
+      <p class="body-text">The flipbook reader is a custom iframe element embedded directly in the site. It's not a third-party widget — it's a component I built and placed precisely within the editorial experience so that the magazine sells itself visually before asking for money.</p>
+      <p class="body-text">The print flow is entirely separate from the digital issue flow. A print subscriber gets the physical magazine and portal access. A digital subscriber gets the digital issue. A single issue buyer gets the physical object. <strong>There is no crossover between the two checkout paths.</strong></p>
+    </div>
+    <div>
+      <div class="video-placeholder">
+        <div class="video-icon"></div>
+        <div class="video-label">Print Purchase Flow Demo</div>
+        <div class="video-note">Loom walkthrough of flipbook preview and checkout sequence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 FREE TIER MEDIA -->
+<section class="case-section dark fade-up">
+  <span class="section-label">06 — Free Editorial + Premium Media</span>
+  <div class="two-col flip">
+    <div>
+      <h2 class="section-heading">THE REPORTING<br>IS FREE.<br><span>DEPTH COSTS.</span></h2>
+      <p class="body-text">Free editorial content on The Parlor is never gated. But some articles carry something extra — a full interview, a recorded conversation, a video piece. These live alongside the free article as premium media accompaniments.</p>
+      <p class="body-text">Custom-built audio and video players — currently in development — embed directly in the article with the microtransaction built into the player itself. A teaser plays. Then: <em>listen to the full interview</em> or <em>watch the full conversation</em>. One-time purchase or upgrade to digital.</p>
+      <p class="body-text">Many of the audio pieces were recorded by the writers themselves. That intimacy — hearing the person who reported the story tell it in their own voice — is what has a price. Not the journalism. The experience of going deeper into it.</p>
+      <div class="callout">
+        <p class="callout-text">This is a different relationship with the paywall entirely. The reader never feels blocked from information. They feel invited to go further.</p>
+      </div>
+    </div>
+    <div>
+      <div class="video-placeholder">
+        <div class="video-icon"></div>
+        <div class="video-label">Premium Media Player Demo</div>
+        <div class="video-note">Demo of custom audio/video player with built-in microtransaction — coming</div>
+      </div>
+      <div class="arch-block" style="margin-top:24px;">
+        <div class="arch-title">MEDIA PURCHASE PATHS</div>
+        <ul class="arch-list">
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>One-time purchase</strong> — $2.50 unlocks the full audio or video piece in session</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Digital upgrade</strong> — subscribe to digital tier, all premium media included</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Article remains free</strong> — purchase only affects the media accompaniment, never the journalism</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 STILL BUILDING -->
+<section class="case-section fade-up">
+  <span class="section-label">07 — Still Building</span>
+  <h2 class="section-heading">BUILT SOLO.<br><span>STILL BUILDING.</span></h2>
+  <div class="two-col">
+    <div>
+      <p class="body-text">The Parlor is not a finished product. It's a living platform that evolves with the publication's needs and my own technical growth. Parts of the site are still under construction — intentionally. Each rebuild is better than the last.</p>
+      <p class="body-text">The current migration from Airtable to <strong>Supabase</strong> is underway — moving the backend infrastructure to a more robust, scalable foundation while keeping the frontend experience continuous for existing members.</p>
+    </div>
+    <div>
+      <div class="arch-block">
+        <div class="arch-title">IN DEVELOPMENT</div>
+        <ul class="arch-list">
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Supabase migration</strong> — replacing Airtable with scalable relational database</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Custom audio/video players</strong> — with microtransactions built in</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Submission management</strong> — expanded contributor portal with editorial workflow</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Issue 2 infrastructure</strong> — open call platform and competition management</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<a class="next-project" href="immigration-case-study.html">
+  <div>
+    <div class="next-label">Next Case Study</div>
+    <div class="next-title">IMMIGRATION<br>LAW BY STATE</div>
+  </div>
+  <div class="next-arrow">↗</div>
+</a>
+
+<script>
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

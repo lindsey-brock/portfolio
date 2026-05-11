@@ -425,27 +425,30 @@ nav{
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:32px;">
     <h2 class="slide-heading" style="margin-bottom:0;">SEE THE<br><span>GEOGRAPHY.</span></h2>
     <div style="position:relative;">
-      <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778516839/Untitled_design_-_2026-05-11T182705.731_kzwuyk.png" alt="Immigration enforcement map" style="width:100%;height:auto;border:1px solid var(--border);display:block;"/>
-      <a href="https://www.theparlormagazine.com/post/fifty-ways-to-enforce-a-border" target="_blank" style="
-        position:absolute;bottom:16px;right:16px;
-        background:rgba(12,12,12,0.85);
-        backdrop-filter:blur(8px);
-        border:1px solid var(--accent);
-        color:var(--accent);
-        font-family:var(--sans);font-size:10px;font-weight:500;
-        letter-spacing:0.15em;text-transform:uppercase;
-        text-decoration:none;
-        padding:10px 16px;
-        display:flex;align-items:center;gap:10px;
-        transition:background 0.2s;
-      "
-      onmouseover="this.style.background='rgba(232,197,71,0.12)'"
-      onmouseout="this.style.background='rgba(12,12,12,0.85)'"
-      >
-        See the map in context
-        <span style="animation:arrowPulse 1.4s ease-in-out infinite;display:inline-block;">↗</span>
-      </a>
-    </div>
+  <div id="map-embed" style="width:100%;background:#0c0c0c;border:1px solid var(--border);line-height:0;">
+    <svg id="caseMapSvg" style="width:100%;display:block;" viewBox="0 0 960 600"></svg>
+  </div>
+  <a href="https://www.theparlormagazine.com/post/fifty-ways-to-enforce-a-border" target="_blank" style="
+    position:absolute;bottom:16px;right:16px;
+    background:rgba(12,12,12,0.85);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--accent);
+    color:var(--accent);
+    font-family:var(--sans);font-size:10px;font-weight:500;
+    letter-spacing:0.15em;text-transform:uppercase;
+    text-decoration:none;
+    padding:10px 16px;
+    display:flex;align-items:center;gap:10px;
+    transition:background 0.2s;
+  "
+  onmouseover="this.style.background='rgba(232,197,71,0.12)'"
+  onmouseout="this.style.background='rgba(12,12,12,0.85)'"
+  >
+    See the map in context
+    <span style="animation:arrowPulse 1.4s ease-in-out infinite;display:inline-block;">↗</span>
+  </a>
+</div>
+
   </div>
   <style>
     @keyframes arrowPulse {
@@ -610,6 +613,52 @@ document.addEventListener('touchend',e=>{
 },{passive:true});
 
 goTo(0);
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+(function(){
+  const enforced = {
+    "Florida":8,"Tennessee":7,"Georgia":5,"South Carolina":5,
+    "North Carolina":4,"Indiana":4,"Iowa":3,"Louisiana":3,
+    "Texas":3,"Idaho":2,"Montana":2,"North Dakota":2,
+    "Mississippi":2,"Alabama":2,"New Hampshire":2,"Arkansas":2
+  };
+  const fipsToName = {
+    "1":"Alabama","2":"Alaska","4":"Arizona","5":"Arkansas","6":"California",
+    "8":"Colorado","9":"Connecticut","10":"Delaware","12":"Florida","13":"Georgia",
+    "15":"Hawaii","16":"Idaho","17":"Illinois","18":"Indiana","19":"Iowa",
+    "20":"Kansas","21":"Kentucky","22":"Louisiana","23":"Maine","24":"Maryland",
+    "25":"Massachusetts","26":"Michigan","27":"Minnesota","28":"Mississippi",
+    "29":"Missouri","30":"Montana","31":"Nebraska","32":"Nevada","33":"New Hampshire",
+    "34":"New Jersey","35":"New Mexico","36":"New York","37":"North Carolina",
+    "38":"North Dakota","39":"Ohio","40":"Oklahoma","41":"Oregon","42":"Pennsylvania",
+    "44":"Rhode Island","45":"South Carolina","46":"South Dakota","47":"Tennessee",
+    "48":"Texas","49":"Utah","50":"Vermont","51":"Virginia","53":"Washington",
+    "54":"West Virginia","55":"Wisconsin","56":"Wyoming"
+  };
+  const color = name => {
+    const n = enforced[name] || 0;
+    if (n === 0) return "rgba(245,240,232,0.07)";
+    if (n <= 2) return "#cfe3ff";
+    if (n <= 5) return "#7fb0ff";
+    return "#0b5fff";
+  };
+  const svg = d3.select("#caseMapSvg");
+  const projection = d3.geoAlbersUsa().scale(1280).translate([480,300]);
+  const path = d3.geoPath().projection(projection);
+  fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json")
+    .then(r => r.json())
+    .then(us => {
+      const states = topojson.feature(us, us.objects.states);
+      svg.selectAll("path")
+        .data(states.features)
+        .join("path")
+        .attr("d", path)
+        .attr("fill", d => color(fipsToName[String(+d.id)]))
+        .attr("stroke","rgba(245,240,232,0.45)")
+        .attr("stroke-width",0.9);
+    });
+})();
 </script>
 </body>
 </html>

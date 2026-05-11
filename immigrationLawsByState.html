@@ -419,49 +419,72 @@ nav{
     </div>
 
     <!-- SLIDE 04 — THE MAP -->
-    <div class="slide">
-      <div class="slide-rule"></div>
-      <span class="slide-label">03 — The Visualization</span>
-      <h2 class="slide-heading">SEE THE<br><span>GEOGRAPHY.</span></h2>
-      <div class="map-placeholder" style="margin-bottom:32px;aspect-ratio:16/7;">
-        <div class="map-icon">🗺</div>
-        <div class="map-placeholder-title">IMMIGRATION ENFORCEMENT LAWS BY STATE</div>
-        <div class="map-placeholder-desc">The map is embedded live in The Parlor article — hover any state to see bill details, status, and last action date.</div>
-        <a class="map-link" href="https://theparlormagazine.com" target="_blank">View in The Parlor →</a>
-      </div>
-      <div class="two-col">
-        <div>
-          <p class="body-text">The map uses a four-step color scale to show enforcement density by state — from no laws in the dataset through to six or more. The <strong>AlbersUSA projection</strong> keeps Alaska and Hawaii visible without distorting the continental states.</p>
-          <p class="body-text">Hovering any state with legislation opens a tooltip showing each bill — its number, year, plain-language summary, current status, and last action date. States with no enforcement legislation in scope are not interactive. The visual distinction between active and inactive states is immediate.</p>
+<div class="slide">
+  <div class="slide-rule"></div>
+  <span class="slide-label">03 — The Visualization</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:32px;">
+    <h2 class="slide-heading" style="margin-bottom:0;">SEE THE<br><span>GEOGRAPHY.</span></h2>
+    <div style="position:relative;">
+      <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778515190/Untitled_design_-_2026-05-11T175940.567_gd139i.png" alt="Immigration enforcement map" style="width:100%;height:auto;border:1px solid var(--border);display:block;"/>
+      <a href="https://www.theparlormagazine.com/post/fifty-ways-to-enforce-a-border" target="_blank" style="
+        position:absolute;bottom:16px;right:16px;
+        background:rgba(12,12,12,0.85);
+        backdrop-filter:blur(8px);
+        border:1px solid var(--accent);
+        color:var(--accent);
+        font-family:var(--sans);font-size:10px;font-weight:500;
+        letter-spacing:0.15em;text-transform:uppercase;
+        text-decoration:none;
+        padding:10px 16px;
+        display:flex;align-items:center;gap:10px;
+        transition:background 0.2s;
+      "
+      onmouseover="this.style.background='rgba(232,197,71,0.12)'"
+      onmouseout="this.style.background='rgba(12,12,12,0.85)'"
+      >
+        See the map in context
+        <span style="animation:arrowPulse 1.4s ease-in-out infinite;display:inline-block;">↗</span>
+      </a>
+    </div>
+  </div>
+  <style>
+    @keyframes arrowPulse {
+      0%,100%{transform:translate(0,0);opacity:1;}
+      50%{transform:translate(3px,-3px);opacity:0.6;}
+    }
+  </style>
+  <div class="two-col">
+    <div>
+      <p class="body-text">The map uses a four-step color scale to show enforcement density by state — from no laws in the dataset through to six or more. The <strong>AlbersUSA projection</strong> keeps Alaska and Hawaii visible without distorting the continental states.</p>
+      <p class="body-text">Hovering any state with legislation opens a tooltip showing each bill — its number, year, plain-language summary, current status, and last action date. States with no enforcement legislation in scope are not interactive. The visual distinction between active and inactive states is immediate.</p>
+    </div>
+    <div>
+      <div style="margin-bottom:8px;font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);">COLOR SCALE</div>
+      <div class="scale-viz">
+        <div class="scale-step">
+          <div class="scale-swatch" style="background:#f3f3f3;border:1px solid rgba(245,240,232,0.2);"></div>
+          <div class="scale-label">None</div>
+          <div class="scale-desc">No enforcement laws in dataset</div>
         </div>
-        <div>
-          <!-- COLOR SCALE -->
-          <div style="margin-bottom:8px;font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);">COLOR SCALE</div>
-          <div class="scale-viz">
-            <div class="scale-step">
-              <div class="scale-swatch" style="background:#f3f3f3;border:1px solid rgba(245,240,232,0.2);"></div>
-              <div class="scale-label">None</div>
-              <div class="scale-desc">No enforcement laws in dataset</div>
-            </div>
-            <div class="scale-step">
-              <div class="scale-swatch" style="background:#cfe3ff;"></div>
-              <div class="scale-label">1–2</div>
-              <div class="scale-desc">Limited enforcement activity</div>
-            </div>
-            <div class="scale-step">
-              <div class="scale-swatch" style="background:#7fb0ff;"></div>
-              <div class="scale-label">3–5</div>
-              <div class="scale-desc">Active enforcement legislation</div>
-            </div>
-            <div class="scale-step">
-              <div class="scale-swatch" style="background:#0b5fff;"></div>
-              <div class="scale-label">6+</div>
-              <div class="scale-desc">High-density enforcement states</div>
-            </div>
-          </div>
+        <div class="scale-step">
+          <div class="scale-swatch" style="background:#cfe3ff;"></div>
+          <div class="scale-label">1–2</div>
+          <div class="scale-desc">Limited enforcement activity</div>
+        </div>
+        <div class="scale-step">
+          <div class="scale-swatch" style="background:#7fb0ff;"></div>
+          <div class="scale-label">3–5</div>
+          <div class="scale-desc">Active enforcement legislation</div>
+        </div>
+        <div class="scale-step">
+          <div class="scale-swatch" style="background:#0b5fff;"></div>
+          <div class="scale-label">6+</div>
+          <div class="scale-desc">High-density enforcement states</div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
     <!-- SLIDE 05 — DESIGN & ACCESSIBILITY -->
     <div class="slide">

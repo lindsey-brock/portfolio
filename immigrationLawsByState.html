@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Immigration Law by State — Case Study — Lindsey Brock Morales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0c0c0c;
+  --bg2:#111111;
+  --bg3:#161616;
+  --text:#f5f0e8;
+  --muted:#8a8478;
+  --accent:#e8c547;
+  --red:#c94040;
+  --border:rgba(245,240,232,0.1);
+  --display:'Bebas Neue',sans-serif;
+  --serif:'Libre Baskerville',serif;
+  --sans:'DM Sans',sans-serif;
+}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 48px;height:60px;
+  background:rgba(12,12,12,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--display);font-size:28px;letter-spacing:0.15em;color:var(--text);text-decoration:none;line-height:1;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:0;align-items:center;height:100%;}
+.nav-link{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:0 24px;height:100%;display:flex;align-items:center;
+  border-bottom:2px solid transparent;
+  transition:color 0.2s,border-color 0.2s;
+}
+.nav-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-cta{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);
+  padding:10px 20px;text-decoration:none;margin-left:16px;
+  transition:opacity 0.2s;border-bottom:2px solid transparent !important;
+}
+.nav-cta:hover{opacity:0.85;}
+
+/* CAROUSEL */
+.carousel-outer{
+  position:fixed;
+  top:60px;left:0;right:0;
+  bottom:100px;
+  overflow:hidden;
+  z-index:1;
+}
+.carousel-track{
+  display:flex;
+  height:100%;
+  transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  will-change:transform;
+}
+
+/* SLIDES */
+.slide{
+  min-width:100vw;
+  height:100%;
+  overflow-y:auto;
+  padding:40px 120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  position:relative;
+  border-right:1px solid var(--border);
+}
+.slide:nth-child(odd){background:var(--bg);}
+.slide:nth-child(even){background:var(--bg2);}
+.slide-rule{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--red),var(--accent));opacity:0.4;}
+.slide-label{font-size:9px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block;}
+.slide-heading{font-family:var(--display);font-size:clamp(36px,5vw,72px);letter-spacing:0.03em;line-height:1;margin-bottom:36px;}
+.slide-heading span{color:var(--accent);}
+
+/* HERO */
+.slide-hero{background:linear-gradient(135deg,#0a1a0f 0%,#0c0c0c 100%) !important;}
+.slide-hero .slide-rule{opacity:1;}
+.back-link{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  margin-bottom:32px;transition:color 0.2s;
+}
+.back-link:hover{color:var(--accent);}
+.case-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.case-tag{font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--accent);color:var(--accent);}
+.case-tag.muted{border-color:var(--border);color:var(--muted);}
+.case-title{font-family:var(--display);font-size:clamp(48px,8vw,110px);line-height:0.92;letter-spacing:0.02em;margin-bottom:28px;}
+.case-title span{color:var(--accent);}
+.case-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding-top:28px;border-top:1px solid var(--border);}
+.case-intro-text{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);line-height:1.8;}
+.case-meta{display:flex;flex-direction:column;gap:16px;}
+.case-meta-label{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
+.case-meta-value{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+
+/* TEXT */
+.body-text{font-family:var(--serif);font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:20px;}
+.body-text strong{color:var(--text);font-style:normal;font-weight:700;}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--accent);padding:20px 28px;background:rgba(232,197,71,0.04);margin:24px 0;}
+.callout-text{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--text);line-height:1.7;}
+
+/* TECH PILLS */
+.tech-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.tech-pill{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);color:var(--muted);}
+
+/* ARCH BLOCK */
+.arch-block{background:var(--bg3);border:1px solid var(--border);padding:32px;margin:24px 0;}
+.arch-title{font-family:var(--display);font-size:18px;letter-spacing:0.05em;color:var(--accent);margin-bottom:20px;}
+.arch-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.arch-item{display:flex;gap:14px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.arch-item:last-child{border-bottom:none;padding-bottom:0;}
+.arch-arrow{color:var(--accent);font-size:13px;flex-shrink:0;margin-top:3px;}
+.arch-text{font-size:13px;color:var(--muted);line-height:1.6;}
+.arch-text strong{color:var(--text);}
+
+/* MAP PLACEHOLDER */
+.map-placeholder{
+  width:100%;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:20px;
+  position:relative;
+  overflow:hidden;
+  padding:48px;
+  text-align:center;
+}
+.map-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(126,231,135,0.03),transparent);
+}
+.map-icon{
+  font-size:48px;
+  position:relative;z-index:1;
+  opacity:0.4;
+}
+.map-placeholder-title{
+  font-family:var(--display);font-size:18px;letter-spacing:0.1em;
+  color:var(--text);position:relative;z-index:1;
+}
+.map-placeholder-desc{
+  font-family:var(--serif);font-size:13px;font-style:italic;
+  color:var(--muted);max-width:360px;line-height:1.7;
+  position:relative;z-index:1;
+}
+.map-link{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);
+  padding:10px 24px;text-decoration:none;
+  position:relative;z-index:1;
+  transition:opacity 0.2s;
+}
+.map-link:hover{opacity:0.85;}
+
+/* METHOD BLOCK */
+.method-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  margin:32px 0;
+}
+.method-card{
+  padding:28px;background:var(--bg3);border:1px solid var(--border);
+}
+.method-label{
+  font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.method-title{
+  font-family:var(--display);font-size:20px;letter-spacing:0.05em;
+  margin-bottom:10px;
+}
+.method-desc{
+  font-family:var(--serif);font-size:12px;font-style:italic;
+  color:var(--muted);line-height:1.7;
+}
+
+/* SCALE VIZ */
+.scale-viz{
+  display:flex;gap:2px;margin:24px 0;
+}
+.scale-step{
+  flex:1;padding:16px 12px;
+  display:flex;flex-direction:column;gap:8px;
+  border:1px solid var(--border);
+}
+.scale-swatch{
+  width:100%;height:20px;border-radius:2px;
+}
+.scale-label{
+  font-size:10px;font-weight:500;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--text);
+}
+.scale-desc{
+  font-size:11px;color:var(--muted);line-height:1.4;
+}
+
+/* PROGRESS */
+.progress{
+  position:fixed;
+  bottom:90px;left:0;right:0;
+  z-index:200;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  padding:10px 0;
+  background:rgba(12,12,12,0.95);
+  backdrop-filter:blur(8px);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.progress-num{font-family:var(--display);font-size:13px;letter-spacing:0.15em;color:var(--muted);}
+.progress-num.current{color:var(--accent);}
+.progress-dots{display:flex;gap:6px;align-items:center;}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background 0.3s,transform 0.3s;}
+.progress-dot.active{background:var(--accent);transform:scale(1.3);}
+
+/* CHEVRONS */
+.chevron{
+  position:fixed;top:50%;transform:translateY(-50%);
+  z-index:200;width:56px;height:56px;
+  border:1px solid var(--border);
+  background:rgba(12,12,12,0.8);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+  animation:pulse 2s ease-in-out infinite;
+}
+.chevron:hover{border-color:var(--accent);background:rgba(232,197,71,0.08);}
+.chevron svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none;}
+.chevron-left{left:24px;}
+.chevron-right{right:24px;}
+.chevron.hidden{opacity:0;pointer-events:none;}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(232,197,71,0.3);}
+  50%{box-shadow:0 0 0 8px rgba(232,197,71,0);}
+}
+
+/* NEXT */
+.next-project-footer{
+  position:fixed;bottom:0;left:0;right:0;height:100px;
+  background:rgba(12,12,12,0.98);border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;z-index:200;
+  text-decoration:none;color:inherit;transition:background 0.2s;
+}
+.next-project-footer:hover{background:#111;}
+.next-footer-left{display:flex;flex-direction:column;gap:4px;}
+.next-footer-label{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+.next-footer-title{font-family:var(--display);font-size:clamp(18px,2.5vw,28px);letter-spacing:0.05em;line-height:1;}
+.next-footer-arrow{font-size:28px;color:var(--accent);transition:transform 0.3s;}
+.next-project-footer:hover .next-footer-arrow{transform:translate(6px,-6px);}
+
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .slide{padding:32px 24px;}
+  .two-col{grid-template-columns:1fr;gap:32px;}
+  .method-grid{grid-template-columns:1fr;}
+  .chevron-left{left:12px;}
+  .chevron-right{right:12px;}
+  .next-project-footer{padding:0 24px;}
+  .case-intro-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LBM<span>.</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html#work">Work</a>
+    <a class="nav-link" href="index.html#reporting">Reporting</a>
+    <a class="nav-link" href="index.html#about">About</a>
+    <a class="nav-link nav-cta" href="index.html#contact">Let's talk</a>
+  </div>
+</nav>
+
+<div class="carousel-outer">
+  <div class="carousel-track" id="track">
+
+    <!-- SLIDE 01 — HERO -->
+    <div class="slide slide-hero">
+      <div class="slide-rule"></div>
+      <a class="back-link" href="index.html#work">← Back to work</a>
+      <div class="case-tags">
+        <span class="case-tag">Data Visualization</span>
+        <span class="case-tag">Journalism</span>
+        <span class="case-tag muted">Policy</span>
+        <span class="case-tag muted">Live Data</span>
+      </div>
+      <h1 class="case-title">IMMIGRATION<br>LAW BY<br><span>STATE</span></h1>
+      <div class="case-intro-grid">
+        <p class="case-intro-text">A choropleth map tracking immigration enforcement legislation across all 50 states — built to accompany "Fifty Ways to Enforce a Border," a piece of original reporting on the devolution of federal immigration enforcement to the state level. The data is live. The argument is visual.</p>
+        <div class="case-meta">
+          <div>
+            <div class="case-meta-label">Role</div>
+            <div class="case-meta-value">Data Journalism · Visualization Design · API Architecture</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Publication</div>
+            <div class="case-meta-value">The Parlor Magazine</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Data Source</div>
+            <div class="case-meta-value">National Conference of State Legislatures</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Stack</div>
+            <div class="case-meta-value">D3 v7 · TopoJSON · Wix Velo API · ARIA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02 — EDITORIAL CONTEXT -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">01 — The Editorial Argument</span>
+      <div class="two-col">
+        <div>
+          <h2 class="slide-heading">THE MAP IS<br>THE <span>ARGUMENT.</span></h2>
+          <p class="body-text">The piece it accompanies — <em>"Fifty Ways to Enforce a Border"</em> — was reported by a Parlor reporting fellow. It covers a specific and underreported story: as federal immigration enforcement has become more politically volatile, conservative states have moved to fill the gap themselves, passing their own enforcement legislation and forming coalitions between state police forces and ICE.</p>
+          <p class="body-text">That story is hard to tell in prose alone. You can cite numbers. You can name states. But the geographic pattern — the concentration, the spread, the states that opted in aggressively vs those that didn't — only becomes legible when you can see it all at once.</p>
+          <div class="callout">
+            <p class="callout-text">Data journalism isn't decoration. This map makes a claim: that immigration enforcement has been systematically redistributed from the federal to the state level, and the geography of that redistribution is not random.</p>
+          </div>
+        </div>
+        <div>
+          <p class="body-text">The map shows enforcement-specific legislation only — laws directly tied to police cooperation with ICE, state-level detention powers, deportation facilitation, and enforcement coalition agreements. It does not include driver's license legislation or other immigration-adjacent bills.</p>
+          <p class="body-text">That's a deliberate editorial decision. Other outlets — including the Marshall Project — included all immigration-related legislation when covering the same dataset. We found that approach diluted the enforcement story. A state passing a law about driver's licenses for undocumented residents is doing something categorically different from a state empowering its police force to act as ICE agents. Treating them as equivalent obscures the argument.</p>
+          <div class="arch-block">
+            <div class="arch-title">EDITORIAL SCOPE</div>
+            <ul class="arch-list">
+              <li class="arch-item"><span class="arch-arrow">✓</span><span class="arch-text"><strong>Included</strong> — ICE cooperation agreements, state detention authority, enforcement coalition legislation</span></li>
+              <li class="arch-item"><span class="arch-arrow">✓</span><span class="arch-text"><strong>Included</strong> — State police empowerment bills, deportation facilitation measures</span></li>
+              <li class="arch-item"><span class="arch-arrow">✗</span><span class="arch-text"><strong>Excluded</strong> — Driver's license legislation, generic immigration status bills</span></li>
+              <li class="arch-item"><span class="arch-arrow">✗</span><span class="arch-text"><strong>Excluded</strong> — Non-enforcement immigration measures included by other outlets</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 03 — DATA & API -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">02 — Data Architecture</span>
+      <div class="two-col">
+        <div>
+          <h2 class="slide-heading">LIVE DATA.<br><span>EVERY LOAD.</span></h2>
+          <p class="body-text">The map doesn't use a static JSON file. It calls a live HTTP endpoint built in <strong>Wix Velo</strong> — a serverless function that queries the data collection and returns the current state of the dataset on every page load.</p>
+          <p class="body-text">That means as new legislation passes and the dataset is updated, the map automatically populates — no redeployment required. The visualization stays connected to the reality it's describing, which matters for a story that's still unfolding. Immigration enforcement legislation didn't stop in 2024. States are still moving.</p>
+          <p class="body-text">The source data comes from the <strong>National Conference of State Legislatures</strong> immigration legislation database — a comprehensive tracker of state-level immigration bills, their status, last action dates, and bill summaries. We pulled enforcement-specific records and built the Velo collection around that filtered dataset.</p>
+          <div class="tech-stack">
+            <span class="tech-pill">D3 v7</span>
+            <span class="tech-pill">TopoJSON</span>
+            <span class="tech-pill">Wix Velo</span>
+            <span class="tech-pill">HTTP Functions</span>
+            <span class="tech-pill">NCSL Database</span>
+            <span class="tech-pill">ARIA</span>
+            <span class="tech-pill">AlbersUSA Projection</span>
+          </div>
+        </div>
+        <div>
+          <div class="arch-block">
+            <div class="arch-title">DATA FLOW</div>
+            <ul class="arch-list">
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>NCSL database</strong> — source data, manually filtered to enforcement scope</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Wix data collection</strong> — structured records by state, bill, year, status, summary</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Velo HTTP function</strong> — <code style="font-family:monospace;font-size:11px;color:var(--accent);">/_functions/immigrationLawsByState</code> returns live JSON</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>D3 + TopoJSON</strong> — fetches endpoint on load, renders choropleth, binds tooltip data</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Wix iframe embed</strong> — map lives in The Parlor article, data stays live</span></li>
+            </ul>
+          </div>
+          <div class="arch-block" style="margin-top:0;">
+            <div class="arch-title">DATA STRUCTURE PER STATE</div>
+            <ul class="arch-list">
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>bill</strong> — bill number or name</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>year</strong> — legislative session year</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>summary</strong> — plain language description</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>status_detail</strong> — enacted, passed, introduced</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>last_action_date</strong> — most recent legislative movement</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04 — THE MAP -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">03 — The Visualization</span>
+      <h2 class="slide-heading">SEE THE<br><span>GEOGRAPHY.</span></h2>
+      <div class="map-placeholder" style="margin-bottom:32px;aspect-ratio:16/7;">
+        <div class="map-icon">🗺</div>
+        <div class="map-placeholder-title">IMMIGRATION ENFORCEMENT LAWS BY STATE</div>
+        <div class="map-placeholder-desc">The map is embedded live in The Parlor article — hover any state to see bill details, status, and last action date.</div>
+        <a class="map-link" href="https://theparlormagazine.com" target="_blank">View in The Parlor →</a>
+      </div>
+      <div class="two-col">
+        <div>
+          <p class="body-text">The map uses a four-step color scale to show enforcement density by state — from no laws in the dataset through to six or more. The <strong>AlbersUSA projection</strong> keeps Alaska and Hawaii visible without distorting the continental states.</p>
+          <p class="body-text">Hovering any state with legislation opens a tooltip showing each bill — its number, year, plain-language summary, current status, and last action date. States with no enforcement legislation in scope are not interactive. The visual distinction between active and inactive states is immediate.</p>
+        </div>
+        <div>
+          <!-- COLOR SCALE -->
+          <div style="margin-bottom:8px;font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);">COLOR SCALE</div>
+          <div class="scale-viz">
+            <div class="scale-step">
+              <div class="scale-swatch" style="background:#f3f3f3;border:1px solid rgba(245,240,232,0.2);"></div>
+              <div class="scale-label">None</div>
+              <div class="scale-desc">No enforcement laws in dataset</div>
+            </div>
+            <div class="scale-step">
+              <div class="scale-swatch" style="background:#cfe3ff;"></div>
+              <div class="scale-label">1–2</div>
+              <div class="scale-desc">Limited enforcement activity</div>
+            </div>
+            <div class="scale-step">
+              <div class="scale-swatch" style="background:#7fb0ff;"></div>
+              <div class="scale-label">3–5</div>
+              <div class="scale-desc">Active enforcement legislation</div>
+            </div>
+            <div class="scale-step">
+              <div class="scale-swatch" style="background:#0b5fff;"></div>
+              <div class="scale-label">6+</div>
+              <div class="scale-desc">High-density enforcement states</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 05 — DESIGN & ACCESSIBILITY -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">04 — Design & Accessibility</span>
+      <div class="two-col">
+        <div>
+          <h2 class="slide-heading">DATA VIZ<br>FOR <span>REAL PEOPLE.</span></h2>
+          <p class="body-text">The Parlor's readers are not data scientists. The map needed to be immediately legible to someone who has never interacted with a choropleth — and it needed to work for readers who navigate by keyboard or use assistive technology.</p>
+          <p class="body-text">Every state with legislation is keyboard-navigable with a tab index. ARIA labels describe each state's content for screen readers. The tooltip is marked as a live region so screen reader users hear updates as they navigate. States without legislation in scope are explicitly excluded from the tab order — they're not interactive, so they shouldn't pretend to be.</p>
+          <div class="callout">
+            <p class="callout-text">Accessibility in data journalism isn't an afterthought. If the visualization only works for sighted users with a mouse, it's not actually public-facing journalism.</p>
+          </div>
+        </div>
+        <div>
+          <div class="method-grid">
+            <div class="method-card">
+              <div class="method-label">Interaction</div>
+              <div class="method-title">HOVER + KEYBOARD</div>
+              <div class="method-desc">Mouse hover and keyboard focus both trigger the tooltip. Tab order follows states with legislation only.</div>
+            </div>
+            <div class="method-card">
+              <div class="method-label">Screen Readers</div>
+              <div class="method-title">ARIA LIVE</div>
+              <div class="method-desc">Tooltip marked aria-live="polite". Each state has a descriptive aria-label with law count.</div>
+            </div>
+            <div class="method-card">
+              <div class="method-label">Tooltip</div>
+              <div class="method-title">SMART POSITION</div>
+              <div class="method-desc">Tooltip repositions to stay within viewport bounds — no clipping at edges or corners.</div>
+            </div>
+            <div class="method-card">
+              <div class="method-label">Projection</div>
+              <div class="method-title">ALBERS USA</div>
+              <div class="method-desc">Standard US cartographic projection — Alaska and Hawaii inset, continental states undistorted.</div>
+            </div>
+          </div>
+          <div class="tech-stack" style="margin-top:16px;">
+            <span class="tech-pill">WCAG 2.1</span>
+            <span class="tech-pill">ARIA roles</span>
+            <span class="tech-pill">Keyboard nav</span>
+            <span class="tech-pill">Focus visible</span>
+            <span class="tech-pill">Live regions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end track -->
+</div>
+
+<!-- CHEVRONS -->
+<button class="chevron chevron-left hidden" id="chevLeft" aria-label="Previous slide">
+  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+</button>
+<button class="chevron chevron-right" id="chevRight" aria-label="Next slide">
+  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+</button>
+
+<!-- PROGRESS -->
+<div class="progress" id="progress">
+  <span class="progress-num current" id="progressCurrent">01</span>
+  <div class="progress-dots" id="progressDots"></div>
+  <span class="progress-num" id="progressTotal">05</span>
+</div>
+
+<!-- NEXT PROJECT -->
+<a class="next-project-footer" href="index.html#work">
+  <div class="next-footer-left">
+    <div class="next-footer-label">Back to</div>
+    <div class="next-footer-title">ALL WORK</div>
+  </div>
+  <div class="next-footer-arrow">↗</div>
+</a>
+
+<script>
+const track=document.getElementById('track');
+const slides=track.querySelectorAll('.slide');
+const total=slides.length;
+const chevLeft=document.getElementById('chevLeft');
+const chevRight=document.getElementById('chevRight');
+const progressCurrent=document.getElementById('progressCurrent');
+const progressDots=document.getElementById('progressDots');
+let current=0;
+
+for(let i=0;i<total;i++){
+  const d=document.createElement('div');
+  d.className='progress-dot'+(i===0?' active':'');
+  progressDots.appendChild(d);
+}
+
+function goTo(n){
+  current=Math.max(0,Math.min(total-1,n));
+  track.style.transform=`translateX(-${current*100}vw)`;
+  chevLeft.classList.toggle('hidden',current===0);
+  chevRight.classList.toggle('hidden',current===total-1);
+  progressCurrent.textContent=String(current+1).padStart(2,'0');
+  document.querySelectorAll('.progress-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===current);
+  });
+}
+
+chevRight.addEventListener('click',()=>goTo(current+1));
+chevLeft.addEventListener('click',()=>goTo(current-1));
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') goTo(current+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') goTo(current-1);
+});
+
+let touchStartX=0,touchStartY=0;
+document.addEventListener('touchstart',e=>{
+  touchStartX=e.touches[0].clientX;
+  touchStartY=e.touches[0].clientY;
+},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){
+    if(dx<0) goTo(current+1);
+    else goTo(current-1);
+  }
+},{passive:true});
+
+goTo(0);
+</script>
+</body>
+</html>

@@ -1175,6 +1175,33 @@ clickLayer.addEventListener('click',()=>{
     video.currentTime=9;
   }
 });
+// REGIME MODAL
+const regimeCard = document.getElementById('regimeCard');
+const regimeModal = document.getElementById('regimeModal');
+const regimeClose = document.getElementById('regimeClose');
+const regimeFrame = document.getElementById('regimeFrame');
+
+regimeCard.addEventListener('click', e => {
+  e.preventDefault();
+  regimeFrame.src = 'foreign-regime-changes.html';
+  regimeModal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+});
+
+regimeClose.addEventListener('click', () => {
+  regimeModal.style.display = 'none';
+  regimeFrame.src = '';
+  document.body.style.overflow = '';
+});
+
+regimeClose.addEventListener('mouseover', () => {
+  regimeClose.style.color = '#e8c547';
+  regimeClose.style.borderColor = '#e8c547';
+});
+regimeClose.addEventListener('mouseout', () => {
+  regimeClose.style.color = '';
+  regimeClose.style.borderColor = '';
+});
 </script>
 </body>
 </html>

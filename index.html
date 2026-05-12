@@ -680,29 +680,55 @@ footer{
   </a>
 
   <!-- 02 REGIME CHANGES -->
-  <a class="project" href="foreign-regime-changes.html" data-category="data-viz journalism">
+<a class="project" href="#" data-category="data-viz journalism" id="regimeCard">
   <div class="project-visual" style="min-height:520px;height:520px;">
-    <iframe 
-      src="foreign-regime-changes.html"
-      style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;"
-      title="133 Years of US Intervention map">
-    </iframe>
+    <canvas class="project-canvas" data-theme="map"></canvas>
+    <div class="project-visual-overlay"></div>
     <div class="project-num">02</div>
   </div>
-    <div class="project-info">
-      <div class="project-tags">
-        <span class="project-tag active">Data Visualization</span>
-        <span class="project-tag active">History</span>
-        <span class="project-tag">Accountability</span>
-      </div>
-      <h3 class="project-title">133 YEARS OF US INTERVENTION</h3>
-      <p class="project-desc">Interactive timeline mapping US foreign regime changes from 1893 to 2026. Fly-to animation, century navigation, pulsing markers — making history explorable and accountable.</p>
-      <div class="project-footer">
-        <div class="project-tech">Leaflet.js · JavaScript<br>GitHub Pages · ARIA</div>
-        <span class="project-arrow">↗</span>
-      </div>
+  <div class="project-info">
+    <div class="project-tags">
+      <span class="project-tag active">Data Visualization</span>
+      <span class="project-tag active">History</span>
+      <span class="project-tag">Accountability</span>
     </div>
-  </a>
+    <h3 class="project-title">133 YEARS OF US INTERVENTION</h3>
+    <p class="project-desc">Interactive timeline mapping US foreign regime changes from 1893 to 2026. Fly-to animation, century navigation, pulsing markers — making history explorable and accountable.</p>
+    <div class="project-footer">
+      <div class="project-tech">Leaflet.js · JavaScript<br>GitHub Pages · ARIA</div>
+      <span class="project-arrow">↗</span>
+    </div>
+  </div>
+</a>
+
+<!-- REGIME CHANGES MODAL -->
+<div id="regimeModal" style="
+  display:none;
+  position:fixed;inset:0;
+  z-index:500;
+  background:var(--bg);
+">
+  <button id="regimeClose" style="
+    position:fixed;top:16px;right:24px;
+    z-index:600;
+    font-family:var(--sans);font-size:10px;font-weight:500;
+    letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--muted);
+    border:1px solid var(--border);
+    background:rgba(12,12,12,0.92);
+    backdrop-filter:blur(12px);
+    padding:8px 14px;
+    cursor:pointer;
+    transition:color 0.2s,border-color 0.2s;
+    display:flex;align-items:center;gap:8px;
+  ">✕ Close</button>
+  <iframe 
+    id="regimeFrame"
+    src=""
+    style="width:100%;height:100%;border:none;"
+    title="133 Years of US Intervention">
+  </iframe>
+</div>
 
   <!-- 03 IMMIGRATION -->
 <a class="project" href="immigrationLawsByState.html" data-category="data-viz science">

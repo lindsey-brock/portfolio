@@ -630,40 +630,34 @@ footer{
 
 <!-- WORK -->
 <div class="project-visual" style="overflow:hidden;z-index:1;background:#0c0c0c;height:560px;position:relative;">
-  <img id="parlorImg1"
-    src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518454/Untitled_design_-_2026-05-11T185358.044_h6sjjw.png"
-    style="position:absolute;left:50%;top:50%;transform:translate(-60%,-50%);width:62%;height:auto;z-index:2;box-shadow:-4px 4px 24px rgba(0,0,0,0.6);transition:z-index 0s;"
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-60%,-50%);width:62%;z-index:4;"
     onmouseenter="
-      document.getElementById('parlorImg1').style.zIndex='4';
       document.getElementById('parlorOverlay').style.opacity='1';
-      document.getElementById('parlorOverlay').style.pointerEvents='all';
     "
     onmouseleave="
-      document.getElementById('parlorImg1').style.zIndex='2';
       document.getElementById('parlorOverlay').style.opacity='0';
-      document.getElementById('parlorOverlay').style.pointerEvents='none';
-    "
-  />
-  <div id="parlorOverlay" style="
-    position:absolute;
-    left:50%;top:50%;
-    transform:translate(-60%,-50%);
-    width:62%;height:100%;
-    z-index:5;
-    background:rgba(12,12,12,0.6);
-    display:flex;align-items:center;justify-content:center;
-    opacity:0;transition:opacity 0.3s;pointer-events:none;
-  ">
-    <button style="
-      font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;
-      letter-spacing:0.15em;text-transform:uppercase;
-      color:var(--bg);background:var(--accent);
-      border:none;padding:12px 24px;cursor:pointer;
-    " onclick="event.preventDefault();event.stopPropagation();
-      document.getElementById('parlorModal').style.display='block';
-      document.body.style.overflow='hidden';">
-      ▶ Preview Site
-    </button>
+    ">
+    <img id="parlorImg1"
+      src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518454/Untitled_design_-_2026-05-11T185358.044_h6sjjw.png"
+      style="width:100%;height:auto;display:block;box-shadow:-4px 4px 24px rgba(0,0,0,0.6);"
+    />
+    <div id="parlorOverlay" style="
+      position:absolute;inset:0;
+      background:rgba(12,12,12,0.6);
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;transition:opacity 0.3s;
+    ">
+      <button style="
+        font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;
+        letter-spacing:0.15em;text-transform:uppercase;
+        color:var(--bg);background:var(--accent);
+        border:none;padding:12px 24px;cursor:pointer;
+      " onclick="event.preventDefault();event.stopPropagation();
+        document.getElementById('parlorModal').style.display='block';
+        document.body.style.overflow='hidden';">
+        ▶ Preview Site
+      </button>
+    </div>
   </div>
   <img id="parlorImg2"
     src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518460/Untitled_design_-_2026-05-11T185311.878_jjnyet.png"
@@ -671,7 +665,6 @@ footer{
   />
   <div class="project-visual-overlay"></div>
 </div>
-  </div>
   <div class="project-info">
     <div>
       <div class="project-tags">

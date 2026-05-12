@@ -1174,47 +1174,14 @@ clickLayer.addEventListener('click',()=>{
 const regimeCard = document.getElementById('regimeCard');
 const regimeModal = document.getElementById('regimeModal');
 const regimeClose = document.getElementById('regimeClose');
-let regimeMap = null;
 
 regimeCard.addEventListener('click', e => {
   e.preventDefault();
   regimeModal.style.display = 'block';
   document.body.style.overflow = 'hidden';
-
-  if (!regimeMap) {
-    regimeMap = L.map('regimeMapContainer', { zoomControl:false, worldCopyJump:true }).setView([15,-20],2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom:7,
-      attribution:'&copy; OpenStreetMap contributors'
-    }).addTo(regimeMap);
-
-    // Add your first event marker as default
-    const pulseIcon = L.divIcon({
-      className:'',
-      html:'<div style="width:14px;height:14px;border-radius:50%;background:#e8c547;border:2px solid #0c0c0c;box-shadow:0 0 0 0 rgba(232,197,71,0.5);animation:pulse 1.8s infinite;"></div>',
-      iconSize:[14,14],iconAnchor:[7,7]
-    });
-    L.marker([21.3069,-157.8583],{icon:pulseIcon}).addTo(regimeMap);
-  } else {
-    regimeMap.invalidateSize();
-  }
-});
-
-regimeClose.addEventListener('click', () => {
-  regimeModal.style.display = 'none';
-  document.body.style.overflow = '';
-});
-regimeClose.addEventListener('mouseover', () => {
-  regimeClose.style.color = '#e8c547';
-  regimeClose.style.borderColor = '#e8c547';
-});
-regimeClose.addEventListener('mouseout', () => {
-  regimeClose.style.color = '';
-  regimeClose.style.borderColor = '';
+  document.getElementById('regimeFrame').src = 'https://lindsey-brock.github.io/regime-changes/foreign-regime-changes.html';
 });
 </script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </body>
 </html>
 </html>

@@ -1179,7 +1179,22 @@ regimeCard.addEventListener('click', e => {
   e.preventDefault();
   regimeModal.style.display = 'block';
   document.body.style.overflow = 'hidden';
-  document.getElementById('regimeFrame').src = 'document.getElementById('regimeFrame').src = 'https://lindsey-brock.github.io/regime-changes/';
+  document.getElementById('regimeFrame').src = 'https://lindsey-brock.github.io/regime-changes/index.html';
+});
+
+regimeClose.addEventListener('click', () => {
+  regimeModal.style.display = 'none';
+  document.getElementById('regimeFrame').src = '';
+  document.body.style.overflow = '';
+});
+
+regimeClose.addEventListener('mouseover', () => {
+  regimeClose.style.color = '#e8c547';
+  regimeClose.style.borderColor = '#e8c547';
+});
+regimeClose.addEventListener('mouseout', () => {
+  regimeClose.style.color = '';
+  regimeClose.style.borderColor = '';
 });
 </script>
 </body>

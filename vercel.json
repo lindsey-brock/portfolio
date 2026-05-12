@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "source": "/foreign-regime-changes.html",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ]
+}

@@ -630,11 +630,13 @@ footer{
 
 <!-- WORK -->
 <div class="project-visual" style="overflow:hidden;z-index:1;background:#0c0c0c;height:560px;position:relative;">
-  <div style="position:absolute;left:50%;top:50%;transform:translate(-60%,-50%);width:62%;z-index:4;"
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-60%,-50%);width:62%;z-index:2;"
     onmouseenter="
+      this.style.zIndex='4';
       document.getElementById('parlorOverlay').style.opacity='1';
     "
     onmouseleave="
+      this.style.zIndex='2';
       document.getElementById('parlorOverlay').style.opacity='0';
     ">
     <img id="parlorImg1"

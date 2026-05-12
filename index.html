@@ -645,13 +645,20 @@ footer{
   </div>
 </div>
 <div class="project-visual" style="overflow:hidden;z-index:1;background:#0c0c0c;height:560px;position:relative;">
- <div style="position:absolute;left:50%;top:50%;transform:translate(-60%,-50%);width:62%;z-index:2;line-height:0;overflow:hidden;"
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-60%,-50%);width:62%;z-index:2;line-height:0;overflow:hidden;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);"
+    id="parlorWrapper"
     onmouseenter="
       this.style.zIndex='4';
+      this.style.transform='translate(-50%,-50%)';
+      document.getElementById('parlorImg2').style.transform='translate(-50%,-50%)';
+      document.getElementById('parlorImg2').style.zIndex='1';
       document.getElementById('parlorOverlay').style.opacity='1';
     "
     onmouseleave="
       this.style.zIndex='2';
+      this.style.transform='translate(-60%,-50%)';
+      document.getElementById('parlorImg2').style.transform='translate(2%,-45%)';
+      document.getElementById('parlorImg2').style.zIndex='3';
       document.getElementById('parlorOverlay').style.opacity='0';
     ">
     <img id="parlorImg1"
@@ -678,7 +685,7 @@ footer{
   </div>
   <img id="parlorImg2"
     src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518460/Untitled_design_-_2026-05-11T185311.878_jjnyet.png"
-    style="position:absolute;left:50%;top:50%;transform:translate(2%,-45%);width:55%;height:auto;z-index:3;"
+    style="position:absolute;left:50%;top:50%;transform:translate(2%,-45%);width:55%;height:auto;z-index:3;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),z-index 0s;"
   />
   <div class="project-visual-overlay"></div>
 </div>

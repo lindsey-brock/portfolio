@@ -1360,11 +1360,13 @@ if(hasPlayed){
     clickLayer.style.display='none';
     document.body.style.overflow='';
     document.documentElement.style.overflow='';
-    document.getElementById('bg').classList.add('show');
-    document.getElementById('heroOverlay').classList.add('show');
-    document.getElementById('heroStrip').classList.add('show');
-    document.getElementById('heroLine').classList.add('show');
-    setTimeout(()=>document.getElementById('heroContent').classList.add('reveal'),800);
+    setTimeout(()=>{
+  document.getElementById('bg').classList.add('show');
+  document.getElementById('heroOverlay').classList.add('show');
+  document.getElementById('heroStrip').classList.add('show');
+  document.getElementById('heroLine').classList.add('show');
+},800);
+setTimeout(()=>document.getElementById('heroContent').classList.add('reveal'),1600);
     setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
     setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
     setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);

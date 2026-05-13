@@ -464,11 +464,89 @@ nav{
         </div>
       </div>
     </div>
+<!-- SLIDE 04 — THE PORTAL -->
+<div class="slide">
+  <div class="slide-rule"></div>
+  <span class="slide-label">03 — The Member Portal</span>
+  <div class="two-col">
+    <div>
+      <h2 class="slide-heading">A PUBLICATION<br>THAT LIVES<br><span>FROM THE INSIDE.</span></h2>
+      <p class="body-text">The Parlor isn't just a magazine you read. It's a platform you inhabit. The member portal is a separate application — its own codebase, deployed on Vercel, embedded back into the Wix shell — that gives subscribers a completely different experience of the publication from the inside.</p>
+      <p class="body-text">The portal has its own navigation, identity, and logic. It knows who you are, what tier you're on, what you've saved, what you've read, and what's new since you last logged in. It's built to feel like a room, not a dashboard.</p>
+      <div class="callout">
+        <p class="callout-text">The goal was never a paywall with a members page bolted on. The goal was a community platform that happens to also be how you access the magazine.</p>
+      </div>
+      <div class="tech-stack">
+        <span class="tech-pill">Vercel Serverless</span>
+        <span class="tech-pill">Airtable (migrating)</span>
+        <span class="tech-pill">Supabase</span>
+        <span class="tech-pill">REST APIs</span>
+        <span class="tech-pill">GitHub</span>
+      </div>
+    </div>
+    <div>
+      <div class="arch-block">
+        <div class="arch-title">WHAT THE PORTAL DOES</div>
+        <ul class="arch-list">
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Reading Room</strong> — threaded forum with categories, upvoting, nested replies, library linking, and writer Q&As. All live via Airtable API, migrating to Supabase.</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>The Library</strong> — curated content drops per theme: essays, books, audio, film, protest posters. Filtered by type, month, or theme. Member activity tracked (saves, reads, history).</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Events calendar</strong> — weekly view with community-proposed events, RSVP logic, and type filtering. Members can propose roundtables, book clubs, writing workshops, organizing sessions.</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Member inbox</strong> — direct messaging between members and editors, with threaded conversations, compose, and admin broadcast capability.</span></li>
+          <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Notifications</strong> — reply alerts, library drops, event confirmations, editor messages. Panel and full page view.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
+  <!-- API ARCHITECTURE -->
+  <div style="margin-top:32px;">
+    <div style="font-family:var(--display);font-size:13px;letter-spacing:0.1em;color:var(--accent);margin-bottom:12px;">BACKEND API SURFACE — VERCEL + AIRTABLE → SUPABASE</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:18px 20px;">
+        <div style="font-family:var(--display);font-size:14px;letter-spacing:0.08em;color:var(--accent);margin-bottom:10px;">CONTENT</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.9;">
+          /api/library<br>
+          /api/library-themes<br>
+          /api/member-activity
+        </div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:18px 20px;">
+        <div style="font-family:var(--display);font-size:14px;letter-spacing:0.08em;color:var(--accent);margin-bottom:10px;">COMMUNITY</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.9;">
+          /api/threads<br>
+          /api/replies<br>
+          /api/upvotes
+        </div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:18px 20px;">
+        <div style="font-family:var(--display);font-size:14px;letter-spacing:0.08em;color:var(--accent);margin-bottom:10px;">MESSAGING</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.9;">
+          /api/inbox-threads<br>
+          /api/inbox-messages<br>
+          /api/notifications
+        </div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:18px 20px;">
+        <div style="font-family:var(--display);font-size:14px;letter-spacing:0.08em;color:var(--accent);margin-bottom:10px;">EVENTS</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.9;">
+          /api/events<br>
+          /api/member-plans<br>
+          /api/upvotes
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIGRATION NOTE -->
+  <div style="margin-top:24px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);padding:20px 28px;">
+    <div style="font-family:var(--display);font-size:14px;letter-spacing:0.08em;color:var(--accent);margin-bottom:10px;">THE MIGRATION</div>
+    <p class="body-text" style="margin-bottom:0;">The backend started on <strong>Airtable</strong> — the right call for speed. Each feature is a serverless Vercel function querying Airtable's REST API: filtered reads, PATCH updates for upvote counts and reply tallies, relational lookups across tables. It worked. As the platform grows in complexity — relational joins, real-time events, row-level security, performance at scale — <strong>Supabase</strong> is the natural next layer. The migration is underway, designed to be invisible to members.</p>
+  </div>
+</div>
     <!-- SLIDE 04 — CONTENT ARCHITECTURE -->
     <div class="slide">
       <div class="slide-rule"></div>
-      <span class="slide-label">03 — Content Architecture & Monetization</span>
+      <span class="slide-label">04 — Content Architecture & Monetization</span>
       <h2 class="slide-heading">BUILD THE AUDIENCE.<br><span>THEN MONETIZE DEPTH.</span></h2>
       <div class="two-col" style="margin-bottom:32px;">
         <div>
@@ -624,7 +702,7 @@ nav{
     <!-- SLIDE 05 — DIGITAL PAYWALL -->
     <div class="slide">
       <div class="slide-rule"></div>
-      <span class="slide-label">04 — The Digital Issue Paywall</span>
+      <span class="slide-label">05 — The Digital Issue Paywall</span>
       <div class="two-col">
         <div>
           <h2 class="slide-heading" style="font-size:clamp(28px,3.5vw,52px);margin-bottom:20px;">10 SECONDS.<br>THEN THE<br><span>WALL HITS.</span></h2>
@@ -715,7 +793,7 @@ nav{
     <!-- SLIDE 06 — PRINT FLOW -->
     <div class="slide">
       <div class="slide-rule"></div>
-      <span class="slide-label">05 — Print Purchase Flow</span>
+      <span class="slide-label">06 — Print Purchase Flow</span>
       <h2 class="slide-heading">BROWSE.<br>THEN <span>BUY.</span></h2>
       <p class="body-text" style="max-width:580px;margin-bottom:0;">The print magazine needed to sell itself. So I built a complete conversion experience — preview, decision, payment — without the reader ever leaving the page.</p>
       <div class="flow">
@@ -751,7 +829,7 @@ nav{
     <!-- SLIDE 08 — STILL BUILDING -->
     <div class="slide">
       <div class="slide-rule"></div>
-      <span class="slide-label">06 — Still Building</span>
+      <span class="slide-label">07 — Still Building</span>
       <div class="two-col">
         <div>
           <h2 class="slide-heading">BUILT SOLO.<br><span>STILL BUILDING.</span></h2>

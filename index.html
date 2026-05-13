@@ -1335,14 +1335,11 @@ if(hasPlayed){
   video.style.display='none';
   clickLayer.style.display='none';
   document.body.style.overflow='';
-
-  // Show last-frame image instead of video
-  const lastFrame = document.createElement('img');
-  lastFrame.src = 'https://res.cloudinary.com/dmegrbq5k/image/upload/v1778357984/Copy_of_Summer_Video_2_htexds.mp4';
-  lastFrame.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity 1.2s ease;';
+  const lastFrame=document.createElement('img');
+  lastFrame.src='https://res.cloudinary.com/dmegrbq5k/image/upload/v1778678176/Copy_of_Summer_Video_em5xjw.png';
+  lastFrame.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity 1.2s ease;';
   document.querySelector('.hero').prepend(lastFrame);
-  setTimeout(()=>lastFrame.style.opacity='1', 100);
-
+  setTimeout(()=>lastFrame.style.opacity='1',100);
   document.getElementById('bg').classList.add('show');
   document.getElementById('heroOverlay').classList.add('show');
   document.getElementById('heroStrip').classList.add('show');
@@ -1354,7 +1351,6 @@ if(hasPlayed){
   document.getElementById('ht3').classList.add('show');
   document.getElementById('heroMeta').classList.add('show');
   document.querySelector('nav').classList.add('visible');
-}
 } else {
   document.body.style.overflow='hidden';
   const scrollFallback=setTimeout(()=>{
@@ -1368,12 +1364,11 @@ if(hasPlayed){
     clickLayer.style.display='none';
     document.body.style.overflow='';
     document.documentElement.style.overflow='';
-    setTimeout(()=>{
-  document.getElementById('bg').classList.add('show');
-document.getElementById('heroOverlay').classList.add('show');
-document.getElementById('heroStrip').classList.add('show');
-document.getElementById('heroLine').classList.add('show');
-setTimeout(()=>document.getElementById('heroContent').classList.add('reveal'),800);
+    document.getElementById('bg').classList.add('show');
+    document.getElementById('heroOverlay').classList.add('show');
+    document.getElementById('heroStrip').classList.add('show');
+    document.getElementById('heroLine').classList.add('show');
+    setTimeout(()=>document.getElementById('heroContent').classList.add('reveal'),800);
     setTimeout(()=>document.getElementById('heroEdition').classList.add('show'),900);
     setTimeout(()=>document.getElementById('ht1').classList.add('show'),1100);
     setTimeout(()=>document.getElementById('ht2').classList.add('show'),1250);

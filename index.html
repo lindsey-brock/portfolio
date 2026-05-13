@@ -936,13 +936,27 @@ footer{
   <iframe id="twitchFrame" src="" style="width:100%;height:100%;border:none;"></iframe>
 </div>
   <!-- 05 CLIMATE - COMING SOON -->
-  <div class="project-visual" style="min-height:420px;height:420px;position:relative;">
+  <div class="project-visual" style="min-height:420px;height:420px;position:relative;"
+  onmouseenter="document.getElementById('climateOverlay').style.opacity='1'"
+  onmouseleave="document.getElementById('climateOverlay').style.opacity='0'">
   <iframe
     src="https://lindsey-brock.github.io/kawsay-pacha/"
     style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;"
     title="Community Archaeology & Climate Resilience">
   </iframe>
-  <div style="position:absolute;inset:0;z-index:10;"></div>
+  <div id="climateOverlay" style="
+    position:absolute;inset:0;z-index:10;
+    background:rgba(12,12,12,0.55);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;transition:opacity 0.3s;
+  ">
+    <div style="
+      font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;
+      letter-spacing:0.15em;text-transform:uppercase;
+      color:var(--bg);background:var(--muted);
+      border:none;padding:12px 24px;
+    ">○ Coming Soon</div>
+  </div>
 </div>
     <div class="project-info">
       <div>

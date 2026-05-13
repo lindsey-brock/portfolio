@@ -741,9 +741,8 @@ document.querySelectorAll('.timeline-tab').forEach(tab => {
   tab.addEventListener('click', () => switchSection(tab.dataset.section));
 });
 
-prevBtn.addEventListener('click', () => { if(currentIndex > 0) goTo(currentIndex - 1); });
-nextBtn.addEventListener('click', () => { if(currentIndex < panels[currentSection].length - 1) goTo(currentIndex + 1); });
-
+document.getElementById('chevLeft').addEventListener('click', () => { if(currentIndex > 0) goTo(currentIndex - 1); });
+document.getElementById('chevRight').addEventListener('click', () => { if(currentIndex < panels[currentSection].length - 1) goTo(currentIndex + 1); });
 // Keyboard navigation
 document.addEventListener('keydown', e => {
   if(e.key === 'ArrowRight') nextBtn.click();

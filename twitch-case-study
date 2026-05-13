@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Harassment on Twitch — Case Study — Lindsey Brock Morales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0c0c0c;--bg2:#111111;--bg3:#161616;
+  --text:#f5f0e8;--muted:#8a8478;--accent:#e8c547;--red:#c94040;
+  --purple:#7b5ea7;--purple-dim:rgba(123,94,167,0.15);
+  --border:rgba(245,240,232,0.1);
+  --display:'Bebas Neue',sans-serif;
+  --serif:'Libre Baskerville',serif;
+  --sans:'DM Sans',sans-serif;
+}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 48px;height:60px;
+  background:rgba(12,12,12,0.96);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--display);font-size:28px;letter-spacing:0.15em;color:var(--text);text-decoration:none;line-height:1;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:0;align-items:center;height:100%;}
+.nav-link{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:0 24px;height:100%;display:flex;align-items:center;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;}
+.nav-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-cta{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:10px 20px;text-decoration:none;margin-left:16px;transition:opacity 0.2s;border-bottom:2px solid transparent !important;}
+.nav-cta:hover{opacity:0.85;}
+
+.carousel-outer{position:fixed;top:60px;left:0;right:0;bottom:100px;overflow:hidden;z-index:1;}
+.carousel-track{display:flex;height:100%;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);will-change:transform;}
+
+.slide{min-width:100vw;height:100%;overflow-y:auto;padding:40px 120px;display:flex;flex-direction:column;justify-content:flex-start;position:relative;border-right:1px solid var(--border);}
+.slide:nth-child(odd){background:var(--bg);}
+.slide:nth-child(even){background:var(--bg2);}
+.slide-rule{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--red),var(--accent));opacity:0.4;}
+.slide-label{font-size:9px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block;}
+.slide-heading{font-family:var(--display);font-size:clamp(36px,5vw,72px);letter-spacing:0.03em;line-height:1;margin-bottom:36px;}
+.slide-heading span{color:var(--accent);}
+
+/* HERO — dark purple */
+.slide-hero{background:linear-gradient(135deg,#0f0a1a 0%,#0c0c0c 100%) !important;}
+.slide-hero .slide-rule{opacity:1;background:linear-gradient(90deg,var(--purple),var(--accent),var(--purple));}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:32px;transition:color 0.2s;}
+.back-link:hover{color:var(--accent);}
+.case-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.case-tag{font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--accent);color:var(--accent);}
+.case-tag.muted{border-color:var(--border);color:var(--muted);}
+.case-tag.purple{border-color:var(--purple);color:var(--purple);}
+.case-title{font-family:var(--display);font-size:clamp(48px,7vw,100px);line-height:0.92;letter-spacing:0.02em;margin-bottom:28px;}
+.case-title span{color:var(--accent);}
+.case-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding-top:28px;border-top:1px solid var(--border);}
+.case-intro-text{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);line-height:1.8;}
+.case-meta{display:flex;flex-direction:column;gap:16px;}
+.case-meta-label{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
+.case-meta-value{font-size:12px;color:var(--muted);line-height:1.6;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.body-text{font-family:var(--serif);font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:20px;}
+.body-text strong{color:var(--text);font-style:normal;font-weight:700;}
+.body-text em{color:var(--text);}
+
+.callout{border-left:3px solid var(--accent);padding:20px 28px;background:rgba(232,197,71,0.04);margin:24px 0;}
+.callout-text{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--text);line-height:1.7;}
+.callout-purple{border-left:3px solid var(--purple);padding:20px 28px;background:var(--purple-dim);margin:24px 0;}
+.callout-purple .callout-text{color:var(--text);}
+
+.tech-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.tech-pill{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border);color:var(--muted);}
+
+.arch-block{background:var(--bg3);border:1px solid var(--border);padding:32px;margin:24px 0;}
+.arch-title{font-family:var(--display);font-size:18px;letter-spacing:0.05em;color:var(--accent);margin-bottom:20px;}
+.arch-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.arch-item{display:flex;gap:14px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.arch-item:last-child{border-bottom:none;padding-bottom:0;}
+.arch-arrow{color:var(--accent);font-size:13px;flex-shrink:0;margin-top:3px;}
+.arch-text{font-size:13px;color:var(--muted);line-height:1.6;}
+.arch-text strong{color:var(--text);}
+
+.stat-row{display:flex;gap:2px;margin:24px 0;}
+.stat-block{flex:1;padding:28px 20px;background:var(--bg3);border:1px solid var(--border);text-align:center;}
+.stat-num{font-family:var(--display);font-size:clamp(32px,4vw,52px);color:var(--accent);line-height:1;margin-bottom:6px;}
+.stat-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:24px 0;}
+.method-card{padding:28px;background:var(--bg3);border:1px solid var(--border);}
+.method-label{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.method-title{font-family:var(--display);font-size:20px;letter-spacing:0.05em;margin-bottom:10px;}
+.method-desc{font-family:var(--serif);font-size:12px;font-style:italic;color:var(--muted);line-height:1.7;}
+
+/* VIZ EMBED */
+.viz-embed{width:100%;border:1px solid var(--border);background:var(--bg3);}
+
+.progress{position:fixed;bottom:90px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 0;background:rgba(12,12,12,0.95);backdrop-filter:blur(8px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.progress-num{font-family:var(--display);font-size:13px;letter-spacing:0.15em;color:var(--muted);}
+.progress-num.current{color:var(--accent);}
+.progress-dots{display:flex;gap:6px;align-items:center;}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background 0.3s,transform 0.3s;}
+.progress-dot.active{background:var(--accent);transform:scale(1.3);}
+
+.chevron{position:fixed;top:50%;transform:translateY(-50%);z-index:200;width:56px;height:56px;border:1px solid var(--border);background:rgba(12,12,12,0.8);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;animation:chevpulse 2s ease-in-out infinite;}
+.chevron:hover{border-color:var(--accent);background:rgba(232,197,71,0.08);}
+.chevron svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none;}
+.chevron-left{left:24px;}
+.chevron-right{right:24px;}
+.chevron.hidden{opacity:0;pointer-events:none;}
+@keyframes chevpulse{0%,100%{box-shadow:0 0 0 0 rgba(232,197,71,0.3);}50%{box-shadow:0 0 0 8px rgba(232,197,71,0);}}
+
+.next-project-footer{position:fixed;bottom:0;left:0;right:0;height:100px;background:rgba(12,12,12,0.98);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;z-index:200;text-decoration:none;color:inherit;transition:background 0.2s;}
+.next-project-footer:hover{background:#111;}
+.next-footer-left{display:flex;flex-direction:column;gap:4px;}
+.next-footer-label{font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+.next-footer-title{font-family:var(--display);font-size:clamp(18px,2.5vw,28px);letter-spacing:0.05em;line-height:1;}
+.next-footer-arrow{font-size:28px;color:var(--accent);transition:transform 0.3s;}
+.next-project-footer:hover .next-footer-arrow{transform:translate(6px,-6px);}
+
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .slide{padding:32px 24px;}
+  .two-col{grid-template-columns:1fr;gap:32px;}
+  .method-grid{grid-template-columns:1fr;}
+  .stat-row{flex-wrap:wrap;}
+  .stat-block{min-width:calc(50% - 2px);}
+  .chevron-left{left:12px;}
+  .chevron-right{right:12px;}
+  .next-project-footer{padding:0 24px;}
+  .case-intro-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LBM<span>.</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html#work">Work</a>
+    <a class="nav-link" href="index.html#reporting">Reporting</a>
+    <a class="nav-link" href="index.html#about">About</a>
+    <a class="nav-link nav-cta" href="index.html#contact">Let's talk</a>
+  </div>
+</nav>
+
+<div class="carousel-outer">
+  <div class="carousel-track" id="track">
+
+    <!-- SLIDE 01 — HERO -->
+    <div class="slide slide-hero">
+      <div class="slide-rule"></div>
+      <a class="back-link" href="index.html#work">← Back to work</a>
+      <div class="case-tags">
+        <span class="case-tag">Data Visualization</span>
+        <span class="case-tag">Reported Journalism</span>
+        <span class="case-tag muted">Platform Accountability</span>
+        <span class="case-tag purple">The Parlor</span>
+      </div>
+      <h1 class="case-title">STREAMING<br>ON HARD<br><span>MODE</span></h1>
+      <div class="case-intro-grid">
+        <p class="case-intro-text">A data visualization built to accompany original reporting on what female and queer streamers actually face on Twitch — harassment, unpaid moderation labor, algorithmic invisibility, and a platform that frames its own failure as progress. The chart uses Twitch's numbers to say what Twitch won't.</p>
+        <div class="case-meta">
+          <div>
+            <div class="case-meta-label">Role</div>
+            <div class="case-meta-value">Data Journalism · Visualization Design · Frontend Development</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Publication</div>
+            <div class="case-meta-value">The Parlor Magazine</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Data Source</div>
+            <div class="case-meta-value">Twitch Transparency Report 2024 (H1 + H2 combined)</div>
+          </div>
+          <div>
+            <div class="case-meta-label">Stack</div>
+            <div class="case-meta-value">JavaScript · SVG · D3-free · GitHub Pages</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 02 — EDITORIAL ARGUMENT -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">01 — The Editorial Argument</span>
+      <div class="two-col">
+        <div>
+          <h2 class="slide-heading">TWITCH'S<br>DATA.<br><span>OUR ARGUMENT.</span></h2>
+          <p class="body-text"><em>"Streaming on Hard Mode"</em> is reported journalism — interviews with female and queer streamers, firsthand accounts of harassment, stalking, and real-world danger, and a structural analysis of why the platform fails the people who power it. The reporting is the story. The visualization is the evidence.</p>
+          <p class="body-text">Twitch released its 2024 Transparency Report in two halves and framed a 27% decline in sexual harassment enforcements in H2 as early signs of progress. The visualization reframes that number: 132,409 documented actions isn't progress — it's a partial count of a problem the platform's own moderation system consistently underreaches.</p>
+          <div class="callout-purple">
+            <p class="callout-text">The 4% figure doesn't show how common harassment is. It shows how little of it the platform actually sees. Female and queer streamers rely on volunteer mods or self-moderate entirely — meaning a significant share of harassment never enters Twitch's enforcement system at all. The gap between actions taken and documented incidents is the story.</p>
+          </div>
+        </div>
+        <div>
+          <p class="body-text">As BrieBello, a female streamer interviewed for the piece, put it: <em>"I try not to give my mods too much of a job — they work for free, after all."</em> Lydbutton, another interviewee, was more direct: <em>"I wish I could pay my mods — one of them literally uses social work training for free in my space."</em></p>
+          <p class="body-text">This is what the enforcement data doesn't capture: the unpaid emotional labor that keeps women safe on a platform that profits from their visibility without adequately protecting it. The visualization puts Twitch's own numbers in context so the reader understands what 132,409 means — and what it doesn't.</p>
+          <div class="arch-block">
+            <div class="arch-title">WHAT THE REPORTING FOUND</div>
+            <ul class="arch-list">
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Harassment is structural</strong> — not isolated incidents but a documented pattern across the platform</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Women self-moderate</strong> — volunteer mods, blocked word lists, follower-only chat reduce Twitch's enforcement burden and their own visibility</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Underreporting is structural</strong> — harassment that never reaches Twitch's system doesn't appear in the transparency data</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Twitch framed decline as progress</strong> — the visualization challenges that framing with context</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 03 — THE DATA -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">02 — The Dataset</span>
+      <div class="stat-row">
+        <div class="stat-block">
+          <div class="stat-num">132,409</div>
+          <div class="stat-label">Documented actions</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">−27%</div>
+          <div class="stat-label">H2 decline (Twitch's framing)</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">28,760</div>
+          <div class="stat-label">Appeals filed</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">~4%</div>
+          <div class="stat-label">Of all enforcement actions</div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:8px;">
+        <div>
+          <p class="body-text">The dataset uses Twitch's own <strong>Transparency Report 2024</strong>, published in two halves. H1 and H2 figures are combined for annual totals. Twitch publishes these reports voluntarily — they are not legally required, and the methodology for counting actions is not fully disclosed. That opacity is itself part of the story.</p>
+          <p class="body-text">The visualization doesn't claim the data is complete. It claims that even Twitch's own partial accounting — 132,409 documented sexual harassment actions in a single year — is not a number a platform should frame as evidence of improvement. When Twitch cited the H2 decline as progress, they were describing fewer documented incidents on a platform where documentation depends on how much women are willing to report, and how much the system is willing to act.</p>
+          <div class="callout">
+            <p class="callout-text">As GameHuntaD, a male streamer, observed in the piece: <em>"Twitch can't be everywhere. You have to build a community that doesn't tolerate that behavior."</em> That sentence describes the failure perfectly — Twitch has offloaded its safety responsibility onto its creators.</p>
+          </div>
+        </div>
+        <div>
+          <div class="arch-block">
+            <div class="arch-title">DATA DECISIONS</div>
+            <ul class="arch-list">
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Source</strong> — Twitch Transparency Report 2024, H1 + H2 combined</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Scope</strong> — 8 enforcement categories, sexual harassment as focal metric</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>No external API</strong> — data is inline JSON; static, no ongoing updates needed</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Appeals included</strong> — 28,760 total (18,565 H1 + 10,195 H2) shown in source note</span></li>
+              <li class="arch-item"><span class="arch-arrow">→</span><span class="arch-text"><strong>Framing is editorial</strong> — the visualization presents Twitch's numbers, not independent verification</span></li>
+            </ul>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill">Twitch Transparency Report</span>
+            <span class="tech-pill">H1 + H2 2024</span>
+            <span class="tech-pill">8 categories</span>
+            <span class="tech-pill">Inline JSON</span>
+            <span class="tech-pill">No external API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 04 — THE VISUALIZATION -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">03 — The Visualization</span>
+      <div class="two-col" style="margin-bottom:24px;">
+        <h2 class="slide-heading" style="margin-bottom:0;">TWO CHARTS.<br><span>ONE ARGUMENT.</span></h2>
+        <p class="body-text" style="margin-bottom:0;">The donut shows proportion — sexual harassment as a share of all enforcement. The bar chart shows rank — where sexual harassment sits relative to other policy categories. Together they make the same point from two angles: this is not a marginal problem.</p>
+      </div>
+      <iframe
+        src="https://lindsey-brock.github.io/twitch-preview.html/"
+        class="viz-embed"
+        style="height:460px;border:none;"
+        title="Harassment on Twitch visualization">
+      </iframe>
+    </div>
+
+    <!-- SLIDE 05 — INTERACTION & DESIGN -->
+    <div class="slide">
+      <div class="slide-rule"></div>
+      <span class="slide-label">04 — Interaction & Design</span>
+      <div class="two-col">
+        <div>
+          <h2 class="slide-heading">ANIMATION<br>AS <span>ARGUMENT.</span></h2>
+          <p class="body-text">Both charts animate on load. The donut draws in over 1.4 seconds with a cubic-bezier easing curve — the gold segment filling first, the percentage counter ticking up simultaneously. The bar chart animates on tab switch, bars drawing in staggered at 80ms intervals.</p>
+          <p class="body-text">These aren't decorative choices. Animation draws the eye to the data as it appears, making the reveal feel like a discovery rather than a static display. The reader watches the number arrive. It lands differently than reading a number that was already there.</p>
+          <div class="callout">
+            <p class="callout-text">The gold highlight on "Sexual Harassment" in the bar chart is the only use of the accent color in that panel. Everything else is muted. The eye goes there first — which is the point.</p>
+          </div>
+        </div>
+        <div>
+          <div class="method-grid">
+            <div class="method-card">
+              <div class="method-label">Donut Chart</div>
+              <div class="method-title">SVG ANIMATION</div>
+              <div class="method-desc">stroke-dasharray and stroke-dashoffset drive the draw-in. No D3 — pure SVG with CSS transitions and a JS counter.</div>
+            </div>
+            <div class="method-card">
+              <div class="method-label">Bar Chart</div>
+              <div class="method-title">STAGGERED FILL</div>
+              <div class="method-desc">CSS width transition on each bar-fill div, triggered via setTimeout with 80ms stagger per bar on tab activation.</div>
+            </div>
+            <div class="method-card">
+              <div class="method-label">Color</div>
+              <div class="method-title">SINGLE ACCENT</div>
+              <div class="method-desc">Gold for sexual harassment only. All other bars muted at 20–50% opacity. The hierarchy is immediate and unambiguous.</div>
+            </div>
+            <div class="method-card">
+              <div class="method-label">Typography</div>
+              <div class="method-title">PORTFOLIO SYSTEM</div>
+              <div class="method-desc">Bebas Neue for numbers and labels. DM Sans for UI. Matches the LBM editorial design system throughout.</div>
+            </div>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-pill">Pure SVG</span>
+            <span class="tech-pill">No D3</span>
+            <span class="tech-pill">CSS transitions</span>
+            <span class="tech-pill">JS counter</span>
+            <span class="tech-pill">Tab navigation</span>
+            <span class="tech-pill">GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end track -->
+</div>
+
+<!-- CHEVRONS -->
+<button class="chevron chevron-left hidden" id="chevLeft" aria-label="Previous slide">
+  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+</button>
+<button class="chevron chevron-right" id="chevRight" aria-label="Next slide">
+  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+</button>
+
+<!-- PROGRESS -->
+<div class="progress" id="progress">
+  <span class="progress-num current" id="progressCurrent">01</span>
+  <div class="progress-dots" id="progressDots"></div>
+  <span class="progress-num" id="progressTotal">05</span>
+</div>
+
+<!-- NEXT PROJECT -->
+<a class="next-project-footer" href="index.html#work">
+  <div class="next-footer-left">
+    <div class="next-footer-label">Back to</div>
+    <div class="next-footer-title">ALL WORK</div>
+  </div>
+  <div class="next-footer-arrow">↗</div>
+</a>
+
+<script>
+const track=document.getElementById('track');
+const slides=track.querySelectorAll('.slide');
+const total=slides.length;
+const chevLeft=document.getElementById('chevLeft');
+const chevRight=document.getElementById('chevRight');
+const progressCurrent=document.getElementById('progressCurrent');
+const progressDots=document.getElementById('progressDots');
+let current=0;
+
+for(let i=0;i<total;i++){
+  const d=document.createElement('div');
+  d.className='progress-dot'+(i===0?' active':'');
+  progressDots.appendChild(d);
+}
+
+function goTo(n){
+  current=Math.max(0,Math.min(total-1,n));
+  track.style.transform=`translateX(-${current*100}vw)`;
+  chevLeft.classList.toggle('hidden',current===0);
+  chevRight.classList.toggle('hidden',current===total-1);
+  progressCurrent.textContent=String(current+1).padStart(2,'0');
+  document.querySelectorAll('.progress-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===current);
+  });
+}
+
+chevRight.addEventListener('click',()=>goTo(current+1));
+chevLeft.addEventListener('click',()=>goTo(current-1));
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') goTo(current+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') goTo(current-1);
+});
+
+let touchStartX=0,touchStartY=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){
+    if(dx<0) goTo(current+1); else goTo(current-1);
+  }
+},{passive:true});
+
+goTo(0);
+</script>
+</body>
+</html>

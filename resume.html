@@ -586,7 +586,13 @@ nav{
           <div class="exp-role">Editorial Designer · Data Journalist · Civic Technologist</div>
           <div class="exp-dates-loc">Mar 2024 — Present · United States</div>
           <p class="exp-desc">Designing at the intersection of editorial storytelling and civic infrastructure — turning complex data about power, policy, and public systems into things people can actually see, use, and act on.</p>
-          <p class="exp-desc">My work spans interactive maps, data-driven visual investigations, editorial platforms, and civic tools covering immigration, labor, accountability, and public infrastructure — bringing both the design sensibility of an editorial eye and the technical rigor of civic technology to make dense, politically significant information accessible to broad audiences.</p>
+         <ul class="exp-bullets">
+  <li>Interactive data visualizations and investigative maps built with D3.js, Leaflet, and Flourish — turning policy data, legislative records, and public datasets into explorable visual narratives.</li>
+  <li>Civic technology tools and web applications for independent media organizations, nonprofits, and advocacy groups covering immigration, labor, accountability, and public infrastructure.</li>
+  <li>Editorial design and digital publishing infrastructure for independent publishers — from brand identity and print production to CMS architecture and subscriber platforms.</li>
+  <li>Science communication design for researchers and community scientists — translating fieldwork, climate data, and public health findings into accessible public-facing web presence.</li>
+  <li>Frontend development using HTML, CSS, JavaScript, and React — building custom embeds, serverless API integrations, and data-driven interfaces from scratch.</li>
+</ul>
         </div>
 
         <!-- EXP 3: TRAMA DI TERRE -->
@@ -643,6 +649,12 @@ nav{
         </div>
 
       </div>
+      <button class="chevron chevron-left hidden" id="chevLeft" aria-label="Previous">
+  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+</button>
+<button class="chevron chevron-right" id="chevRight" aria-label="Next">
+  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+</button>
     </div>
 
     <!-- NAV ARROWS -->
@@ -658,12 +670,7 @@ nav{
 <footer style="position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--border);padding:16px 48px;z-index:100;">
   <a href="index.html#about" style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#8a8478;text-decoration:none;transition:color 0.2s;">← Back to About</a>
 </footer>
-<button class="chevron chevron-left hidden" id="chevLeft" aria-label="Previous">
-  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-</button>
-<button class="chevron chevron-right" id="chevRight" aria-label="Next">
-  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-</button>
+  
 <script>
 const panels = {
   experience: Array.from(document.querySelectorAll('.panel[data-section="experience"]')),

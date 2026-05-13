@@ -391,6 +391,27 @@ nav{
   .download-bar{padding:16px 24px;}
   .back-link{padding:16px 24px;}
 }
+.chevron{
+  position:fixed;top:50%;transform:translateY(-50%);
+  z-index:200;
+  width:56px;height:56px;
+  border:1px solid var(--border);
+  background:rgba(12,12,12,0.8);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+  animation:pulse 2s ease-in-out infinite;
+}
+.chevron:hover{border-color:var(--accent);background:rgba(232,197,71,0.08);}
+.chevron svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none;}
+.chevron-left{left:290px;}
+.chevron-right{right:24px;}
+.chevron.hidden{opacity:0;pointer-events:none;}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(232,197,71,0.3);}
+  50%{box-shadow:0 0 0 8px rgba(232,197,71,0);}
+}
 </style>
 </head>
 <body>
@@ -637,7 +658,12 @@ nav{
 <footer style="position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--border);padding:16px 48px;z-index:100;">
   <a href="index.html#about" style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#8a8478;text-decoration:none;transition:color 0.2s;">← Back to About</a>
 </footer>
-
+<button class="chevron chevron-left hidden" id="chevLeft" aria-label="Previous">
+  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+</button>
+<button class="chevron chevron-right" id="chevRight" aria-label="Next">
+  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+</button>
 <script>
 const panels = {
   experience: Array.from(document.querySelectorAll('.panel[data-section="experience"]')),

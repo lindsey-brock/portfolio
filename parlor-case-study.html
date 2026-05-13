@@ -874,38 +874,6 @@ nav{
   </div>
   <div class="next-footer-arrow">↗</div>
 </a>
-<!-- CONTACT MODAL -->
-<div id="contactModal" style="display:none;position:fixed;inset:0;z-index:400;background:rgba(12,12,12,0.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px;">
-  <div style="background:#111;border:1px solid rgba(245,240,232,0.1);max-width:900px;width:100%;max-height:90vh;overflow-y:auto;position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;padding:64px;">
-    <button onclick="closeContactModal()" style="position:absolute;top:20px;right:24px;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#8a8478;cursor:pointer;transition:color 0.2s;" onmouseover="this.style.color='#e8c547'" onmouseout="this.style.color='#8a8478'">✕ Close</button>
-
-    <!-- LEFT -->
-    <div>
-      <div style="font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#e8c547;margin-bottom:20px;">Get in touch</div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,6vw,80px);letter-spacing:0.02em;line-height:0.9;margin-bottom:32px;">LET'S MAKE<br>SOMETHING<br><span style="color:#e8c547;">WORTH</span><br>SEEING.</h2>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-      </div>
-    </div>
-
-    <!-- RIGHT: FORM -->
-    <form action="https://formspree.io/f/xbdwbvey" method="POST" style="display:flex;flex-direction:column;gap:16px;">
-      <div style="display:flex;flex-direction:column;gap:6px;">
-        <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#8a8478;">Name</label>
-        <input type="text" name="name" required style="background:transparent;border:1px solid rgba(245,240,232,0.1);padding:14px 16px;color:#f5f0e8;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"/>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;">
-        <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#8a8478;">Email</label>
-        <input type="email" name="email" required style="background:transparent;border:1px solid rgba(245,240,232,0.1);padding:14px 16px;color:#f5f0e8;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"/>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;">
-        <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#8a8478;">Message</label>
-        <textarea name="message" required rows="5" style="background:transparent;border:1px solid rgba(245,240,232,0.1);padding:14px 16px;color:#f5f0e8;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"></textarea>
-      </div>
-      <button type="submit" style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#0c0c0c;background:#e8c547;padding:16px 32px;border:none;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Send Message →</button>
-      <a href="https://calendly.com/lindsey-brock2201/30min" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#f5f0e8;border:1px solid rgba(245,240,232,0.1);padding:16px 32px;text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#e8c547';this.style.color='#e8c547'" onmouseout="this.style.borderColor='rgba(245,240,232,0.1)';this.style.color='#f5f0e8'">Book a 30-min Discovery Call ↗</a>
-    </form>
-  </div>
-</div>
 
 <script>
 const track = document.getElementById('track');
@@ -970,26 +938,6 @@ function showTier(n){
   document.querySelectorAll('.tier-tab').forEach((t,i)=>t.classList.toggle('active',i===n));
   document.querySelectorAll('.tier-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
 }
-<script>
-function openContactModal() {
-  const m = document.getElementById('contactModal');
-  m.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-function closeContactModal() {
-  const m = document.getElementById('contactModal');
-  m.style.display = 'none';
-  document.body.style.overflow = '';
-}
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('contactModal').addEventListener('click', function(e) {
-    if (e.target === this) closeContactModal();
-  });
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeContactModal();
-});
-</script>
 </script>
 </body>
 </html>

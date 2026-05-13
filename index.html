@@ -1141,51 +1141,39 @@ footer{
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <canvas id="contactCanvas"></canvas>
-  <div class="contact-inner">
-    <div class="contact-eyebrow">Get in touch</div>
-    <h2 class="contact-title fade-up">LET'S MAKE<br>SOMETHING<br><span>WORTH</span><br>SEEING.</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:48px;align-items:start;">
-      
-      <!-- CONTACT FORM -->
-      <form action="https://formspree.io/f/xbdwbvey" method="POST" style="display:flex;flex-direction:column;gap:16px;">
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Name</label>
-          <input type="text" name="name" required style="background:transparent;border:1px solid var(--border);padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"/>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Email</label>
-          <input type="email" name="email" required style="background:transparent;border:1px solid var(--border);padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"/>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Message</label>
-          <textarea name="message" required rows="5" style="background:transparent;border:1px solid var(--border);padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"></textarea>
-        </div>
-        <button type="submit" style="font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:16px 32px;border:none;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Send Message →</button>
-      </form>
-
-      <!-- BOOK A CALL -->
-      <div style="display:flex;flex-direction:column;gap:24px;">
-        <div>
-          <div style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;">Or book a discovery call</div>
-          <p style="font-family:var(--serif);font-size:15px;font-style:italic;color:var(--muted);line-height:1.9;margin-bottom:32px;">Prefer to talk through your project directly? Book a free 30-minute discovery call — we can discuss your needs, timeline, and how I can help.</p>
-          <a href="https://calendly.com/lindsey-brock2201/30min" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);padding:16px 32px;text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#e8c547';this.style.color='#e8c547'" onmouseout="this.style.borderColor='rgba(245,240,232,0.1)';this.style.color='var(--text)'">
-            Book a 30-min Call ↗
-          </a>
-        </div>
-        <div style="padding-top:24px;border-top:1px solid var(--border);">
-          <div style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Also find me at</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="mailto:lindsey.brock2201@gmail.com" style="font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e8c547'" onmouseout="this.style.color='#8a8478'">✉ lindsey.brock2201@gmail.com</a>
-            <a href="https://theparlormagazine.com" target="_blank" style="font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e8c547'" onmouseout="this.style.color='#8a8478'">↗ theparlormagazine.com</a>
-            <a href="https://www.linkedin.com/in/lindsey-brock-morales/" target="_blank" style="font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e8c547'" onmouseout="this.style.color='#8a8478'">↗ linkedin.com/in/lindsey-brock-morales</a>
-          </div>
-        </div>
+  <div class="contact-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    
+    <!-- LEFT: BIG TITLE -->
+    <div>
+      <div class="contact-eyebrow">Get in touch</div>
+      <h2 class="contact-title fade-up">LET'S MAKE<br>SOMETHING<br><span>WORTH</span><br>SEEING.</h2>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:10px;">
+        <a href="mailto:lindsey.brock2201@gmail.com" style="font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e8c547'" onmouseout="this.style.color='#8a8478'">✉ lindsey.brock2201@gmail.com</a>
+        <a href="https://www.linkedin.com/in/lindsey-brock-morales/" target="_blank" style="font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e8c547'" onmouseout="this.style.color='#8a8478'">↗ linkedin.com/in/lindsey-brock-morales</a>
+        <a href="https://theparlormagazine.com" target="_blank" style="font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e8c547'" onmouseout="this.style.color='#8a8478'">↗ theparlormagazine.com</a>
       </div>
-
     </div>
+
+    <!-- RIGHT: FORM + BUTTONS -->
+    <form action="https://formspree.io/f/xbdwbvey" method="POST" style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Name</label>
+        <input type="text" name="name" required style="background:transparent;border:1px solid var(--border);padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"/>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Email</label>
+        <input type="email" name="email" required style="background:transparent;border:1px solid var(--border);padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"/>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <label style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Message</label>
+        <textarea name="message" required rows="5" style="background:transparent;border:1px solid var(--border);padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"></textarea>
+      </div>
+      <button type="submit" style="font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:16px 32px;border:none;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Send Message →</button>
+      <a href="https://calendly.com/lindsey-brock2201/30min" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);padding:16px 32px;text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#e8c547';this.style.color='#e8c547'" onmouseout="this.style.borderColor='rgba(245,240,232,0.1)';this.style.color='var(--text)'">Book a 30-min Discovery Call ↗</a>
+    </form>
+
   </div>
 </section>
 

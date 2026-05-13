@@ -634,7 +634,7 @@ nav{
   </main>
 </div>
 
-<a href="index.html" class="back-link">← Back to Portfolio</a>
+<a href="index.html#about" class="back-link">← Back to About</a>
 
 <script>
 const panels = {

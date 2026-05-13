@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Lindsey Brock Morales — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0c0c0c;
+  --text:#f5f0e8;
+  --muted:#8a8478;
+  --accent:#e8c547;
+  --red:#c94040;
+  --border:rgba(245,240,232,0.1);
+  --display:'Bebas Neue',sans-serif;
+  --serif:'Libre Baskerville',serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 48px;height:60px;
+  background:rgba(12,12,12,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--display);font-size:28px;
+  letter-spacing:0.15em;color:var(--text);
+  text-decoration:none;line-height:1;
+}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:0;align-items:center;height:100%;}
+.nav-link{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:0 24px;height:60px;
+  display:flex;align-items:center;
+  border-bottom:2px solid transparent;
+  transition:color 0.2s,border-color 0.2s;
+}
+.nav-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-link.active{color:var(--text);border-bottom-color:var(--accent);}
+.nav-cta{
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);
+  padding:10px 20px;text-decoration:none;
+  margin-left:16px;
+  transition:opacity 0.2s;
+}
+.nav-cta:hover{opacity:0.85;}
+
+/* TOP RULE */
+.top-rule{
+  height:3px;
+  background:linear-gradient(90deg,#e8c547,#c94040,#e8c547);
+  margin-top:60px;
+}
+
+/* HEADER */
+.resume-header{
+  padding:80px 48px 64px;
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:end;
+}
+.header-left{}
+.header-eyebrow{
+  font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+}
+.header-name{
+  font-family:var(--display);
+  font-size:clamp(56px,8vw,112px);
+  letter-spacing:0.02em;line-height:0.92;
+  color:var(--text);
+}
+.header-name span{color:var(--accent);}
+.header-right{
+  display:flex;flex-direction:column;
+  gap:24px;
+  padding-bottom:8px;
+}
+.header-summary{
+  font-family:var(--serif);font-size:15px;font-style:italic;
+  color:var(--muted);line-height:1.9;
+  border-left:2px solid var(--accent);
+  padding-left:24px;
+}
+.header-contact{
+  display:flex;flex-direction:column;gap:8px;
+}
+.contact-item{
+  font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  transition:color 0.2s;
+}
+.contact-item:hover{color:var(--accent);}
+.contact-item span{color:var(--text);}
+
+/* DOWNLOAD BAR */
+.download-bar{
+  padding:20px 48px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.download-label{
+  font-family:var(--serif);font-size:13px;font-style:italic;color:var(--muted);
+}
+.download-btn{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);
+  padding:10px 20px;text-decoration:none;
+  transition:opacity 0.2s;display:inline-flex;align-items:center;gap:8px;
+}
+.download-btn:hover{opacity:0.85;}
+
+/* MAIN GRID */
+.resume-body{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  height:calc(100vh - 163px);
+}
+
+/* SIDEBAR */
+.sidebar{
+  border-right:1px solid var(--border);
+  padding:56px 40px;
+  position:sticky;
+  top:60px;
+  height:calc(100vh - 60px);
+  overflow-y:auto;
+}
+.sidebar-section{
+  margin-bottom:48px;
+}
+.sidebar-heading{
+  font-family:var(--display);font-size:22px;
+  letter-spacing:0.1em;color:var(--muted);
+  margin-bottom:20px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.skill-item{
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.skill-name{font-size:12px;font-weight:500;color:var(--text);}
+.skill-tag{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);}
+
+.lang-item{
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+.lang-name{font-size:12px;font-weight:500;color:var(--text);margin-bottom:3px;}
+.lang-level{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);}
+
+.cert-item{
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  font-family:var(--serif);font-size:12px;font-style:italic;
+  color:var(--muted);line-height:1.6;
+}
+
+/* MAIN CONTENT */
+.main-content{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  min-height:0;
+}
+
+/* TIMELINE HEADER BAR */
+.timeline-header{
+  padding:32px 48px 0;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.timeline-tabs{
+  display:flex;gap:0;
+}
+.timeline-tab{
+  font-family:var(--display);font-size:28px;
+  letter-spacing:0.08em;
+  color:var(--muted);
+  padding:0 32px 20px 0;
+  cursor:pointer;
+  border-bottom:3px solid transparent;
+  transition:color 0.2s,border-color 0.2s;
+  background:none;border-top:none;border-left:none;border-right:none;
+}
+.timeline-tab.active{
+  color:var(--text);
+  border-bottom-color:var(--accent);
+}
+.timeline-tab:hover{color:var(--text);}
+
+/* TRACK BAR */
+.timeline-track{
+  padding:20px 48px;
+  display:flex;align-items:center;gap:0;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.timeline-track::-webkit-scrollbar{display:none;}
+.track-line{
+  flex:1;height:1px;
+  background:var(--border);
+  min-width:24px;
+}
+.track-node{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  cursor:pointer;
+  flex-shrink:0;
+}
+.track-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--muted);
+  border:2px solid var(--bg);
+  transition:background 0.2s,transform 0.2s;
+}
+.track-node.active .track-dot{
+  background:var(--accent);
+  transform:scale(1.4);
+}
+.track-node:hover .track-dot{background:var(--text);}
+.track-label{
+  font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;
+  transition:color 0.2s;
+}
+.track-node.active .track-label{color:var(--accent);}
+
+/* PANELS VIEWPORT */
+.panels-viewport{
+  flex:1;
+  overflow:hidden;
+  position:relative;
+}
+.panels-track{
+  display:flex;
+  height:100%;
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.panel{
+  min-width:100%;
+  height:100%;
+  overflow-y:auto;
+  padding:48px 56px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--accent) var(--bg);
+  flex-shrink:0;
+}
+.panel::-webkit-scrollbar{width:3px;}
+.panel::-webkit-scrollbar-thumb{background:var(--accent);}
+
+/* PANEL TYPE BADGE */
+.panel-type{
+  font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.panel-type::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(232,197,71,0.4),transparent);
+  max-width:120px;
+}
+
+.exp-org{
+  font-family:var(--display);
+  font-size:clamp(36px,4vw,64px);
+  letter-spacing:0.03em;line-height:0.95;
+  color:var(--text);margin-bottom:10px;
+}
+.exp-role{
+  font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.exp-dates-loc{
+  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:28px;
+}
+.exp-desc{
+  font-family:var(--serif);font-size:14px;font-style:italic;
+  color:var(--muted);line-height:1.9;margin-bottom:24px;
+  max-width:600px;
+  border-left:2px solid var(--accent);
+  padding-left:20px;
+}
+.exp-bullets{
+  list-style:none;display:flex;flex-direction:column;gap:12px;
+  max-width:640px;
+}
+.exp-bullets li{
+  font-size:13px;color:var(--text);line-height:1.7;
+  padding-left:24px;position:relative;
+}
+.exp-bullets li::before{
+  content:'—';
+  position:absolute;left:0;color:var(--accent);
+}
+
+/* EDUCATION PANEL */
+.edu-degree{
+  font-family:var(--display);
+  font-size:clamp(32px,3.5vw,56px);
+  letter-spacing:0.03em;line-height:1;
+  color:var(--text);margin-bottom:10px;
+}
+.edu-school{
+  font-size:13px;font-weight:500;letter-spacing:0.08em;
+  color:var(--muted);margin-bottom:6px;
+}
+
+/* NAV ARROWS */
+.panel-nav{
+  padding:16px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);
+  flex-shrink:0;
+}
+.panel-nav-btn{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--border);
+  padding:10px 20px;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:color 0.2s,border-color 0.2s;
+}
+.panel-nav-btn:hover{color:var(--accent);border-color:var(--accent);}
+.panel-nav-btn:disabled{opacity:0.2;cursor:default;pointer-events:none;}
+.panel-counter{
+  font-family:var(--display);font-size:20px;
+  letter-spacing:0.1em;color:var(--muted);
+}
+.panel-counter span{color:var(--accent);}
+
+/* FOCUS AREAS */
+.focus-grid{
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-top:8px;
+}
+.focus-tag{
+  font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;
+  padding:6px 12px;border:1px solid var(--border);color:var(--muted);
+  transition:border-color 0.2s,color 0.2s;
+}
+.focus-tag:hover{border-color:var(--accent);color:var(--accent);}
+
+/* BACK LINK */
+.back-link{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:20px 48px;
+  border-top:1px solid var(--border);
+  width:100%;
+  transition:color 0.2s;
+}
+.back-link:hover{color:var(--accent);}
+
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .resume-header{grid-template-columns:1fr;padding:56px 24px 40px;}
+  .resume-body{grid-template-columns:1fr;}
+  .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);padding:40px 24px;}
+  .panel{padding:32px 24px;}
+  .timeline-header{padding:24px 24px 0;}
+  .timeline-track{padding:16px 24px;}
+  .panel-nav{padding:12px 24px;}
+  .download-bar{padding:16px 24px;}
+  .back-link{padding:16px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LBM<span>.</span></a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html#work">Work</a>
+    <a class="nav-link" href="index.html#reporting">Reporting</a>
+    <a class="nav-link" href="index.html#about">About</a>
+    <a class="nav-link active" href="resume.html">Resume</a>
+    <a class="nav-link nav-cta" href="index.html#contact">Let's talk</a>
+  </div>
+</nav>
+
+<div class="top-rule"></div>
+
+<!-- HEADER -->
+<header class="resume-header">
+  <div class="header-left">
+    <div class="header-eyebrow">Curriculum Vitae — 2026</div>
+    <h1 class="header-name">LINDSEY<br>BROCK<br><span>MORALES</span></h1>
+  </div>
+  <div class="header-right">
+    <p class="header-summary">Multilingual editorial designer, data journalist, and civic technologist working at the intersection of politics, science, and community — making complex information impossible to ignore.</p>
+    <div class="header-contact">
+      <a href="mailto:lindsey.brock2201@gmail.com" class="contact-item">✉ <span>lindsey.brock2201@gmail.com</span></a>
+      <a href="https://www.linkedin.com/in/lindsey-brockmorales" class="contact-item" target="_blank">↗ <span>linkedin.com/in/lindsey-brockmorales</span></a>
+      <a href="https://theparlormagazine.com" class="contact-item" target="_blank">↗ <span>theparlormagazine.com</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- DOWNLOAD BAR -->
+<div class="download-bar">
+  <span class="download-label">Full curriculum vitae — Bologna, IT & Washington DC</span>
+  <a href="Profile.pdf" download class="download-btn">↓ Download PDF</a>
+</div>
+
+<!-- BODY -->
+<div class="resume-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">SKILLS</div>
+      <div class="skill-item"><span class="skill-name">Editorial & UX Design</span><span class="skill-tag">Core</span></div>
+      <div class="skill-item"><span class="skill-name">Data Visualization</span><span class="skill-tag">D3 · Leaflet</span></div>
+      <div class="skill-item"><span class="skill-name">Narrative Design</span><span class="skill-tag">Core</span></div>
+      <div class="skill-item"><span class="skill-name">Data Journalism</span><span class="skill-tag">Core</span></div>
+      <div class="skill-item"><span class="skill-name">Editorial Strategy</span><span class="skill-tag">Core</span></div>
+      <div class="skill-item"><span class="skill-name">Frontend Development</span><span class="skill-tag">HTML · CSS · JS</span></div>
+      <div class="skill-item"><span class="skill-name">Science Communication</span><span class="skill-tag">Emerging</span></div>
+      <div class="skill-item"><span class="skill-name">Independent Publishing</span><span class="skill-tag">Print & Digital</span></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">LANGUAGES</div>
+      <div class="lang-item"><div class="lang-name">English</div><div class="lang-level">Native</div></div>
+      <div class="lang-item"><div class="lang-name">Spanish</div><div class="lang-level">Native or Bilingual</div></div>
+      <div class="lang-item"><div class="lang-name">Italian</div><div class="lang-level">Native or Bilingual</div></div>
+      <div class="lang-item"><div class="lang-name">French</div><div class="lang-level">Limited Working</div></div>
+      <div class="lang-item"><div class="lang-name">Arabic (Levantine)</div><div class="lang-level">Limited Working</div></div>
+      <div class="lang-item"><div class="lang-name">Arabic (MSA)</div><div class="lang-level">Elementary</div></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">CERTIFICATIONS</div>
+      <div class="cert-item">Product Design (UX/UI) — UX Design Institute</div>
+      <div class="cert-item">User Interface Design — Talend Garden</div>
+      <div class="cert-item">Foundations of User Experience (UX) Design — Google</div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">DESIGN TOOLS</div>
+      <div class="skill-item"><span class="skill-name">Figma</span><span class="skill-tag">UI/UX</span></div>
+      <div class="skill-item"><span class="skill-name">Adobe Illustrator</span><span class="skill-tag">Adobe CC</span></div>
+      <div class="skill-item"><span class="skill-name">Adobe Photoshop</span><span class="skill-tag">Adobe CC</span></div>
+      <div class="skill-item"><span class="skill-name">Adobe InDesign</span><span class="skill-tag">Adobe CC</span></div>
+      <div class="skill-item"><span class="skill-name">Adobe Premiere Pro</span><span class="skill-tag">Adobe CC</span></div>
+      <div class="skill-item"><span class="skill-name">Adobe After Effects</span><span class="skill-tag">Adobe CC</span></div>
+      <div class="skill-item"><span class="skill-name">Canva</span><span class="skill-tag">Design</span></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">CODE & DEV</div>
+      <div class="skill-item"><span class="skill-name">HTML · CSS · JavaScript</span><span class="skill-tag">Core</span></div>
+      <div class="skill-item"><span class="skill-name">React</span><span class="skill-tag">Frontend</span></div>
+      <div class="skill-item"><span class="skill-name">D3.js</span><span class="skill-tag">Dataviz</span></div>
+      <div class="skill-item"><span class="skill-name">Leaflet.js</span><span class="skill-tag">Mapping</span></div>
+      <div class="skill-item"><span class="skill-name">Wix Velo</span><span class="skill-tag">Platform</span></div>
+      <div class="skill-item"><span class="skill-name">Supabase</span><span class="skill-tag">Backend</span></div>
+      <div class="skill-item"><span class="skill-name">Airtable</span><span class="skill-tag">Data</span></div>
+      <div class="skill-item"><span class="skill-name">Vercel · GitHub Pages</span><span class="skill-tag">Deploy</span></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">DATA & VIZ</div>
+      <div class="skill-item"><span class="skill-name">Flourish</span><span class="skill-tag">Dataviz</span></div>
+      <div class="skill-item"><span class="skill-name">TopoJSON</span><span class="skill-tag">Mapping</span></div>
+      <div class="skill-item"><span class="skill-name">Serverless APIs</span><span class="skill-tag">Backend</span></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">OTHER TOOLS</div>
+      <div class="skill-item"><span class="skill-name">Notion</span><span class="skill-tag">Workflow</span></div>
+      <div class="skill-item"><span class="skill-name">MailerLite</span><span class="skill-tag">Email</span></div>
+      <div class="skill-item"><span class="skill-name">Buffer</span><span class="skill-tag">Social</span></div>
+      <div class="skill-item"><span class="skill-name">Cloudinary</span><span class="skill-tag">Media</span></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">FOCUS AREAS</div>
+      <div class="focus-grid">
+        <span class="focus-tag">Equity-Centered UX</span>
+        <span class="focus-tag">Inclusive Design</span>
+        <span class="focus-tag">Multilingual UX</span>
+        <span class="focus-tag">Visual Storytelling</span>
+        <span class="focus-tag">Digital Accessibility</span>
+        <span class="focus-tag">Human Rights</span>
+        <span class="focus-tag">Civic Technology</span>
+        <span class="focus-tag">UX Writing</span>
+        <span class="focus-tag">Cross-Cultural</span>
+        <span class="focus-tag">Data Visualization</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN TIMELINE -->
+  <main class="main-content">
+
+    <!-- TAB SWITCHER -->
+    <div class="timeline-header">
+      <div class="timeline-tabs">
+        <button class="timeline-tab active" data-section="experience">Experience</button>
+        <button class="timeline-tab" data-section="education">Education</button>
+      </div>
+    </div>
+
+    <!-- TRACK -->
+    <div class="timeline-track" id="timelineTrack"></div>
+
+    <!-- PANELS VIEWPORT -->
+    <div class="panels-viewport">
+      <div class="panels-track" id="panelsTrack">
+
+        <!-- EXP 1: PARLOR -->
+        <div class="panel" data-section="experience">
+          <div class="panel-type">Experience · 2025 — Present</div>
+          <div class="exp-org">THE PARLOR MAGAZINE</div>
+          <div class="exp-role">Founder & Editor-in-Chief · Director of Product Design</div>
+          <div class="exp-dates-loc">Aug 2025 — Present · Washington, DC</div>
+          <p class="exp-desc">Independent, intersectional feminist publication amplifying voices on motherhood, labor, technology, politics, and power.</p>
+          <ul class="exp-bullets">
+            <li>Founded and direct The Parlor, overseeing editorial strategy, contributor onboarding, and organizational growth.</li>
+            <li>Directed end-to-end UX and brand design, developing a cohesive design system for both web and print collateral.</li>
+            <li>Designed and implemented website architecture ensuring accessibility, responsive design, and smooth reader journey.</li>
+            <li>Built and launched The Parlor Shop as a revenue and branding arm, curating ethically sourced merchandise.</li>
+            <li>Managed fundraising, fiscal sponsorship exploration, and grant writing to secure sustainable revenue streams.</li>
+            <li>Optimized user flows for subscription, shopping, and content discovery, prioritizing clarity and reducing friction.</li>
+          </ul>
+        </div>
+
+        <!-- EXP 2: LMB -->
+        <div class="panel" data-section="experience">
+          <div class="panel-type">Experience · 2024 — Present</div>
+          <div class="exp-org">LMB.</div>
+          <div class="exp-role">Editorial Designer · Data Journalist · Civic Technologist</div>
+          <div class="exp-dates-loc">Mar 2024 — Present · United States</div>
+          <p class="exp-desc">Designing at the intersection of editorial storytelling and civic infrastructure — turning complex data about power, policy, and public systems into things people can actually see, use, and act on.</p>
+          <ul class="exp-bullets">
+            <li>Built interactive maps, data-driven visual investigations, editorial platforms, and civic tools covering immigration, labor, and accountability.</li>
+            <li>Developed 133 Years of US Intervention — an interactive timeline mapping foreign regime changes with fly-to animation and century navigation.</li>
+            <li>Created choropleth map of immigration enforcement legislation across all 50 states connected to a live serverless API.</li>
+          </ul>
+        </div>
+
+        <!-- EXP 3: TRAMA DI TERRE -->
+        <div class="panel" data-section="experience">
+          <div class="panel-type">Experience · 2018 — 2024</div>
+          <div class="exp-org">TRAMA DI TERRE</div>
+          <div class="exp-role">Service Design & Community Research Coordinator</div>
+          <div class="exp-dates-loc">Sep 2018 — Jan 2024 · Italy</div>
+          <ul class="exp-bullets">
+            <li>Designed and conducted semi-structured interviews, needs assessments, and intake surveys with hundreds of migrant women.</li>
+            <li>Created trauma-informed outreach materials in Arabic, Italian, French, and Spanish in partnership with psychologists and legal experts.</li>
+            <li>Helped draft service guidelines that contributed to municipal policy change on gender-based violence and migrant health access.</li>
+            <li>Led workshops and feedback sessions with service users to improve cultural competency and usability of support systems.</li>
+          </ul>
+        </div>
+
+        <!-- EXP 4: MONDODONNA -->
+        <div class="panel" data-section="experience">
+          <div class="panel-type">Experience · 2017 — 2018</div>
+          <div class="exp-org">MONDODONNA ONLUS</div>
+          <div class="exp-role">Human Trafficking Case Manager — Progetto Oltre La Strada</div>
+          <div class="exp-dates-loc">Sep 2017 — Sep 2018 · Bologna, Italy</div>
+          <p class="exp-desc">Direct support to survivors of human trafficking and severe exploitation, guiding individuals through legal, social, and psychological systems.</p>
+          <ul class="exp-bullets">
+            <li>Conducted intake assessments and developed individualized care plans in coordination with legal aid, law enforcement, and healthcare services.</li>
+            <li>Supported clients through asylum procedures and Article 18 residency pathways, connecting them with vocational training.</li>
+            <li>Collaborated with psychologists, cultural mediators, and legal experts to deliver trauma-informed, culturally competent care.</li>
+            <li>Documented exploitation patterns to inform policy and contribute to outreach and prevention activities.</li>
+          </ul>
+        </div>
+
+        <!-- EDU 1: UX Design Institute -->
+        <div class="panel" data-section="education" style="display:none;">
+          <div class="panel-type">Education · UX/UI</div>
+          <div class="edu-degree">PRODUCT DESIGN (UX/UI)</div>
+          <div class="edu-school">UX Design Institute</div>
+        </div>
+
+        <!-- EDU 2: Bologna -->
+        <div class="panel" data-section="education" style="display:none;">
+          <div class="panel-type">Education · Master's Degree</div>
+          <div class="edu-degree">INTERNATIONAL COOPERATION & HUMAN RIGHTS</div>
+          <div class="edu-school">University of Bologna — Alma Mater Studiorum · Bologna, Italy</div>
+        </div>
+
+        <!-- EDU 3: Puerto Rico -->
+        <div class="panel" data-section="education" style="display:none;">
+          <div class="panel-type">Education · Bachelor's Degree</div>
+          <div class="edu-degree">CULTURAL ANTHROPOLOGY & APPLIED LINGUISTICS</div>
+          <div class="edu-school">Universidad de Puerto Rico · Puerto Rico</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NAV ARROWS -->
+    <div class="panel-nav">
+      <button class="panel-nav-btn" id="prevBtn" disabled>← Previous</button>
+      <span class="panel-counter"><span id="currentNum">1</span> / <span id="totalNum">4</span></span>
+      <button class="panel-nav-btn" id="nextBtn">Next →</button>
+    </div>
+
+  </main>
+</div>
+
+<a href="index.html" class="back-link">← Back to Portfolio</a>
+
+<script>
+const panels = {
+  experience: Array.from(document.querySelectorAll('.panel[data-section="experience"]')),
+  education:  Array.from(document.querySelectorAll('.panel[data-section="education"]'))
+};
+
+const trackLabels = {
+  experience: ['The Parlor','LMB.','Trama di Terre','MondoDonna'],
+  education:  ['UX Design Inst.','U. of Bologna','U. Puerto Rico']
+};
+
+let currentSection = 'experience';
+let currentIndex = 0;
+
+const panelsTrack = document.getElementById('panelsTrack');
+const trackEl     = document.getElementById('timelineTrack');
+const prevBtn     = document.getElementById('prevBtn');
+const nextBtn     = document.getElementById('nextBtn');
+const currentNum  = document.getElementById('currentNum');
+const totalNum    = document.getElementById('totalNum');
+
+function buildTrack(section) {
+  trackEl.innerHTML = '';
+  const labels = trackLabels[section];
+  labels.forEach((label, i) => {
+    if (i > 0) {
+      const line = document.createElement('div');
+      line.className = 'track-line';
+      trackEl.appendChild(line);
+    }
+    const node = document.createElement('div');
+    node.className = 'track-node' + (i === currentIndex ? ' active' : '');
+    node.innerHTML = `<div class="track-dot"></div><div class="track-label">${label}</div>`;
+    node.addEventListener('click', () => goTo(i));
+    trackEl.appendChild(node);
+  });
+}
+
+function showSection(section) {
+  // Hide all panels
+  Object.values(panels).flat().forEach(p => p.style.display = 'none');
+  // Show only current section panels in the track
+  panels[section].forEach(p => p.style.display = '');
+  // Rebuild panels track to only contain current section panels
+  panelsTrack.innerHTML = '';
+  panels[section].forEach(p => panelsTrack.appendChild(p));
+}
+
+function goTo(index) {
+  currentIndex = index;
+  const total = panels[currentSection].length;
+  panelsTrack.style.transform = `translateX(-${index * 100}%)`;
+  currentNum.textContent = index + 1;
+  totalNum.textContent = total;
+  prevBtn.disabled = index === 0;
+  nextBtn.disabled = index === total - 1;
+  // Update track nodes
+  trackEl.querySelectorAll('.track-node').forEach((n, i) => {
+    n.classList.toggle('active', i === index);
+  });
+}
+
+function switchSection(section) {
+  currentSection = section;
+  currentIndex = 0;
+  document.querySelectorAll('.timeline-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.section === section);
+  });
+  showSection(section);
+  buildTrack(section);
+  goTo(0);
+}
+
+document.querySelectorAll('.timeline-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchSection(tab.dataset.section));
+});
+
+prevBtn.addEventListener('click', () => { if(currentIndex > 0) goTo(currentIndex - 1); });
+nextBtn.addEventListener('click', () => { if(currentIndex < panels[currentSection].length - 1) goTo(currentIndex + 1); });
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight') nextBtn.click();
+  if(e.key === 'ArrowLeft')  prevBtn.click();
+});
+
+// Init
+switchSection('experience');
+</script>
+</body>
+</html>

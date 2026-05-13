@@ -602,7 +602,8 @@ nav{
         <div class="panel" data-section="education" style="display:none;">
           <div class="panel-type">Education · UX/UI</div>
           <div class="edu-degree">PRODUCT DESIGN (UX/UI)</div>
-          <div class="edu-school">UX Design Institute</div>
+         <div class="edu-school">UX Design Institute</div>
+<p class="exp-desc" style="margin-top:24px;">Comprehensive training across the full product design lifecycle — from exploratory user research and ethnographic interviewing through affinity mapping, task analysis, and persona development, to lo-fi and hi-fi prototyping in Figma, iterative usability testing, heuristic evaluation, interaction design, information architecture, design systems and component libraries, accessibility standards (WCAG), and handoff for development implementation.</p>
         </div>
 
         <!-- EDU 2: Bologna -->

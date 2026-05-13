@@ -723,15 +723,13 @@ footer{
   </div>
 
   <!-- IMG2: MAGAZINE COVER -->
-  <div id="parlorMagWrapper" style="position:absolute;left:50%;top:50%;transform:translate(2%,-45%);width:42%;z-index:3;line-height:0;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),width 0.5s cubic-bezier(0.16,1,0.3,1);"
-    onmouseenter="this.style.transform='translate(-50%,-50%)';this.style.width='48%';this.style.zIndex='10';document.getElementById('parlorImg1').style.opacity='0';document.getElementById('parlorMagOverlay').style.opacity='1';"
-    onmouseleave="this.style.transform='translate(2%,-45%)';this.style.width='42%';this.style.zIndex='3';document.getElementById('parlorImg1').style.opacity='1';document.getElementById('parlorMagOverlay').style.opacity='0';">
+  <div id="parlorMagWrapper" style="position:absolute;left:50%;top:50%;transform:translate(2%,-45%);width:55%;z-index:3;line-height:0;overflow:hidden;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),width 0.5s cubic-bezier(0.16,1,0.3,1);">
     <img id="parlorImg2"
       src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518460/Untitled_design_-_2026-05-11T185311.878_jjnyet.png"
       style="width:100%;height:auto;display:block;box-shadow:4px 8px 40px rgba(0,0,0,0.8);"
     />
-    <div id="parlorMagOverlay" style="position:absolute;inset:0;background:rgba(12,12,12,0.65);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;pointer-events:none;">
-      <button style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#0c0c0c;background:#e8c547;border:none;padding:12px 24px;cursor:pointer;pointer-events:auto;"
+    <div id="parlorMagOverlay" style="position:absolute;inset:0;background:rgba(12,12,12,0.65);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;">
+      <button style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#0c0c0c;background:#e8c547;border:none;padding:12px 24px;cursor:pointer;"
         onclick="event.preventDefault();event.stopPropagation();openFlipbookModal();">
         Look Inside ↗
       </button>
@@ -1558,6 +1556,18 @@ function closeFlipbookModal() {
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeFlipbookModal();
+});
+document.getElementById('parlorMagWrapper').addEventListener('mouseenter', function() {
+  this.style.transform = 'translate(-50%,-50%)';
+  this.style.zIndex = '10';
+  document.getElementById('parlorImg1').style.opacity = '0';
+  document.getElementById('parlorMagOverlay').style.opacity = '1';
+});
+document.getElementById('parlorMagWrapper').addEventListener('mouseleave', function() {
+  this.style.transform = 'translate(2%,-45%)';
+  this.style.zIndex = '3';
+  document.getElementById('parlorImg1').style.opacity = '1';
+  document.getElementById('parlorMagOverlay').style.opacity = '0';
 });
 </script>
 </body>

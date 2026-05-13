@@ -718,8 +718,8 @@ function goTo(index) {
   panelsTrack.style.transform = `translateX(-${index * 100}%)`;
   currentNum.textContent = index + 1;
   totalNum.textContent = total;
-  prevBtn.disabled = index === 0;
-  nextBtn.disabled = index === total - 1;
+  document.getElementById('chevLeft').classList.toggle('hidden', index === 0);
+document.getElementById('chevRight').classList.toggle('hidden', index === total - 1);
   // Update track nodes
   trackEl.querySelectorAll('.track-node').forEach((n, i) => {
     n.classList.toggle('active', i === index);

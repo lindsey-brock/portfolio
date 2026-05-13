@@ -378,7 +378,14 @@ nav{
   background:var(--bg);position:relative;z-index:10;
 }
 .back-link:hover{color:var(--accent);}
-
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 57px;
+  background: var(--bg);
+  z-index: 99;
+}
 @media(max-width:900px){
   nav{padding:0 24px;}
   .resume-header{grid-template-columns:1fr;padding:56px 24px 40px;}

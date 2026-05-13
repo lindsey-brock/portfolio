@@ -647,10 +647,10 @@ footer{
     </select>
   </div>
 </div>
- <div style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
+ <div data-separator="true" style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">01</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
-</div>
+ </div>
 <a class="project wide" href="parlor-case-study.html" data-category="editorial journalism platform">
 <div class="project-visual" style="overflow:hidden;z-index:1;background:#0c0c0c;height:560px;position:relative;">
   <div style="position:absolute;left:50%;top:50%;transform:translate(-60%,-50%);width:62%;z-index:2;line-height:0;overflow:hidden;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);"
@@ -747,7 +747,7 @@ footer{
 </div>
 
 <!-- 02 REGIME CHANGES -->
-<div style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
+<div data-separator="true" style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">02</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
 </div>
@@ -820,7 +820,7 @@ footer{
 </div>
 
   <!-- 03 IMMIGRATION -->
- <div style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
+ <div data-separator="true" style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">03</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
 </div>
@@ -893,7 +893,7 @@ footer{
 </div>
 
  <!-- 04 TWITCH -->
-<div style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
+<div data-separator="true" style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">04</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
 </div>
@@ -1002,7 +1002,7 @@ footer{
   </a>
 
   <!-- 06 NON DA SOLA - COMING SOON -->
-  <div style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
+  <div data-separator="true" style="padding:24px 48px;display:flex;align-items:center;gap:16px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#c94040,#e8c547,transparent) 1;">
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">06</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
 </div>
@@ -1290,17 +1290,15 @@ if(workFilter){
     const projects=document.querySelectorAll('.project');
     projects.forEach(p=>{
       const cats=(p.dataset.category||'').split(' ');
-      if(val==='all'||cats.includes(val)){
-        p.style.display='';
-        setTimeout(()=>p.classList.add('visible'),50);
-      } else {
-        p.style.display='none';
-        p.classList.remove('visible');
-      }
+      const show=val==='all'||cats.includes(val);
+      p.style.display=show?'':'none';
+      if(show) setTimeout(()=>p.classList.add('visible'),50);
+      else p.classList.remove('visible');
+      const sep=p.previousElementSibling;
+      if(sep&&sep.dataset.separator) sep.style.display=show?'':'none';
     });
   });
 }
-
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.12});

@@ -547,6 +547,56 @@ footer{
   from { opacity: 0; transform: translateY(-50%) translateX(20px); }
   to   { opacity: 1; transform: translateY(-50%) translateX(0); }
 }
+/* PROJECT CTA — replaces bare arrow */
+.project-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 12px 20px;
+  transition: opacity 0.2s, gap 0.3s;
+}
+.project:hover .project-cta { gap: 16px; opacity: 0.9; }
+.project-cta-arrow { font-size: 14px; line-height: 1; }
+
+.project-cta.coming-soon {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  cursor: default;
+}
+
+/* CARD FOCUS SYSTEM */
+.project-dim-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12,12,12,0.72);
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.project { position: relative; }
+.project.dimmed .project-dim-overlay { opacity: 1; }
+
+/* Reveal gradient mask — sits below each card, fades out as card enters */
+.project-reveal-mask {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 220px;
+  background: linear-gradient(to top, rgba(12,12,12,1) 0%, rgba(12,12,12,0) 100%);
+  z-index: 21;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+.project.in-view .project-reveal-mask { opacity: 0; }
 </style>
 </head>
 <body>

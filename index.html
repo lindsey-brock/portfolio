@@ -1485,6 +1485,46 @@ document.getElementById('twitchClose').addEventListener('click', () => {
   document.getElementById('twitchFrame').src = '';
   document.body.style.overflow = '';
 });
+// CARD FOCUS — dim all others when one is active
+(function(){
+  const projects = Array.from(document.querySelectorAll('.project'));
+
+  // Inject overlay + mask into every card
+  projects.forEach(p => {
+    const overlay = document.createElement('div');
+    overlay.className = 'project-dim-overlay';
+    p.appendChild(overlay);
+
+    const mask = document.createElement('div');
+    mask.className = 'project-reveal-mask';
+    p.appendChild(mask);
+  });
+
+  let activeProject = null;
+
+  const focusObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        activeProject = entry.target;
+        entry.target.classList.add('in-view');
+
+        // Dim everything except the active card
+        projects.forEach(p => {
+          if (p !== activeProject) {
+            p.classList.add('dimmed');
+          } else {
+            p.classList.remove('dimmed');
+          }
+        });
+      }
+    });
+  }, {
+    threshold: 0.45,   // card must be ~45% visible to become active
+    rootMargin: '0px'
+  });
+
+  projects.forEach(p => focusObserver.observe(p));
+})();
 </script>
 </body>
 </html>

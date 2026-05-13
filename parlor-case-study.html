@@ -395,11 +395,9 @@ nav{
           <p class="body-text">Wix provides authentication out of the box. What it doesn't provide is a system that bridges that authentication with a separate member portal, a living database, and persistent session state across custom-coded features. So I built one.</p>
           <p class="body-text">The authentication layer bridges <strong>Wix Auth</strong> with proprietary portal logic. When a member logs in, their session propagates through the portal, connects to the database, and determines what they can access based on their membership tier. It's not a plugin — it's custom architecture that happens to run on Wix infrastructure.</p>
           <p class="body-text">The member portal is a separate application entirely — its own codebase, hosted on <strong>GitHub</strong> and deployed on <strong>Vercel</strong>, then embedded back into the Wix site via iframe. This is a micro-frontend architecture: the portal is an independent app that lives inside the Wix shell, bridging back to Wix Auth and the live database through the custom authentication layer.</p>
-          <div class="video-placeholder" style="aspect-ratio:16/5;margin-top:16px;">
-            <div class="video-icon"></div>
-            <div class="video-label">Login Flow Walkthrough</div>
-            <div class="video-note">Loom walkthrough coming</div>
-          </div>
+          <video controls style="width:100%;height:auto;display:block;margin-top:16px;">
+  <source src="https://res.cloudinary.com/dmegrbq5k/video/upload/v1778706533/Untitled_design_55_ra0oeo.mp4" type="video/mp4"/>
+</video>
         </div>
         <div>
           <div class="arch-block">

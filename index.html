@@ -521,15 +521,9 @@ canvas#bg.show{opacity:1;}
 footer{
   padding:32px 48px;border-top:1px solid var(--border);
   display:flex;justify-content:space-between;align-items:center;
+  position:relative;
 }
-.footer-logo{font-family:var(--display);font-size:20px;letter-spacing:0.1em;color:var(--muted);}
-.footer-links{display:flex;gap:24px;}
-.footer-links a{
-  font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;transition:color 0.2s;
-}
-.footer-links a:hover{color:var(--accent);}
-
+  
 .fade-up{
   opacity:0;transform:translateY(32px);
   transition:opacity 0.8s ease,transform 0.8s ease;

@@ -710,7 +710,7 @@ footer{
     onmouseenter="
       this.style.zIndex='4';
       this.style.transform='translate(-50%,-50%)';
-      document.getElementById('parlorImg2').style.transform='translate(-50%,-50%)';
+      document.getElementById('parlorImg2').style.transform='translate(2%,-45%)';
       document.getElementById('parlorImg2').style.zIndex='1';
       document.getElementById('parlorOverlay').style.opacity='1';
     "
@@ -743,13 +743,53 @@ footer{
       </button>
     </div>
   </div>
-  <img id="parlorImg2"
-    src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518460/Untitled_design_-_2026-05-11T185311.878_jjnyet.png"
-    style="position:absolute;left:50%;top:50%;transform:translate(2%,-45%);width:55%;height:auto;z-index:3;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),z-index 0s;"
-  />
+
+  <!-- IMG2: MAGAZINE — hover grows it and shows Look Inside -->
+  <div id="parlorMagWrapper" style="
+    position:absolute;left:50%;top:50%;
+    transform:translate(2%,-45%);
+    width:55%;z-index:3;
+    transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),width 0.5s cubic-bezier(0.16,1,0.3,1),z-index 0s;
+  "
+    onmouseenter="
+      event.stopPropagation();
+      this.style.transform='translate(-50%,-50%)';
+      this.style.width='64%';
+      this.style.zIndex='10';
+      document.getElementById('parlorImg1').style.opacity='0';
+      document.getElementById('parlorMagOverlay').style.opacity='1';
+    "
+    onmouseleave="
+      this.style.transform='translate(2%,-45%)';
+      this.style.width='55%';
+      this.style.zIndex='3';
+      document.getElementById('parlorImg1').style.opacity='1';
+      document.getElementById('parlorMagOverlay').style.opacity='0';
+    ">
+    <img id="parlorImg2"
+      src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518460/Untitled_design_-_2026-05-11T185311.878_jjnyet.png"
+      style="width:100%;height:auto;display:block;box-shadow:4px 8px 40px rgba(0,0,0,0.8);transition:opacity 0.3s;"
+    />
+    <div id="parlorMagOverlay" style="
+      position:absolute;inset:0;
+      background:rgba(12,12,12,0.65);
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;transition:opacity 0.3s;
+    ">
+      <button style="
+        font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;
+        letter-spacing:0.15em;text-transform:uppercase;
+        color:#0c0c0c;background:#e8c547;
+        border:none;padding:12px 24px;cursor:pointer;
+        transition:opacity 0.2s;
+      " onclick="event.preventDefault();event.stopPropagation();openFlipbookModal();">
+        Look Inside ↗
+      </button>
+    </div>
+  </div>
+
   <div class="project-visual-overlay"></div>
 </div>
-  <div class="project-info">
     <div>
       <div class="project-tags">
         <span class="project-tag active">Editorial Design</span>

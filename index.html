@@ -1197,18 +1197,17 @@ tabindex="-1">
 </footer>
 
 <script>
-// Fix: prevent hash jump on load and force scroll to top
+// Fix: force scroll to top on fresh load, but allow hash navigation from other pages
 if (window.location.hash) {
-  history.replaceState(null, null, window.location.pathname);
+  document.documentElement.style.scrollBehavior = 'auto';
+} else {
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+  document.documentElement.style.scrollBehavior = 'auto';
 }
-requestAnimationFrame(() => {
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-});
-// Disable smooth scroll during load to prevent hash jump
-document.documentElement.style.scrollBehavior = 'auto';
-
 // Lazy load iframes — only inject src when scrolled into view
 const lazyIframes = document.querySelectorAll('iframe[data-src]');
 const iframeObserver = new IntersectionObserver(entries => {

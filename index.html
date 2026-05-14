@@ -1563,18 +1563,6 @@ function closeFlipbookModal() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeFlipbookModal();
 });
-document.getElementById('parlorMagWrapper').addEventListener('mouseenter', function() {
-  this.style.transform = 'translate(-50%,-50%)';
-  this.style.zIndex = '10';
-  document.getElementById('parlorImg1').style.opacity = '0';
-  document.getElementById('parlorMagOverlay').style.opacity = '1';
-});
-document.getElementById('parlorMagWrapper').addEventListener('mouseleave', function() {
-  this.style.transform = 'translate(2%,-45%)';
-  this.style.zIndex = '3';
-  document.getElementById('parlorImg1').style.opacity = '1';
-  document.getElementById('parlorMagOverlay').style.opacity = '0';
-});
 </script>
 </body>
 </html>

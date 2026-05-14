@@ -1192,9 +1192,11 @@ footer{
 if (window.location.hash) {
   history.replaceState(null, null, window.location.pathname);
 }
-window.scrollTo(0, 0);
-document.documentElement.scrollTop = 0;
-document.body.scrollTop = 0;
+requestAnimationFrame(() => {
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+});
 // Disable smooth scroll during load to prevent hash jump
 document.documentElement.style.scrollBehavior = 'auto';
   

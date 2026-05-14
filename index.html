@@ -1208,6 +1208,19 @@ requestAnimationFrame(() => {
 });
 // Disable smooth scroll during load to prevent hash jump
 document.documentElement.style.scrollBehavior = 'auto';
+
+// Lazy load iframes — only inject src when scrolled into view
+const lazyIframes = document.querySelectorAll('iframe[data-src]');
+const iframeObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const iframe = entry.target;
+      iframe.src = iframe.dataset.src;
+      iframeObserver.unobserve(iframe);
+    }
+  });
+}, { rootMargin: '200px' });
+lazyIframes.forEach(iframe => iframeObserver.observe(iframe));
   
 function rand(min,max){return Math.random()*(max-min)+min;}
 

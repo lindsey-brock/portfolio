@@ -37,6 +37,19 @@ nav{
 .nav-link:hover{color:var(--accent);border-bottom-color:var(--accent);}
 .nav-cta{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:10px 20px;text-decoration:none;margin-left:16px;transition:opacity 0.2s;border-bottom:2px solid transparent !important;}
 .nav-cta:hover{opacity:0.85;color:var(--bg);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(12,12,12,0.98);backdrop-filter:blur(16px);flex-direction:column;align-items:stretch;height:auto;border-bottom:1px solid var(--border);z-index:199;padding:16px 0;}
+  .nav-links.open{display:flex;}
+  .nav-link{height:auto;padding:16px 24px;border-bottom:none;border-top:1px solid var(--border);}
+  .nav-link:first-child{border-top:none;}
+  .nav-cta{margin:16px 24px 8px;padding:14px 24px;text-align:center;justify-content:center;}
+}
 
 .carousel-outer{position:fixed;top:60px;left:0;right:0;bottom:100px;overflow:hidden;z-index:1;}
 .carousel-track{display:flex;height:100%;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);will-change:transform;}
@@ -137,18 +150,36 @@ nav{
   .next-project-footer{padding:0 24px;}
   .case-intro-grid{grid-template-columns:1fr;}
 }
+@media(max-width:768px){
+  .chevron{
+    width:40px;height:40px;
+    top:auto;bottom:112px;
+    transform:none;
+  }
+  .chevron svg{width:14px;height:14px;}
+  .chevron-left{left:calc(50% - 48px);}
+  .chevron-right{right:calc(50% - 48px);left:auto;}
+}
+@media(max-width:768px){
+  .chevron{top:auto;bottom:90px;transform:none;width:44px;height:44px;border:none;background:transparent;backdrop-filter:none;animation:none;z-index:201;}
+  .chevron svg{width:16px;height:16px;}
+  .chevron-left{left:0;}
+  .chevron-right{right:0;left:auto;}
+  .progress{padding:10px 44px;}
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">LBM<span>.</span></a>
+  <a class="nav-logo" href="../">LBM<span>.</span></a>
   <div class="nav-links">
-    <a class="nav-link" href="index.html#work">Work</a>
-    <a class="nav-link" href="index.html#reporting">Reporting</a>
-    <a class="nav-link" href="index.html#about">About</a>
-    <a class="nav-link nav-cta" href="index.html#contact">Let's talk</a>
+    <a class="nav-link" href="../#work">Work</a>
+    <a class="nav-link" href="../#reporting">Reporting</a>
+    <a class="nav-link" href="../#about">About</a>
+    <a class="nav-link nav-cta" href="../#contact">Let's talk</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="carousel-outer">
@@ -157,7 +188,7 @@ nav{
     <!-- SLIDE 01 — HERO -->
     <div class="slide slide-hero">
       <div class="slide-rule"></div>
-      <a class="back-link" href="index.html#work">← Back to work</a>
+      <a class="back-link" href="../#work">← Back to work</a>
       <div class="case-tags">
         <span class="case-tag">Data Visualization</span>
         <span class="case-tag">Reported Journalism</span>
@@ -352,12 +383,12 @@ nav{
 </div>
 
 <!-- NEXT PROJECT -->
-<a class="next-project-footer" href="index.html#work">
+<a class="next-project-footer" href="../#work">
   <div class="next-footer-left">
     <div class="next-footer-label">Back to</div>
     <div class="next-footer-title">ALL WORK</div>
   </div>
-  <div class="next-footer-arrow">↗</div>
+  <div class="next-footer-arrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 20L20 4M20 4H8M20 4V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 </a>
 
 <script>
@@ -406,6 +437,16 @@ document.addEventListener('touchend',e=>{
 },{passive:true});
 
 goTo(0);
+</script>
+<script>
+(function(){
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.querySelector('.nav-links');
+  if (hamburger) {
+    hamburger.addEventListener('click', function(){ hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ hamburger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+  }
+})();
 </script>
 </body>
 </html>

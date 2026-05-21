@@ -56,6 +56,19 @@ nav{
   transition:opacity 0.2s;border-bottom:2px solid transparent !important;
 }
 .nav-cta:hover{opacity:0.85;color:var(--bg);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(12,12,12,0.98);backdrop-filter:blur(16px);flex-direction:column;align-items:stretch;height:auto;border-bottom:1px solid var(--border);z-index:199;padding:16px 0;}
+  .nav-links.open{display:flex;}
+  .nav-link{height:auto;padding:16px 24px;border-bottom:none;border-top:1px solid var(--border);}
+  .nav-link:first-child{border-top:none;}
+  .nav-cta{margin:16px 24px 8px;padding:14px 24px;text-align:center;justify-content:center;}
+}
 
 /* CAROUSEL */
 .carousel-outer{
@@ -288,18 +301,26 @@ nav{
   .next-project-footer{padding:0 24px;}
   .case-intro-grid{grid-template-columns:1fr;}
 }
+@media(max-width:768px){
+  .chevron{top:auto;bottom:90px;transform:none;width:44px;height:44px;border:none;background:transparent;backdrop-filter:none;animation:none;z-index:201;}
+  .chevron svg{width:16px;height:16px;}
+  .chevron-left{left:0;}
+  .chevron-right{right:0;left:auto;}
+  .progress{padding:10px 44px;}
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">LBM<span>.</span></a>
+  <a class="nav-logo" href="../">LBM<span>.</span></a>
   <div class="nav-links">
-    <a class="nav-link" href="index.html#work">Work</a>
-    <a class="nav-link" href="index.html#reporting">Reporting</a>
-    <a class="nav-link" href="index.html#about">About</a>
-    <a class="nav-link nav-cta" href="index.html#contact">Let's talk</a>
+    <a class="nav-link" href="../#work">Work</a>
+    <a class="nav-link" href="../#reporting">Reporting</a>
+    <a class="nav-link" href="../#about">About</a>
+    <a class="nav-link nav-cta" href="../#contact">Let's talk</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="carousel-outer">
@@ -308,7 +329,7 @@ nav{
     <!-- SLIDE 01 — HERO -->
 <div class="slide slide-hero">
   <div class="slide-rule"></div>
-  <a class="back-link" href="index.html#work">← Back to work</a>
+  <a class="back-link" href="../#work">← Back to work</a>
   <div class="case-tags">
     <span class="case-tag">Data Visualization</span>
     <span class="case-tag">Journalism</span>
@@ -550,12 +571,12 @@ nav{
 </div>
 
 <!-- NEXT PROJECT -->
-<a class="next-project-footer" href="twitch-case-study.html">
+<a class="next-project-footer" href="../twitch-case-study/">
   <div class="next-footer-left">
     <div class="next-footer-label">Next Case Study</div>
     <div class="next-footer-title">HARASSMENT ON TWITCH</div>
   </div>
-  <div class="next-footer-arrow">↗</div>
+  <div class="next-footer-arrow"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 20L20 4M20 4H8M20 4V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 </a>
 
 <script>
@@ -654,6 +675,16 @@ goTo(0);
         .attr("stroke","rgba(245,240,232,0.45)")
         .attr("stroke-width",0.9);
     });
+})();
+</script>
+<script>
+(function(){
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.querySelector('.nav-links');
+  if (hamburger) {
+    hamburger.addEventListener('click', function(){ hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ hamburger.classList.remove('open'); navLinks.classList.remove('open'); }); });
+  }
 })();
 </script>
 </body>

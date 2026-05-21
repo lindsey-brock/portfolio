@@ -233,8 +233,79 @@ canvas#bg.show{opacity:1;}
 .replay-btn.show{opacity:1;}
 
 @media(max-width:768px){
-  .hero-content{bottom:110px;left:24px;right:24px;}
-  .hero-meta{left:24px;right:24px;}
+  video, .click-layer{display:none !important;}
+  canvas#bg{opacity:1 !important;}
+  .hero-overlay{opacity:1 !important;}
+  .hero-bottom-strip{opacity:1 !important;height:180px;}
+  .hero-bottom-line{opacity:1 !important;bottom:179px;}
+  .hero-content{
+    bottom:auto;
+    top:50%;
+    transform:translateY(-60%);
+    left:24px;right:24px;
+    visibility:visible !important;
+  }
+  .hero-title{font-size:clamp(80px,22vw,120px);}
+  .hero-edition{opacity:1 !important;transform:none !important;}
+  .hero-title-inner{transform:translateY(0) !important;}
+  .hero-meta{left:24px;right:24px;bottom:24px;opacity:1 !important;transform:none !important;}
+  /* Project info: tighter spacing */
+  .project-info{padding:24px !important;}
+  .project.wide .project-info{padding:24px !important;gap:24px !important;}
+  .project-tags{margin-bottom:12px;}
+  .project-title{margin-bottom:12px;}
+  .project-desc{margin-bottom:20px;}
+  .project-footer{padding-top:16px;gap:16px;}
+  /* Work header: stack heading and filter vertically */
+  .work-header{flex-direction:column;align-items:flex-start;gap:24px;}
+  .work-filter{flex-direction:row;align-items:center;gap:12px;}
+  .filter-select{min-width:0;flex:1;}
+  /* Projects: single column, no rtl flip */
+  .project{grid-template-columns:1fr;min-height:auto;}
+  .project:nth-child(even){direction:ltr;}
+  /* Wide project visual: stack website + magazine vertically */
+  .project.wide .project-visual{
+    grid-template-columns:1fr !important;
+    height:auto !important;
+  }
+  /* Turn the vertical 1px divider into a horizontal rule */
+  .project.wide .project-visual > div:nth-child(2){
+    width:100% !important;
+    height:1px !important;
+    margin:0 !important;
+    align-self:auto !important;
+  }
+  /* Each panel full width */
+  .project.wide .project-visual > div:nth-child(1),
+  .project.wide .project-visual > div:nth-child(3){
+    width:100%;
+    padding:32px 24px !important;
+  }
+  /* Magazine image: full width instead of 60% */
+  .project.wide .project-visual > div:nth-child(3) > div{
+    width:80% !important;
+  }
+  /* Overlays hidden on mobile — tap goes directly to modal via ontouchstart */
+  #regimeOverlay,#immigOverlay,#twitchOverlay,#parlorOverlay,#parlorMagOverlay{
+    display:none !important;
+  }
+  /* Modal close button: icon only on mobile */
+  .close-label{display:none;}
+  /* Non da Sola: center and enlarge image */
+  div:has(#nonDaSolaOverlay) > img {
+    left:50% !important;
+    transform:translate(-50%,-50%) !important;
+    width:80% !important;
+  }
+  /* Contact: single column */
+  .contact-inner{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:40px !important;
+  }
+  /* Footer: pull copyright into flex flow, hide desktop balance spacer */
+  .footer-logo{position:static !important;transform:none !important;}
+  footer > div:last-child{display:none !important;}
 }
 /* MARQUEE TICKER */
 .ticker{
@@ -600,6 +671,38 @@ footer{
   transition: opacity 0.7s ease;
 }
 .project.in-view .project-reveal-mask { opacity: 0; }
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-links{
+    display:none;
+    position:fixed;
+    top:60px;left:0;right:0;
+    background:rgba(12,12,12,0.98);
+    backdrop-filter:blur(16px);
+    flex-direction:column;
+    align-items:stretch;
+    height:auto;
+    border-bottom:1px solid var(--border);
+    z-index:199;
+    padding:16px 0;
+  }
+  .nav-links.open{display:flex;}
+  .nav-link{
+    height:auto;
+    padding:16px 24px;
+    border-bottom:none;
+    border-top:1px solid var(--border);
+  }
+  .nav-link:first-child{border-top:none;}
+  .nav-cta{margin:16px 24px 8px;padding:14px 24px;text-align:center;justify-content:center;}
+  /* Reporting: more breathing room above title, tighter gap below it */
+  .reporting-header{padding:80px 24px 8px;}
+}
 </style>
 </head>
 <body>
@@ -612,6 +715,7 @@ footer{
     <a class="nav-link" href="#about">About</a>
     <a class="nav-link nav-cta" href="#contact">Let's talk</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
@@ -704,13 +808,15 @@ footer{
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">01</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
  </div>
-<a class="project work-card wide" href="parlor-case-study.html" data-category="editorial journalism platform">
+<a class="project work-card wide" href="parlor-case-study/" data-category="editorial journalism platform">
 <div class="project-visual" style="overflow:hidden;z-index:1;background:#0c0c0c;height:560px;position:relative;display:grid;grid-template-columns:1fr 1px 1fr;">
 
   <!-- LEFT: WEBSITE -->
   <div style="position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 32px;"
     onmouseenter="document.getElementById('parlorOverlay').style.opacity='1';"
-    onmouseleave="document.getElementById('parlorOverlay').style.opacity='0';">
+    onmouseleave="document.getElementById('parlorOverlay').style.opacity='0';"
+    ontouchstart="this._tx=event.touches[0].clientX;this._ty=event.touches[0].clientY;"
+    ontouchend="if(Math.abs(event.changedTouches[0].clientX-this._tx)<10&&Math.abs(event.changedTouches[0].clientY-this._ty)<10){event.preventDefault();event.stopPropagation();document.getElementById('parlorModal').style.display='block';document.body.style.overflow='hidden';}">
     <div style="position:relative;width:100%;">
       <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/v1778518454/Untitled_design_-_2026-05-11T185358.044_h6sjjw.png"
         style="width:100%;height:auto;display:block;box-shadow:-4px 8px 32px rgba(0,0,0,0.7);"
@@ -728,7 +834,9 @@ footer{
   <!-- RIGHT: PRINT MAGAZINE -->
   <div style="position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:12px;padding:24px 48px 32px;"
     onmouseenter="document.getElementById('parlorMagOverlay').style.opacity='1';"
-    onmouseleave="document.getElementById('parlorMagOverlay').style.opacity='0';">
+    onmouseleave="document.getElementById('parlorMagOverlay').style.opacity='0';"
+    ontouchstart="this._tx=event.touches[0].clientX;this._ty=event.touches[0].clientY;"
+    ontouchend="if(Math.abs(event.changedTouches[0].clientX-this._tx)<10&&Math.abs(event.changedTouches[0].clientY-this._ty)<10){event.preventDefault();event.stopPropagation();openFlipbookModal();}">
     <div style="position:relative;width:60%;">
       <img src="https://res.cloudinary.com/dmegrbq5k/image/upload/c_crop,g_north_west,h_1003,w_703,x_607,y_19/Untitled_design_-_2026-05-11T185311.878_jjnyet.png"
         style="width:100%;height:auto;display:block;box-shadow:4px 8px 32px rgba(0,0,0,0.7);"
@@ -736,7 +844,7 @@ footer{
       <div id="parlorMagOverlay" style="position:absolute;inset:0;background:rgba(12,12,12,0.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;">
         <button style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#0c0c0c;background:#e8c547;border:none;padding:12px 24px;cursor:pointer;"
           onclick="event.preventDefault();event.stopPropagation();openFlipbookModal();">
-          Look Inside ↗
+          Look Inside <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
     </div>
@@ -759,7 +867,7 @@ footer{
       <p class="project-desc">An independent intersectional print and digital magazine covering labor, politics, culture, and community. Built the full editorial identity, member portal with custom authentication, threaded community platform, and complete submission infrastructure from scratch — alone.</p>
       <div class="project-footer">
         <div class="project-tech">Wix Velo · Serverless APIs · Custom Auth<br>Airtable · Editorial Design · Print Production</div>
-        <div class="project-cta"><span>Read More</span><span class="project-cta-arrow">↗</span></div>
+        <div class="project-cta"><span>Read More</span><span class="project-cta-arrow" style="display:flex;align-items:center"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
       </div>
     </div>
   </div>
@@ -777,7 +885,7 @@ footer{
     letter-spacing:0.15em;text-transform:uppercase;
     color:rgba(255,255,255,0.6);background:rgba(12,12,12,0.9);
     border:1px solid rgba(255,255,255,0.2);padding:8px 14px;cursor:pointer;
-  ">✕ Close</button>
+  "><span class="close-x">✕</span><span class="close-label"> Close</span></button>
   <iframe
     src="https://lindsey-brock.github.io/flipbook/"
     style="width:100%;height:100%;border:none;display:block;"
@@ -804,7 +912,7 @@ footer{
     cursor:pointer;
     transition:color 0.2s,border-color 0.2s;
     display:flex;align-items:center;gap:8px;
-  ">✕ Close</button>
+  "><span class="close-x">✕</span><span class="close-label"> Close</span></button>
   <div style="position:relative;padding-bottom:62.5%;height:0;margin-top:60px;">
     <iframe src="https://www.loom.com/embed/a5a647c2d2cd43dd8ed4bb38450af5d3"
       frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
@@ -818,10 +926,12 @@ footer{
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">02</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
 </div>
-<a class="project work-card" href="https://lindsey-brock.github.io/portfolio/foreign-regime-changes.html" data-category="data-viz journalism" style="overflow:hidden;">
+<a class="project work-card" href="foreign-regime-changes/" data-category="data-viz journalism" style="overflow:hidden;">
   <div class="project-visual" style="min-height:520px;height:520px;position:relative;"
     onmouseenter="document.getElementById('regimeOverlay').style.opacity='1'"
-    onmouseleave="document.getElementById('regimeOverlay').style.opacity='0'">
+    onmouseleave="document.getElementById('regimeOverlay').style.opacity='0'"
+    ontouchstart="this._tx=event.touches[0].clientX;this._ty=event.touches[0].clientY;"
+    ontouchend="if(Math.abs(event.changedTouches[0].clientX-this._tx)<10&&Math.abs(event.changedTouches[0].clientY-this._ty)<10){event.preventDefault();event.stopPropagation();document.getElementById('regimeModal').style.display='block';document.body.style.overflow='hidden';document.getElementById('regimeFrame').src='https://lindsey-brock.github.io/regime-changes/index.html';}">
     <iframe 
       data-src="https://lindsey-brock.github.io/regime-changes/"
       src="about:blank"
@@ -859,7 +969,7 @@ footer{
     <p class="project-desc">Interactive timeline mapping US foreign regime changes from 1893 to 2026. Fly-to animation, century navigation, pulsing markers — making history explorable and accountable.</p>
     <div class="project-footer">
       <div class="project-tech">Leaflet.js · JavaScript<br>GitHub Pages · ARIA</div>
-      <div class="project-cta"><span>Read More</span><span class="project-cta-arrow">↗</span></div>
+      <div class="project-cta"><span>Read More</span><span class="project-cta-arrow" style="display:flex;align-items:center"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </div>
   </div>
 </a>
@@ -884,7 +994,7 @@ footer{
     cursor:pointer;
     transition:color 0.2s,border-color 0.2s;
     display:flex;align-items:center;gap:8px;
-  ">✕ Close</button>
+  "><span class="close-x">✕</span><span class="close-label"> Close</span></button>
   <iframe id="regimeFrame" src="" style="width:100%;height:100%;border:none;" title="133 Years of US Intervention"></iframe>
 </div>
 
@@ -893,10 +1003,12 @@ footer{
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">03</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
 </div>
-<a class="project work-card" href="immigrationLawsByState.html" data-category="data-viz science" style="overflow:hidden;">
+<a class="project work-card" href="immigration-laws-by-state/" data-category="data-viz science" style="overflow:hidden;">
   <div class="project-visual" style="min-height:520px;height:520px;position:relative;"
     onmouseenter="document.getElementById('immigOverlay').style.opacity='1'"
-    onmouseleave="document.getElementById('immigOverlay').style.opacity='0'">
+    onmouseleave="document.getElementById('immigOverlay').style.opacity='0'"
+    ontouchstart="this._tx=event.touches[0].clientX;this._ty=event.touches[0].clientY;"
+    ontouchend="if(Math.abs(event.changedTouches[0].clientX-this._tx)<10&&Math.abs(event.changedTouches[0].clientY-this._ty)<10){event.preventDefault();event.stopPropagation();document.getElementById('immigModal').style.display='block';document.body.style.overflow='hidden';document.getElementById('immigFrame').src='https://theparlormagazine.github.io/immigrationLawsByState.html/';}">
     <iframe 
       data-src="https://theparlormagazine.github.io/immigrationLawsByState.html/"
       src="about:blank"
@@ -934,7 +1046,7 @@ footer{
     <p class="project-desc">Choropleth map of immigration enforcement legislation across all 50 states, connected to a live serverless API. Interactive tooltips reveal bill details, status, and legislative history.</p>
     <div class="project-footer">
       <div class="project-tech">D3 v7 · TopoJSON<br>Wix Velo API · ARIA</div>
-      <div class="project-cta"><span>Read More</span><span class="project-cta-arrow">↗</span></div>
+      <div class="project-cta"><span>Read More</span><span class="project-cta-arrow" style="display:flex;align-items:center"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </div>
   </div>
 </a>
@@ -959,7 +1071,7 @@ footer{
     cursor:pointer;
     transition:color 0.2s,border-color 0.2s;
     display:flex;align-items:center;gap:8px;
-  ">✕ Close</button>
+  "><span class="close-x">✕</span><span class="close-label"> Close</span></button>
   <iframe id="immigFrame" src="" style="width:100%;height:100%;border:none;" title="Immigration Law by State"></iframe>
 </div>
 
@@ -968,10 +1080,12 @@ footer{
   <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.15em;line-height:1;background:linear-gradient(90deg,#c94040,#e8c547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">04</span>
   <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,64,64,0.4),rgba(232,197,71,0.4),transparent);"></div>
 </div>
-  <a class="project work-card" href="twitch-case-study.html" data-category="data-viz journalism" style="overflow:hidden;">
+  <a class="project work-card" href="twitch-case-study/" data-category="data-viz journalism" style="overflow:hidden;">
   <div class="project-visual" style="min-height:520px;height:520px;position:relative;"
     onmouseenter="document.getElementById('twitchOverlay').style.opacity='1'"
-    onmouseleave="document.getElementById('twitchOverlay').style.opacity='0'">
+    onmouseleave="document.getElementById('twitchOverlay').style.opacity='0'"
+    ontouchstart="this._tx=event.touches[0].clientX;this._ty=event.touches[0].clientY;"
+    ontouchend="if(Math.abs(event.changedTouches[0].clientX-this._tx)<10&&Math.abs(event.changedTouches[0].clientY-this._ty)<10){event.preventDefault();event.stopPropagation();document.getElementById('twitchModal').style.display='block';document.body.style.overflow='hidden';document.getElementById('twitchFrame').src='https://lindsey-brock.github.io/twitch-user-data/';}">
     <iframe data-src="https://lindsey-brock.github.io/twitch-preview.html/"
       src="about:blank"
       style="position:absolute;inset:0;width:100%;height:100%;border:none;pointer-events:none;"
@@ -1006,7 +1120,7 @@ tabindex="-1">
     <p class="project-desc">132,409 enforcement actions made visible. Platform accountability data transformed into a public-facing visualization — donut chart, bar chart, tabbed navigation, fully responsive.</p>
     <div class="project-footer">
       <div class="project-tech">JavaScript · SVG<br>D3-free · GitHub Pages</div>
-      <div class="project-cta"><span>Read More</span><span class="project-cta-arrow">↗</span></div>
+      <div class="project-cta"><span>Read More</span><span class="project-cta-arrow" style="display:flex;align-items:center"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </div>
   </div>
 </a>
@@ -1024,7 +1138,7 @@ tabindex="-1">
     padding:8px 14px;cursor:pointer;
     transition:color 0.2s,border-color 0.2s;
     display:flex;align-items:center;gap:8px;
-  ">✕ Close</button>
+  "><span class="close-x">✕</span><span class="close-label"> Close</span></button>
   <iframe id="twitchFrame" src="" style="width:100%;height:100%;border:none;"></iframe>
 </div>
   <!-- 05 CLIMATE - COMING SOON -->
@@ -1113,7 +1227,7 @@ tabindex="-1">
       <p class="report-desc">How Elon Musk and Peter Thiel consolidated power in 2025 — on Silicon Valley's strategic entrenchment in Washington, the coordinated agenda to privatize public infrastructure, capture regulatory bodies, and reshape public policy in the service of private power.</p>
       <div class="report-footer">
         <span class="report-date">July 2025</span>
-        <div class="project-cta" style="align-self:stretch;justify-content:center;padding:16px 20px;font-size:11px;"><span>Read More</span><span class="project-cta-arrow">↗</span></div>
+        <div class="project-cta" style="align-self:stretch;justify-content:center;padding:16px 20px;font-size:11px;"><span>Read More</span><span class="project-cta-arrow" style="display:flex;align-items:center"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
       </div>
     </a>
     <div class="report-card placeholder-report fade-up">
@@ -1144,8 +1258,8 @@ tabindex="-1">
       <div class="skill-line"><span class="skill-name">Science Communication</span><span class="skill-tag">Emerging</span></div>
       <div class="skill-line"><span class="skill-name">Frontend Development</span><span class="skill-tag">HTML · CSS · JS</span></div>
       <div class="skill-line"><span class="skill-name">Independent Publishing</span><span class="skill-tag">Print & Digital</span></div>
-      <a href="resume.html" class="project-cta" style="display:flex;align-self:stretch;justify-content:center;padding:16px 20px;font-size:11px;margin-top:24px;text-decoration:none;">
-  <span>Read My Full Resume</span><span class="project-cta-arrow" style="margin-left:10px;">↗</span>
+      <a href="resume/" class="project-cta" style="display:flex;align-self:stretch;justify-content:center;padding:16px 20px;font-size:11px;margin-top:24px;text-decoration:none;">
+  <span>Read My Full Resume</span><span class="project-cta-arrow" style="margin-left:10px;"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 </a>
     </div>
   </div>
@@ -1178,7 +1292,7 @@ tabindex="-1">
         <textarea name="message" required rows="5" style="background:transparent;border:1px solid var(--border);padding:14px 16px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e8c547'" onblur="this.style.borderColor='rgba(245,240,232,0.1)'"></textarea>
       </div>
       <button type="submit" style="font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:16px 32px;border:none;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Send Message →</button>
-      <a href="https://calendly.com/lindsey-brock2201/30min" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);padding:16px 32px;text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#e8c547';this.style.color='#e8c547'" onmouseout="this.style.borderColor='rgba(245,240,232,0.1)';this.style.color='var(--text)'">Book a 30-min Discovery Call ↗</a>
+      <a href="https://calendly.com/lindsey-brock2201/30min" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--text);border:1px solid var(--border);padding:16px 32px;text-decoration:none;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#e8c547';this.style.color='#e8c547'" onmouseout="this.style.borderColor='rgba(245,240,232,0.1)';this.style.color='var(--text)'">Book a 30-min Discovery Call <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style="vertical-align:middle;flex-shrink:0"><path d="M1.5 9.5L9.5 1.5M9.5 1.5H3.5M9.5 1.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </form>
 
   </div>
@@ -1519,6 +1633,13 @@ setTimeout(() => {
       video.currentTime=9;
     }
   });
+
+  if(window.innerWidth<=768){
+    video.removeEventListener('ended',revealHero);
+    video.removeEventListener('error',revealHero);
+    video.currentTime=9999;
+    revealHero();
+  }
 }
 // REGIME MODAL
 document.getElementById('regimeClose').addEventListener('click', () => {
@@ -1580,10 +1701,24 @@ document.getElementById('twitchClose').addEventListener('click', () => {
 
   projects.forEach(p => focusObserver.observe(p));
 })();
+function injectFlipbookMobileStyles() {
+  if (window.innerWidth > 768) return;
+  try {
+    const doc = document.querySelector('#flipbookModal iframe').contentDocument;
+    if (doc && !doc.getElementById('fb-mobile-overrides')) {
+      const s = doc.createElement('style');
+      s.id = 'fb-mobile-overrides';
+      s.textContent = '.fb-close{display:none!important;}#fbPrevBtn,#fbNextBtn{display:none!important;}';
+      doc.head.appendChild(s);
+    }
+  } catch(e) {}
+}
+document.querySelector('#flipbookModal iframe').addEventListener('load', injectFlipbookMobileStyles);
 function openFlipbookModal() {
   const m = document.getElementById('flipbookModal');
   m.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  injectFlipbookMobileStyles();
 }
 function closeFlipbookModal() {
   const m = document.getElementById('flipbookModal');
@@ -1593,6 +1728,22 @@ function closeFlipbookModal() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeFlipbookModal();
 });
+</script>
+<script>
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.querySelector('.nav-links');
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+}
 </script>
 </body>
 </html>
